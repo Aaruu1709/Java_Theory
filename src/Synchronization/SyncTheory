@@ -1,0 +1,98 @@
+
+Multithreading allows multiple threads to run at the same time.
+But when threads share data, running them at the same time can cause errors.
+That’s why synchronization is needed after multithreading — to prevent conflicts.
+--------------------------------------------------------------
+Real life example:
+Two threads try to withdraw money from the same bank account at the same time.
+Without synchronization,
+both threads might see the old balance and withdraw too much →
+wrong result.
+With synchronization, only one thread can access the account at a time,
+ so it’s safe.
+
+-This happens with threads too: if two threads try to use the same
+ data at the same time, the computer can get confused.
+------------------------------------------------------
+
+
+Why Synchronization Comes (in Multithreading)
+When we have multiple threads running at the same time,
+ they may access the same data or resource simultaneously.
+This can lead to problems like incorrect results, inconsistent data,
+ or program crashes.
+Synchronization is used to overcome these problems.
+Avoid unexpected behavior: program doesn’t crash or give wrong output.
+
+1.Race Condition:
+When two threads try to change the same data at the same time,
+ the final result depends on which thread finishes first.
+Synchronization prevents this by allowing one thread at a time.
+2.Data Inconsistency
+Shared resources can get corrupted if multiple threads access them together.
+Synchronization keeps the data consistent and correct.
+3.Unexpected Behavior / Bugs:
+Without synchronization, programs may behave unpredictably.
+Synchronization ensures reliable and predictable execution.
+----------------------------------------------
+solution:
+Synchronization:
+
+Synchronization addresses such issues by ensuring that only one thread
+at a time can access a critical section of code or a shared resource
+associated with an object. This exclusive access prevents race
+conditions and maintains data consistency.
+Java provides two primary mechanisms for synchronization:
+
+Synchronized methods
+Synchronized blocks
+
+so this allow deelopers to control thread access and ensure safe execution
+in this multithreadd environment
+
+Synchronized Methods in Java :
+
+-Declaring a method as synchronized prevents multiple threads
+from accessing it simultaneously.
+-Only one thread can execute a synchronized method at a time.
+Makes synchronization simpler — no need for manual locks inside the method.
+Every call to the method is automatically thread-safe.
+
+example:
+
+withdraw() is synchronized, so only one thread can execute it at a time.
+Prevents race conditions on the shared balance.
+Even if both threads try to withdraw at the same time, Java will make them go one by one.
+💡 Analogy: Only one person can use the ATM at a time, others wait.
+
+--------------------------------------------------------------
+Synchronized Block:
+-A synchronized block is a part of code that only one thread can execute at a time.
+-syntax:
+
+ synchronized (object) {
+     // critical section
+ }
+ -The object acts as a lock.
+ - Only one thread can hold the lock at a time.
+ -Other threads wanting the same lock must wait until it is released
+ -Purpose:
+
+  Protects shared resources from race conditions.
+  More efficient than synchronized methods because
+  it locks only the critical part, not the whole method.
+  -Provides better performance for multithreaded programs.
+
+
+
+
+
+-----------------------------------------------------------------
+| Feature         | Synchronized Method                                                            | Synchronized Block                                                                                     |
+| --------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| **Definition**  | The **entire method** is locked so only one thread can execute it at a time.   | Only a **specific part of the code** is locked, not the whole method.                                  |
+| **Lock Object** | Uses the **object’s intrinsic lock** (the object that owns the method).        | Uses a **specific object** you provide as a lock.                                                      |
+| **Flexibility** | Less flexible; locks the whole method even if only part needs synchronization. | More flexible; only **critical section** is synchronized, improving performance.                       |
+| **Performance** | Slower if method is large but only part needs sync.                            | Faster because only small code is synchronized.                                                        |
+| **Usage**       | Easy to implement for simple thread safety.                                    | Used when **only some code needs thread safety** or you want **different locks for different blocks**. |
+

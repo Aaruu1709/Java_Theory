@@ -1,0 +1,985 @@
+multithreading:
+-thread is a lightweight task of the application
+-every thread is a separate independent part of the same application(process)
+-thread is exist inside the peocess.
+-multiple thread can exist in a single process.
+-executing more than one thrread simultaneously is called as multitheading
+-thread contains in processes.
+-more than one thread can exist within the same process
+-thread allow us program to run multiple operation concurrently
+in the same process space
+
+one process =multiple thread
+which is recommanded=thread
+*process based=every request one process created=>no of req inc=no of process inc=>performance isuue
+
+so we prefer thrread:
+thread vs. process
+process :created by OS             :heavy weight
+Thread    : created by JVM         : light weight
+one process can contains multiple threads and every thread is independent
+ ex:
+ broweser--->process
+ browser contains multiple tabs  : every tab is a thread
+
+ //process based multitasking:
+ -every request one process is crewated
+ -if number of request is increased the process are increased so it effects on performance
+
+ //thread based multitasking:
+ -for every request one thread is created
+ -if no. of request increased the thrread are increased it improves performance bcoz thread is a light weight
+
+ //there are two types of programming model:
+ 1.single threaded model   :application contains only one thread(main)
+ 2.multi threaded model.   :application contains multiple threads
+
+ 1.single threaded model:
+ in java whenever executioon start from main method one thread started automatically is called main thread
+ ex:here contain only one thread is called main thread
+ to get the name of thread we use getName() method.
+
+ class Test{
+ psvm//main thred start
+ sout("hello ");
+ sout(Thread.currentThread().getName());
+ }//main thread completed
+ }
+
+ hello
+ main
+
+
+ 2. multi threaded model:
+ applicattion contains multiple thread so create the multiple thread and run parallell
+
+ two ways:
+ 1. extending thread class
+ 2.implementing runnable interface
+
+
+ steps to creating thread:
+ 1. creating our normal class to thread class we extends it using thread to become thread class of our normal class
+ so ,
+ class MyThread extends Thread{
+ }
+ 2. to write logic we need run method in thrread class
+ run is alreadly present in thread class we need to override it
+ so,
+ class MyThread extends Thread{
+  public void run()
+  {
+  //logic
+  }
+  }
+
+  3.we need to create object of thread class so that
+  MyThread obj=new MyThread()
+
+  4. we need to start the thread
+ obj. start();
+
+
+
+
+ //thrad schedular:
+ if the appliccation cointain more than one thread then execution decided by thrad schedular
+ thread schedular is a part of JVM
+ thread schedular=mental patiant=we are unable to predict exact behavoir of thread schedular it is JVM vendor dependant
+ we can not except behavior of the thread schedular it is jvm vendor dependent.
+ so we cant say except out of multithreaded example we can say possible output
+ both run parallelly=not expect same output every time
+ thread  schedular allocate cpu
+ t.start():
+ thread class started exceution:
+ -it register the user defineed thread into threadSchedular
+ -after registaring thrad it calls run() method to start the thrad execution
+
+ application:
+ -developing video game
+ implementing multimedia graphics
+ developoing animation
+
+ importance of main thread:
+ execution start from maon thread
+ we will start the user defined thread inside main thread
+
+ life cycle stages:
+ new /born:
+ 1. MyThread t=new MyThread();
+
+ 2.Ready
+ t.start()//ready to execute:if the thread schedular allocate the cpu then thread goes to running
+
+ 3.running state:
+ run()method executing
+ while running thread if calling sleep () or wait() then thread goes to waiting or sleeping mode
+
+ 4.dead state:
+ if run() method is completed then thread goes dead
+
+ observation:
+ case 1:
+ difference between t.start() and t.run();
+ in case of t.start() thread class start() is executed,
+ it register user defined thread into thread schedular then decide thread is created
+ but in case of t.run() method, no new thread will be created,
+ run() is exceuted like normal method call
+
+ case 2:
+ it is recomannded to override run() method to write logic
+ if we are not overriding run() then parent class (thread)run() method executed it is having empty implenatation
+ class MyThread extends Thread
+ {
+ //here we are not overriding run() method
+ }
+
+ case 3:
+ overriding start method not recomannded
+ if we are overriding start() method then our class start executed the thread is not created
+
+ class MyThread extends Thread
+ {
+ @override
+ public void start(){
+ for(int i=0;i<10;i++)
+ {
+ sout("user defined thread");
+ }
+ }}
+
+ case 4:
+ it is not possible to start same thread twice
+ if we start same thread twice we will get java.lang.IllegalThreadStateException
+ t.start();
+ t.start();
+
+
+
+
+
+
+_____________________________________DAY-2______________________________
+
+ex-1
+to stop the excecution of thread use sleep().once sleeping time expire then thread
+is in running state.
+package MultiThreading;
+class MyThread2 extends Thread{
+    public void run(){
+        for (int i=0;i<=10;i++){
+            System.out.println("User defined thread..");
+        try {
+            Thread.sleep(1000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        }
+    }
+}
+public class SleepDemo {
+    public static void main(String[] args) {
+        MyThread2 m2=new MyThread2();
+        m2.start();
+    }
+}
+public static void sleep(long milis)throws IntteruptedException
+cause the currently executing thread to sleep (temporory cease exceution) for the specified number of miliseconds
+
+milis-the length of time to sleep in miliseconds
+illegalArgumentException-if the value of milis is negative
+
+Intterupted Exception-if any thread has interupted the current thread.
+the interupted status of current thread is cleared when this execption is trown
+inturrpt=polite request to stop
+who interrrupt=one thread interupt another /sometimes the same thread
+When does InterruptedException happen?
+
+Only when a thread is:
+
+sleep()
+
+wait()
+
+join()
+
+If another thread interrupts it while it is sleeping or waiting, then 👉 InterruptedException is thrown.
+Thread is sleeping
+
+Another thread calls interrupt()
+
+JVM does two things:
+
+Throws InterruptedException ✅
+
+Clears the interrupted flag ❌ (sets it to false)
+
+Why?
+Because the exception already woke you up.
+
+If Java did NOT clear it:
+
+The thread might:
+
+Immediately throw another exception
+
+Or behave as if it’s interrupted again and again
+
+This causes:
+
+Confusion
+
+Duplicate handling
+
+Infinite interruption handling
+
+👉 Clearing it means:
+
+“You’ve been notified once. Now decide what to do.”
+preventing duplicate handling
+Another thread interrupts the current thread → this means “please stop or wake up.”
+
+2️⃣ If the current thread is sleeping, waiting, or joining → Java throws InterruptedException to wake it up.
+
+3️⃣ Throwing the exception is already enough to inform the thread that it was interrupted.
+
+4️⃣ So Java clears the interrupted flag to avoid sending the same interruption message again.
+______________________
+public static void sleep(long milis,int nanos) throws Interrupted exception
+cause the currently executing thread to sleep (temporary caese excecutiion) for specified number of milinseconds plus the specified nuber of nanoseconds
+milis:the length of specified number of nanoseconds
+nanos:0-999999 additional nanoseconds to sleep
+IllegalArgumnetException -if value of milis is negative , or the value of nanos is not in the rnge 0-999999
+
+sleep(millis, nanos) pauses the current thread
+
+Sleep time = milliseconds + extra nanoseconds
+
+If interrupted while sleeping → InterruptedException
+
+Wrong values → IllegalArgumentException
+
+
+example 2:
+inturrupt method used to inturrupt the thread
+package MultiThreading;
+
+class MyThread3 extends Thread{
+    public void run(){
+        for(int i=0;i<10;i++){
+            System.out.println("user defined thread");
+        try {
+            Thread.sleep(1000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        }
+    }
+}
+public class InterruptDemo {
+    public static void main(String[] args) {
+        MyThread3 obj=new MyThread3();
+        obj.start();
+        obj.interrupt();
+    }
+}
+
+
+You said:
+and thread-based multitasking, and which one is better? I saw one of the video in that, they say about one process, that means multiple threads are created. So which one is recommended? So which we recommended, obviously, obviously thread. So process-based, that means every request, one process, for every request, one process is created. So number of requests increases, number of processes also increases. So it affects our performance or performance issue, yes. So processor will be full, processor load. So we prefer thread. What happens in thread, suppose every request, every single request, every single thread is created, and then every thread is created, then our process is going on. Server request said, JVM thread then each, for each request, one thread is created. So we send thousands of requests and thousands of threads created, which is better, the better than we, for every process, we create one process, for every request, one process is created. So number of processes increase, thousand, thousands process, thousand requests, thousand process and thousand requests and thousand thread. So which is the better? Obviously, thousand thread, which is the better. Okay, so according to that, give me actually what is actually process-based and thread-based multitasking is.
+ChatGPT said:
+Gotcha — you’re circling around the right idea, but a few things need to be cleaned up so the picture is accurate, not just “sounds right in interviews.” Let’s straighten it out calmly and properly.
+
+1️⃣ What is process-based multitasking?
+Definition (simple):
+Process-based multitasking means each task runs in its own process.
+
+A process is an independent program in execution
+
+It has its own memory space
+
+One process cannot directly access another process’s memory
+
+Example
+Running Chrome, VS Code, and Spotify
+
+Each is a separate process
+
+In a server context
+Some older servers handled one request = one process
+
+So:
+
+1000 requests → 1000 processes
+
+Problems with this
+Process creation is heavy
+
+Context switching between processes is expensive
+
+Each process consumes:
+
+Separate memory
+
+Separate OS resources
+
+👉 Result: Poor scalability, high CPU & memory usage
+
+2️⃣ What is thread-based multitasking?
+Definition (simple):
+Thread-based multitasking means multiple threads run inside a single process.
+
+A thread is a lightweight unit of execution
+
+Threads share the same memory
+
+Faster to create and destroy than processes
+
+Example
+A JVM process running a web server
+
+Each client request is handled by a thread
+
+In a server context (like Java)
+One JVM process
+
+Multiple threads inside it
+
+Example:
+
+1000 requests → 1000 threads (inside ONE process)
+
+Why threads are better
+Less memory usage
+
+Faster context switching
+
+Easier data sharing
+
+👉 Result: Better performance than process-based model
+
+3️⃣ Important correction (very important 🔥)
+❌ Wrong idea:
+“For every request, JVM creates a new thread”
+
+✅ What actually happens
+JVM does NOT create unlimited threads
+
+Servers use a thread pool
+
+Thread pool model
+Fixed number of threads (e.g., 200)
+
+Requests are queued
+
+Threads are reused
+
+Requests → Queue → Thread Pool → Processing
+This avoids:
+
+Creating thousands of threads
+
+CPU overload
+
+OutOfMemoryError
+
+4️⃣ Process vs Thread (Side-by-Side)
+Feature	Process	Thread
+Weight	Heavy	Lightweight
+Memory	Separate	Shared
+Creation cost	High	Low
+Communication	Slow (IPC)	Fast
+Context switching	Expensive	Cheap
+Scalability	Poor	Better
+5️⃣ So… which one is better?
+✅ Thread-based multitasking is better for:
+Web servers
+
+High-concurrency systems
+
+JVM-based applications
+
+❌ But threads are not unlimited
+Too many threads → CPU thrashing
+
+That’s why:
+
+Thread pools
+
+Async / non-blocking models (like Netty, Node.js) exist
+
+6️⃣ Final clean definition (interview-ready 🎯)
+Process-based multitasking:
+Multiple processes execute concurrently, each with its own memory space.
+
+Thread-based multitasking:
+Multiple threads execute concurrently within a single process, sharing memory and resources.
+
+If you want, next we can:
+
+Compare threads vs async / event-driven
+
+Explain how Tomcat actually handles requests
+
+Or fix this into a perfect interview answer
+
+Just tell me 👍
+
+You said:
+
+Intterupted Exception-if any thread has interupted the current thread.
+the interupted status of current thread is cleared when this execption is trownThese 10 things, actually, you need to say, give me in easy and simple language so I understand better.
+ChatGPT said:
+No worries — this topic sounds scary, but it’s actually very simple once it’s said in human language, not textbook language 😄
+Let’s break InterruptedException into easy, clear points.
+
+InterruptedException — in very simple words 🧠
+1️⃣ What does interrupt mean?
+Interrupt = politely telling a thread:
+
+“Hey, please stop what you’re doing.”
+
+It does NOT force-stop the thread.
+
+2️⃣ Who interrupts a thread?
+One thread interrupts another thread
+
+Or sometimes the same thread
+
+thread.interrupt();
+3️⃣ When does InterruptedException happen?
+Only when a thread is:
+
+sleep()
+
+wait()
+
+join()
+
+If another thread interrupts it while it is sleeping or waiting, then 👉 InterruptedException is thrown.
+
+4️⃣ Simple real-life example 🛌
+Imagine a person sleeping:
+
+sleeping thread 😴
+Another person wakes them up:
+
+interrupt() 📢
+➡️ Person wakes up suddenly
+➡️ That wake-up is InterruptedException
+
+5️⃣ What does “current thread is interrupted” mean?
+It means:
+
+Some other thread sent an interrupt signal to this thread
+
+6️⃣ What is interrupted status?
+Every thread has a flag (true / false)
+
+This flag says:
+
+true → thread is interrupted
+
+false → thread is normal
+
+7️⃣ Important rule ⚠️
+When InterruptedException is thrown:
+
+🔥 The interrupted status is automatically cleared (set to false)
+
+So after exception:
+
+Thread.interrupted() → false
+8️⃣ Why is the status cleared?
+Because:
+
+JVM assumes:
+“You noticed the interruption, now handle it”
+
+9️⃣ Very small code example 👇
+try {
+    Thread.sleep(5000);
+} catch (InterruptedException e) {
+    System.out.println("Thread was interrupted!");
+}
+If interrupted:
+
+Exception is thrown
+
+Interrupted flag is cleared
+
+🔟 One-line interview explanation 🎯
+InterruptedException occurs when a thread is interrupted while sleeping, waiting, or joining, and the interrupted status is cleared when the exception is thrown.
+
+🧠 Super simple summary
+Interrupt = request to stop
+
+Happens during sleep/wait/join
+
+Exception is thrown
+
+Interrupted flag becomes false
+
+If you want, I can:
+
+Explain difference between interrupt() and stop()
+
+Explain Thread.interrupted() vs isInterrupted()
+
+Or make this into exam-ready notes
+
+Just say the word 👍
+
+You said:
+Why that interrupted status is cleared when exception is thrown? That means InterruptedException occurs when thread is interrupted while sleeping, waiting, or joining. And at that moment, interrupted status is cleared the moment exception is thrown. But why we needed to clear that interrupted status? Please tell me in simple language, why we need to clear that status.
+ChatGPT said:
+Great question — this is exactly the right “why” to ask, not just the definition 👍
+I’ll explain it slow, simple, and logical, no jargon.
+
+First, remember this one thing 🧠
+Interrupted status = a signal / message
+
+It means:
+
+“Someone asked this thread to stop or change what it’s doing.”
+
+Now the BIG QUESTION ❓
+Why does Java clear the interrupted status when InterruptedException is thrown?
+Short answer (very simple):
+👉 Because throwing the exception itself is the message.
+So Java removes the flag to avoid sending the same message twice.
+
+Let’s use a real-life example 🚪
+Imagine this situation:
+You are sleeping 😴
+
+Someone knocks on the door 🚪
+
+Two ways to inform you:
+
+Keep knocking forever
+
+Knock once and wake you up
+
+Java chooses option 2.
+
+How interruption works internally ⚙️
+Step-by-step:
+Thread is sleeping
+
+Another thread calls interrupt()
+
+JVM does two things:
+
+Throws InterruptedException ✅
+
+Clears the interrupted flag ❌ (sets it to false)
+
+Why?
+Because the exception already woke you up.
+
+Why NOT keep the interrupted status true? 🚫
+If Java did NOT clear it:
+
+The thread might:
+
+Immediately throw another exception
+
+Or behave as if it’s interrupted again and again
+
+This causes:
+
+Confusion
+
+Duplicate handling
+
+Infinite interruption handling
+
+👉 Clearing it means:
+
+“You’ve been notified once. Now decide what to do.”
+
+Simple analogy 📞
+Think of interrupted status like a missed call notification:
+
+Phone rings 📱
+
+You answer it ☎️
+
+Notification disappears ❌
+
+Why?
+Because you already handled the call.
+
+What if the thread still wants to stop? 🤔
+Then YOU decide.
+
+That’s why this is common in code:
+
+catch (InterruptedException e) {
+    Thread.currentThread().interrupt(); // restore the flag
+}
+This means:
+
+“I noticed the interruption, but I want others to know too.”
+
+Very important design idea 🔑
+Java gives control to the developer, not the JVM.
+
+JVM says: “Hey, interruption happened”
+
+Developer decides:
+
+Stop the thread
+
+Continue
+
+Re-interrupt
+
+One-line clean explanation (interview-ready 🎯)
+The interrupted status is cleared when InterruptedException is thrown because the exception itself serves as the interruption notification, preventing duplicate handling and giving the developer control over further action.
+
+Super short summary 🧠
+Interrupt flag = signal
+
+Exception = signal delivered
+
+Signal delivered → flag cleared
+
+Developer decides next step
+
+If you want, next I can explain:
+
+Why Thread.sleep() behaves differently
+
+Why interrupt() does NOT stop a thread
+
+Difference between clearing vs restoring interrupt
+
+Just tell me 🙂
+
+You said:
+Give me only four, only in summary, what actually that two lines I am sending to you, what they are actually trying to say. Give me in simple and easy language. Now I totally understand how the logic behind this. So now give me that two lines in simple and easy language, what actually they are going to say.
+ChatGPT said:
+Perfect 👍 Here are only four simple summary points, in very easy language, saying exactly what those two lines mean:
+
+1️⃣ If another thread interrupts the current thread, an InterruptedException happens.
+
+2️⃣ This exception happens only when the thread is sleeping, waiting, or joining.
+
+3️⃣ Throwing the exception is how Java informs the thread that it was interrupted.
+
+4️⃣ Once the exception is thrown, Java clears the interrupted flag because the message has already been delivered.
+
+You said:
+Last word I confused a little bit. Once the exception is thrown, the Java cleared the interrupted flag because the message has already been delivered. But the reason behind that, why it clear, give me in simple points, okay? Whatever you get in a box, if another thread interrupts the current thread, that four points give me in simple language, okay?
+ChatGPT said:
+Got it 👍 I’ll keep it very simple, very clear, and only the key reason, no extra theory.
+
+Here are the four simple points, in plain language:
+
+1️⃣ Another thread interrupts the current thread → this means “please stop or wake up.”
+
+2️⃣ If the current thread is sleeping, waiting, or joining → Java throws InterruptedException to wake it up.
+
+3️⃣ Throwing the exception is already enough to inform the thread that it was interrupted.
+
+4️⃣ So Java clears the interrupted flag to avoid sending the same interruption message again.
+
+That’s it.
+Think of it as: message sent → message received → notification cleared ✅
+
+You said:
+
+public static void sleep(long milis,int nanos) throws Interrupted exception
+cause the currently executing thread to sleep (temporary caese excecutiion) for specified number of milinseconds plus the specified nuber of nanoseconds
+milis:the length of specified number of nanoseconds
+nanos:0-999999 additional nanoseconds to sleep
+IllegalArgumnetException -if value of milis is negative , or the value of nanos is not in the rnge 0-999999So tell me what this line are actually trying to say and give me meaning of that line which is in simple and easy understandable language, okay?
+ChatGPT said:
+No problem 🙂 I’ll translate those lines into very simple, easy-to-understand language, line by line, and then give a short summary.
+
+What this method means (in simple language)
+1️⃣
+public static void sleep(long millis, int nanos) throws InterruptedException
+Meaning:
+This method tells the current thread to pause (sleep) for a certain amount of time.
+While sleeping, the thread does nothing.
+
+2️⃣
+cause the currently executing thread to sleep (temporary cease execution)
+
+Meaning:
+The thread stops running temporarily and resumes after the given time is over.
+
+3️⃣
+for specified number of milliseconds plus the specified number of nanoseconds
+
+Meaning:
+The total sleep time is:
+
+milliseconds + extra nanoseconds
+4️⃣
+millis
+
+the number of milliseconds to sleep
+
+Meaning:
+This is the main sleep time (bigger time unit).
+
+5️⃣
+nanos
+
+0–999999 additional nanoseconds to sleep
+
+Meaning:
+This is extra fine-tuning time added to milliseconds.
+It must be between 0 and 999,999.
+
+6️⃣
+throws InterruptedException
+
+Meaning:
+If another thread interrupts this thread while it is sleeping, Java throws an InterruptedException.
+
+7️⃣
+IllegalArgumentException
+
+Meaning:
+Java throws this exception if:
+
+millis is negative
+
+nanos is less than 0 or greater than 999,999
+
+Very short and clear summary 🧠
+sleep(millis, nanos) pauses the current thread
+
+Sleep time = milliseconds + extra nanoseconds
+
+If interrupted while sleeping → InterruptedException
+
+Wrong values → IllegalArgumentException
+
+That’s all this method is trying to say — nothing more, nothing less 👍
+
+You said:
+package MultiThreading;
+
+class MyThread3 extends Thread{
+    public void run(){
+        for(int i=0;i<10;i++){
+            System.out.println("user defined thread");
+        try {
+            Thread.sleep(1000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        }
+    }
+}
+public class InterruptDemo {
+    public static void main(String[] args) {
+        MyThread3 obj=new MyThread3();
+        obj.start();
+        obj.interrupt();
+    }
+}
+What happened, when I print a.printStackTrace, then it runs successfully and it gave interrupted exception, okay? But in case when we print a.getMessage, then it flows will be normal. It not interrupted. So why this happen? Why this so happen like that?
+ChatGPT said:
+Nice catch — this confusion is very common, and the reason is actually simple once you see it clearly 👍
+Nothing magical is happening here. Let’s break it down step by step, in easy language.
+
+First: what is actually happening in your program?
+Execution flow
+1️⃣ obj.start() → new thread starts running
+2️⃣ That thread enters run()
+3️⃣ It prints "user defined thread"
+4️⃣ It goes to Thread.sleep(1000)
+5️⃣ Main thread calls obj.interrupt()
+6️⃣ Sleeping thread is interrupted → InterruptedException is thrown
+
+👉 This happens in both cases (printStackTrace() and getMessage()).
+
+So the thread IS interrupted in both cases.
+
+Now the important part 🔑
+Why behavior looks different?
+Case 1: e.printStackTrace()
+catch (InterruptedException e) {
+    e.printStackTrace();
+}
+What this does:
+
+Prints full exception details
+
+Includes:
+
+Exception name
+
+Stack trace
+
+So you clearly see that interruption happened
+
+👉 That’s why you feel:
+
+“Oh, interruption happened.”
+
+Case 2: e.getMessage()
+catch (InterruptedException e) {
+    System.out.println(e.getMessage());
+}
+What this does:
+
+Prints only the message text
+
+But InterruptedException usually has NO message
+
+So:
+
+null
+or nothing gets printed
+
+👉 That’s why you feel:
+
+“It is not interrupted.”
+
+But it WAS interrupted — you just didn’t see anything.
+
+Very important point ⚠️
+❌ getMessage()
+→ shows only message (often null)
+
+✅ printStackTrace()
+→ shows proof of interruption
+
+So the difference is only in printing, not in behavior.
+
+Does the program flow change?
+❌ NO
+
+In both cases:
+
+Exception is thrown
+
+Interrupted flag is cleared
+
+Thread continues the loop
+
+Why thread continues normally after exception?
+Because you caught the exception and did nothing else.
+
+To actually stop the thread, you must do something like:
+
+catch (InterruptedException e) {
+    System.out.println("Thread interrupted, stopping");
+    return; // or break;
+}
+or re-interrupt:
+
+catch (InterruptedException e) {
+    Thread.currentThread().interrupt();
+}
+Super simple summary 🧠
+Thread is interrupted in both cases
+
+printStackTrace() shows full error details
+
+getMessage() prints nothing because message is null
+
+Flow looks normal because exception is handled
+
+Difference is only output, not interruption
+
+That’s it 👍
+If you want, next I can explain:
+
+How to properly stop a thread on interrupt
+
+Why interrupt() doesn’t kill a thread
+
+Best practice for handling InterruptedException
+
+You said:
+Listen my point for that program, the thread will be interrupted when the thread is entered into sleeping or waiting mode. If the thread is blocked in invocation of wait, wait long, wait long int, okay, here is the overloading method of wait of the object classes. This method of the object classes of the join, join long, join long int, which also overloaded, sleep long or L or sleep long int, with this also overloaded. Methods of this class, then interrupt status will be cleared and it will receive an interrupted exception. Point number two, if the thread is running mode, then the thread is not interrupted. Point three, interrupted exception. If any thread has interrupted the current thread, the interrupted status of the current thread is cleared when this exception is thrown. So could you please give me neat and in technical word, like suppose I'm going to tell in in front of interview, so I'm not stuck anywhere. So give me simple and easy language.And anyways, please don't further to check if I'm sending wise message, please check if it is correct or not. Even if it is correct, then give okay. If it is wrong, mention this is wrong, right? So I have better understand what I'm telling you, how actually which is wrong or right, okay?
+ChatGPT said:
+Perfect — this is exactly the right way to prepare for interviews 👍
+I’ll do three things, exactly as you asked:
+
+Check each of your points → say RIGHT or WRONG
+
+Fix the wrong parts clearly
+
+Give you a clean, interview-ready explanation in simple technical language
+
+No guessing, no sugar-coating.
+
+✅ Checking your points (truth check)
+🔹 Point 1
+The thread will be interrupted when the thread is entered into
+ sleeping or waiting mode… wait(), join(), sleep()… interrupt
+status will be cleared and it will receive an InterruptedException.
+sleep()
+
+wait()
+
+join()
+
+timed versions of these
+If a thread is blocked in these methods and another thread calls interrupt(), then:
+
+InterruptedException is thrown
+
+interrupted status is cleared
+
+A thread receives InterruptedException if another thread interrupts it while it is sleeping, waiting, or joining.
+
+If the thread is running, InterruptedException is NOT thrown
+If a thread is running, calling interrupt() only sets the interrupted status; it does not throw InterruptedException.
+
+InterruptedException:
+If any thread has interrupted the current thread, the interrupted status of the current thread is
+cleared when this exception is thrown.
+
+_____________________
+example 3:Thread names:
+everuy thread having name
+the default name of main thread is :main
+the default name of userdefined thread is start from:
+thead-0
+thread-1...thread-n
+
+
+example 4:
+overloading run() method
+we can overload the eun() method but thread lways call  0-arg run() method
+1️⃣ You are allowed to write multiple run() methods in a class (with different parameters).
+
+2️⃣ But when a thread starts using start(), JVM will only call run() with no parameters.
+
+3️⃣ Any run() method that has parameters will never be called automatically by the thread.
+
+4️⃣ If you want to use a parameterized run() method, you must call it yourself like a normal method.
+
+example 6:
+We don’t need to write all logic inside the run() method.
+We can create our own method and call it from run().
+
+#
+if the multiple threads are doing the same functionality then to the single class create multiple thread object
+#join()=wait for this this to die
+join(long milis)=wait at most milis miliseconds for this thread to die
+join(long milis,int nanos)=wait t most milis miliseconds plus nonaous nanoseconds for this thread to die
+
+assignment 2:
+diiferennt functionality diffrent thread=>functional interface
+
+
+_____________________________________________
+Daemon Thread:
+----------------------------------------
+two ways to create thread:
+1.extends thread
+2.implements runnable-->onlt one method run()
+
+

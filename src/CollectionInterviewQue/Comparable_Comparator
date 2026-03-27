@@ -1,0 +1,91 @@
+❗ 1. compareTo returns 0
+👉 Treated as duplicate in TreeSet
+
+❗ 2. No Comparable/Comparator
+👉 ❌ ClassCastException
+
+“Comparable ->natural sorting ->inside class->using compareTo(),
+- Comparator ->custom sorting-> outside the class ->using compare().
+ Comparator is more flexible and allows multiple sorting strategies.”
+
+
+ _______________________________________________________
+
+ ✅ COMPARABLE (Point-wise)
+ -Used for natural/default sorting
+ -Defined inside the class
+ -Belongs to java.lang package
+- Class must implement Comparable interface
+ -Uses method:
+  compareTo();
+ Syntax:
+ class A implements Comparable<A>
+ -Only one sorting logic possible ❌
+ -Modifies the original class
+- Automatically used by:
+ TreeSet
+ TreeMap
+ Collections.sort()
+
+ -Sorting is based on:
+
+ obj1.compareTo(obj2)
+
+ Return values:
+ Negative → smaller
+ Zero → equal
+ Positive → greater
+
+ -If compareTo() == 0 → treated as duplicate
+ -If not implemented → ❌ ClassCastException
+ Less flexible
+ -Good for default behavior
+ Used when:
+ Sorting rule is fixed
+
+ Risk:
+ return a - b; // overflow risk
+
+ Better:
+ Integer.compare(a, b);
+
+ ✅ COMPARATOR (Point-wise)
+ -Used for custom sorting
+ -Defined outside the class
+ -Belongs to java.util package
+
+ -Uses method:
+ compare()
+ Syntax:
+ Comparator<A>
+
+ -Allows multiple sorting logics ✅
+ -Does NOT modify original class
+ -Passed as argument to:
+ TreeSet
+ TreeMap
+ Collections.sort()
+
+ -Sorting is based on:
+ compare(obj1, obj2)
+
+ -Return values:
+ Negative → smaller
+ Zero → equal
+ Positive → greater
+ If compare() == 0 → treated as duplicate in TreeSet
+ More flexible
+ Used when:
+ Multiple sorting needed
+ Cannot modify class
+
+ Supports:
+ Comparator.comparing()
+ Comparator.reverseOrder()
+ -Can use:
+ Lambda expressions ✅
+ Preferred in real projects
+ 🔥 FINAL QUICK DIFFERENCE
+
+ 👉 Comparable = inside + default/natural  soting + single logic
+ 👉 Comparator = outside + custom sorting + multiple logic

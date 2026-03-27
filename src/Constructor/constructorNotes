@@ -1,0 +1,248 @@
+constructor:
+_________________________________
+class Test
+{
+}
+Test t=new Test();
+class-name obj-name=keyword constructor
+
+rules:
+1.constructor name and class name must be same
+2.constructor can take the argument
+3.constructor return type not allowed even void
+
+class Test{
+//0-args cons
+Test(){
+logics
+}
+//1-args const
+Test(int a){
+logics
+}
+}
+there are two types of  constructor:
+1.default->compiler->0-args const with empty implememntation
+2.userdefined-> developer-> 0-args or parameterised const
+
+-constror are special method to write the logic and these logic are executed
+ when we create object
+-construcotr execute when we create object of class
+
+when we not generator any const=compiler generate it
+when we declare=comiler not generate
+
+
+example:
+
+class Test {
+void wish(){
+sout("good morning");
+}
+psvm{
+//named object:object with name
+Test t=new Test();
+t.wish();
+
+
+//nameless object:without name
+new Test().wish();
+}
+}
+
+
+example:
+constructor calling:
+case 1:to call the construcor use this keyword
+class Test
+{
+Test(){
+this(10);
+sout("0-args constructor");
+}
+Test(int a){
+this(10,20)
+sout("1-args const);
+}
+Test(int a,int b){
+sout("2-args const);
+}
+psvm{
+new Test();
+}
+}
+
+case 2:
+only rule for construor:
+inside cons this keyword is must first statement
+
+case 3:
+Test(){
+this(10);
+this(10,20);
+sout("0-args cons");
+}
+error:call to this must be first statement
+
+one method can call multiple method
+one constructor can call only one const
+
+
+class vs object:
+1.class ->physical entity-it contains logics if application
+object is physical entity represent memory
+
+2.class -blueprint decides object creation
+without class not possible to create object
+
+3. based on the single class it is possible to create multiple objects,
+every object need memory space
+
+4.declare class using class keyword
+create object using new keywords
+
+_______________________________________
+project level constrctor
+________________________________________
+package Constructor;
+
+public class Example1 {
+    //instance variable
+    int eid;
+    String ename;
+    double esal;
+    String company;
+    String addr;
+    Example1(int eid,String ename,double esal,String company,String addr)//local variable
+    {
+        //assign local data to instance data
+        this.eid=eid;
+        this.ename=ename;
+        this.esal=esal;
+        this.company=company;
+        this.addr=addr;
+    }
+    void status(){
+        if(esal>15000){
+            System.out.println("very good employee");
+        }
+        else{
+            System.out.println("good Employee");
+        }
+    }
+    public static void main(String[] args) {
+        Example1 obj=new Example1(1,"aaruu",30000000,"microsoft","pune");
+        obj.status();
+        Example1 obj2=new Example1(1,"saruu",300,"Tatiana","Vietanam");
+        obj2.status();
+
+    }
+}
+1.variable are used to store the data.
+2.method are use to write the bussiness logics of the application
+3.constructor are used to initialize the data during object creation.
+
+
+example 2:
+package Constructor;
+
+public class Example2 {
+    int id;
+    String ename;
+    int esal;
+    static String company;
+   static String addr;
+
+    Example2(int id,String ename,int esal){
+        this.id=id;
+        this.ename=ename;
+        this.esal=esal;
+        this.company="Infosys";
+        this.addr="Pune";
+    }
+
+    void display(){
+        //logic
+        if(esal>2000){
+            System.out.println(ename+" you are very good employee");
+            System.out.println(id+" "+ename+" "+esal+" "+Example2.company+" "+Example2.addr);
+
+        }
+        else {
+            System.out.println(ename+" you too,,but average emplyee");
+             System.out.println(id+" "+ename+" "+esal+" "+Example2.company+" "+Example2.addr);
+
+        }
+    }
+    public static void main(String[] args) {
+Example2 obj1=new Example2(1,"aaruu",300000);
+obj1.display();
+
+        Example2 obj2=new Example2(1,"meerab",300);
+        obj2.display();
+    }
+}
+
+
+instance variable vs static variable:
+__________________________________________________
+-instance variable:every object separate memory created
+-static variables only one copy of memory created that can be
+ shared by all objects
+
+ -once we do the modifications on instance variable it will reflect on specific object
+ -once we do the modifications on static variable it will reflect on all objects
+
+problem:
+package Constructor;
+
+public class Example3_1 {
+    void add(int num1,int num2){
+        System.out.println(num1+num2);
+    }
+    void mul(int num1,int num2){
+        System.out.println(num1*num2);
+    }
+    void div(int num1,int num2){
+        System.out.println(num1/num2);
+    }
+    public static void main(String[] args) {
+        Example3_1 obj=new Example3_1();
+        obj.add(10,20);
+        obj.mul(10,20);
+        obj.div(10,20);
+        //suppose i want to give same value so is this aproach is good
+        //no..foe every time we pass value
+    }
+}
+________________________________________
+ solution:
+ package Constructor;
+
+ public class Example3_2 {
+     int n1;
+     int n2;
+     Example3_2(int n1,int n2){
+         this.n1=n1;
+         this.n2=n2;
+     }
+     void add(){
+         System.out.println("addition is:"+ (n1+n2));
+     }
+
+     void mul(){
+         System.out.println("multplication is:"+(n1*n2));
+     }
+
+     void div(){
+         System.out.println("division is:"+(n1/n2));
+     }
+     public static void main(String[] args) {
+         Example3_2 obj1=new Example3_2(10,20);
+         obj1.add();
+         obj1.mul();
+         obj1.div();
+
+     }
+ }
+//static + final is good combination

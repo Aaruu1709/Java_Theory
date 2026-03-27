@@ -1,0 +1,59 @@
+
+exception:
+An Exception is an unwanted event that occurs during the execution of a program and disrupts the normal flow of instructions.
+Exceptions usually happen due to problems in the program logic.
+
+For Example :
+IOException
+Occurs when an input/output operation fails.
+Syntax:
+FileReader fr = new FileReader("file.txt");  // May throw IOException
+
+ArithmeticException
+Occurs when dividing a number by zero.
+Syntax:
+int result = 10 / 0;  // Throws ArithmeticException
+
+NullPointerException
+Occurs when calling a method on a null object.
+Syntax:
+String str = null;
+System.out.println(str.length());  // Throws NullPointerException
+
+Unlike Errors,
+ -exceptions are within the control of the programmer and
+ -can be handled in code.
+
+
+ Types of Exceptions in Java
+There are two types of Exceptions in Java
+
+1.Checked Exceptions=
+-Checked Exceptions are those which are checked at compile time.
+-Program won't compile unless they are handled with try-catch or declared using throws.
+Examples :
+IOException
+Input/output operation fails (e.g., file not found).
+FileReader fr = new FileReader("abc.txt");  // May throw IOException
+
+SQLException
+Error in database access.
+Connection con = DriverManager.getConnection(url, user, pass);  // May throw SQLException
+
+2.Unchecked Exceptions=
+Unchecked exceptions are those which occur during runtime, not checked by compiler.
+Usually caused by programming mistakes like invalid index, null access, or divide by zero.
+Examples :
+ArithmeticException
+Divide by zero error.
+int result = 10 / 0;  // Throws ArithmeticException
+
+ArrayIndexOutOfBoundsException
+Accessing array index outside valid range.
+int[] arr = {10, 20, 30};
+System.out.println(arr[5]);  // Throws ArrayIndexOutOfBoundsException
+
+Points to remember:
+Object class is the parent class of all the classes in Java
+Throwable class is the parent class of Exception class in Java.
+Exception class itself is a checked exception, because it is not a subclass of RuntimeException.

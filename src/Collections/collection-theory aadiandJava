@@ -1,0 +1,27 @@
+if we have array why collectio is come to picture..becoz array have some drawbacks like:
+
+-arrays store only similar types of data
+-collection store different type of data
+
+-size of aaray is fixed
+-size of collection is not fixed
+
+-in array we can perfom Insert,Delete,Update,get
+-predefined method of collection
+
+| Array                                           | Collection                                                   |
+| ----------------------------------------------- | ------------------------------------------------------------ |
+| Size of array is **fixed** after creation       | Size of collection is **dynamic (can grow or shrink)**       |
+| Array can store **primitive types and objects** | Collection stores **only objects**                           |
+| Array is part of **Java language**              | Collection is part of **Java Collections Framework**         |
+| In array we use **index to access elements**    | In collection we use **methods like add(), remove(), get()** |
+| Arrays have **limited built-in operations**     | Collections provide **many predefined methods**              |
+| Arrays are **not flexible**                     | Collections are **more flexible and powerful**               |
+
+
+collection is group of data,
+framework is a collection predefined class and interfaces
+-collection  framework  is the set  of predefine classes and interfaces
+which used to store different type of data /object
+-
+-

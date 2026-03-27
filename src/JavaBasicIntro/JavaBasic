@@ -1,0 +1,379 @@
+
+java introduction:
+Author:                     james gosling
+vendor                      sun microsystem(oracle)
+Initial name :              Oak langualge(tree)
+present name:               java
+types of s/w:               open source
+Operating System:           all operating system
+moto of java is :           WORA(write once run anywhere)
+Implementation language:    c,cpp..
+beta  version:              1995
+initial version :           jdk 1.o  1996
+present version :           java 26
+stable cersion:             java 25,21
+exrension:                  .java, .class  , .jar
+parts of java:              J2SE   J2EE   J2ME
+website:                     oracle
+compilation process:         java compiler
+execution process :          jvm(java virtual machine)
+
+| Aspect                         | Today (2026)                                       |
+| ------------------------------ | -------------------------------------------------- |
+| Latest feature release         | **Java SE 26**               |
+| Latest Long-Term Support (LTS) | **Java SE 25**                    |
+| Supported older LTS versions   | Java 21, Java 17, Java 11, Java 8 |
+| Release cycle                  | Every 6 months (March & September)  |
+
+
+Importance of core java:
+-according to sun 3 bilion devices run on the java language only
+-java is used to develop desktop application such as media playes ,antivirus etc.
+-web application:irtc,
+-mobile application:
+embbeded system
+-smartcard
+-robotics
+-games
+
+c-language:
+procedure language->deals with function
+#include<stdio.h>
+void main(){
+printf("hello")
+}
+
+java->object-oriented->deals with classes and objeccts
+
+class Test {
+variables
+methods
+constructor
+blocks
+}
+
+multiple oop language: java, python, kotlin,go,.net....
+all oop lang=meaning same:only syntax change/different
+
+
+steps to design first application:
+
+1.write the application
+2.save
+3.compile
+4.execution
+
+step 1:
+write the application:
+java is object-oriented programming language deals with classes and object
+
+case:1
+Invalid:inside the class directly writing business logic are not allowed
+
+class Test{
+sout("aaruu worls");
+}
+
+case 2: valid: inside the class declare the method inside the method write the business logics.
+ class Test{
+ psvm{
+ sout("aaruu worls");
+ }
+ }
+ class A{
+ }
+ class B{
+ }
+
+ user defined class: Test ,A, B
+ predifed class:  System, String=>java.lang package(predefiedn)
+ so imporrt the classes using import statement
+ two way two import classes:
+ 1.importing alll classs=> *
+ import java.lang.*;
+
+ 2.importing application required classes.
+ import java.lang.String,Syestem
+
+ package contains->
+ classes: String,StringBuffer
+ interfaces: seralixzable
+ Enums:Enum
+ Exception:ArithmeticOperation
+ Error:StackOverFlowError
+ Annotation TYpes: Override, SupressWarning
+
+6 elements
+java is case-sencitive
+
+java codind convension:
+camel case- ArithmeticOperationInJava
+
+mixed case:
+start with lower case, every inner words start with upper case.
+variable    :out ,in,
+method      :  main(), charAt(),toUpperCase()
+
+lower case: every character is lower case
+packages:java.lang.io, java.util
+reserved words: try , new ,int, true
+
+java keyWord:50
+flow control statement-
+data types-
+source file keyword- class,extends,interface,implements,package,import
+exception handling-
+object level- new,this,super,instanceof
+method-void,return
+java5- enum,assert
+un used - goto,const(const)
+modifires- public,private , default,abstract,final,strictfp,native,transient,synchronised,volatile
+predefined constant- true ,false,null
+reserve words-(53): keword(50)+ constant(3)
+
+✅ Java Reserved Words – Short Notes (Updated)
+🔹 1. Flow Control Statements
+
+if / else – Conditional branching
+
+switch – Multi-way selection (supports expressions since Java 14)
+
+case – Defines switch branch
+
+default – Executes if no case matches
+
+for – Loop with init–condition–update
+
+while – Entry-controlled loop
+
+do – Exit-controlled loop
+
+break – Terminates loop or switch
+
+continue – Skips current iteration
+
+return – Sends value back from method
+
+🔹 2. Data Types
+
+byte – 1-byte integer
+
+short – 2-byte integer
+
+int – 4-byte integer (default)
+
+long – 8-byte integer
+
+float – 4-byte decimal
+
+double – 8-byte decimal (default)
+
+char – Single Unicode character
+
+boolean – true / false
+
+🔹 3. Source File / OOP Keywords
+
+class – Blueprint of an object
+
+interface – 100% abstraction (default & static methods allowed)
+
+extends – Inherits class or interface
+
+implements – Implements interface
+
+package – Namespace for classes
+
+import – Access classes from other packages
+
+🔹 4. Object-Level Keywords
+
+new – Creates object
+
+this – Refers to current object
+
+super – Refers to parent class object
+
+instanceof – Checks object type at runtime
+
+🔹 5. Method Keywords
+
+void – Method returns nothing
+
+return – Returns value from method
+
+🔹 6. Exception Handling
+
+try – Wraps risky code
+
+catch – Handles exception
+
+finally – Always executes
+
+throw – Explicitly throws exception
+
+throws – Declares exception responsibility
+
+🔹 7. Modifiers
+Access Modifiers
+
+public – Accessible everywhere
+
+private – Within same class
+
+protected – Same package + subclass
+
+default – Same package only
+
+Non-Access Modifiers
+
+abstract – Incomplete method/class
+
+final – Cannot be overridden/changed
+
+static – Belongs to class
+
+synchronized – Thread-safe method/block
+
+volatile – Visible across threads
+
+transient – Excluded from serialization
+
+native – Implemented using C/C++
+
+strictfp – Consistent floating-point behavior
+
+🔹 8. Java 5 Keywords
+
+enum – Fixed set of constants
+
+assert – Used for debugging checks
+
+🔹 9. Unused Reserved Words
+
+goto – Reserved, not used
+
+const – Reserved, not used
+
+🔹 10. Predefined Constants (Literals)
+
+true – Boolean literal
+
+false – Boolean literal
+
+null – No object reference
+
+⚠️ Not keywords
+
+🚀 Modern Java (VERY IMPORTANT)
+🔹 Java 9 – Module System
+
+module – Defines module
+
+requires – Dependency on module
+
+exports – Exposes package
+
+opens – Opens for reflection
+
+uses – Uses service
+
+provides – Provides service implementation
+
+to / with – Module access control
+
+transitive – Inherited dependency
+
+🔹 Java 10
+
+var – Local variable type inference
+⚠️ Not a keyword (reserved type name)
+
+🔹 Java 14
+
+yield – Returns value from switch expression
+
+🔹 Java 14+
+
+record – Immutable data class with auto-generated methods
+🔢 Total Reserved Words (Java 25)
+
+≈ 69 reserved words
+
+50  → core keywords
++16 → contextual / restricted keywords
++3  → literals
+------------------
+≈69 total
+
+
+
+
+📌 Java Introduction (Updated for Today)
+✔️ Author / Origin
+
+Author: James Gosling and team at Sun Microsystems (later acquired by Oracle Corporation)
+
+Initial internal project name: Oak (named after a tree outside the office)
+
+Present name: Java (chosen later, inspired by Java coffee)
+
+✔️ Vendor
+
+Originally: Sun Microsystems
+
+Now: Oracle Corporation (Java is stewarded via OpenJDK and Oracle JDK distributions)
+
+✔️ Type of Software
+
+Java is open-source (via OpenJDK) and also has commercial builds from Oracle and other vendors
+
+✔️ Platform Support
+
+Java is platform-independent and runs on all major operating systems using the JVM (Write once, run anywhere)
+
+✔️ Motto / Philosophy
+
+WORA: Write Once, Run Anywhere — your Java code runs on any platform with a JVM without recompilation
+
+✔️ Implementation Language
+
+The JVM and core libraries are mostly implemented in C/C++, with new parts in Java and other languages in recent years.
+
+✔️ Version Timeline (Key)
+
+Beta versions: circa 1995
+
+Initial release: JDK 1.0 (January 23, 1996)
+
+Present major Java version: Java SE 26 (released March 2026)
+
+Latest Long-Term Support (LTS): Java SE 25 (LTS) (released September 16, 2025)
+
+✔️ Java Editions (Updated Names)
+
+Modern Java platform is organized into editions, not “J2SE/J2EE/J2ME” anymore — those are older names.
+
+Current Java Platform Editions
+
+Java SE: Standard Edition (core language & libraries)
+
+Jakarta EE: Enterprise Edition (server, enterprise APIs; formerly Java EE)
+
+Java ME: Micro Edition (embedded & constrained devices)
+
+Note: Oracle and Eclipse Foundation now use Java SE / Jakarta EE / Java ME, so the old terms like J2SE, J2EE, J2ME are outdated.
+
+✔️ File Extensions
+
+.java – Java source file
+
+.class – Bytecode (compiled) file
+
+.jar – Java archive (collection of compiled classes)
+
+✔️ Compilation & Execution
+
+Compilation: javac (Java compiler) compiles .java to .class bytecode
+
+Execution: JVM (Java Virtual Machine) runs bytecode on any platform via the Java Runtime Environment (JRE)

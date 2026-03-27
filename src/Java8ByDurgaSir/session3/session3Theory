@@ -1,0 +1,331 @@
+lambda expression
+functional Interface
+
+lambda->functional interfaces
+___________________________________________________________
+Example 1:
+___________________________________________________________
+interface Inter{
+public int squareIt(int n);
+}
+
+class Imple implements Inter{
+public int squareIt(int n){
+return n*n;
+}
+}
+
+class Main{
+psvm{
+Inter i=new Imple();
+i.squareIt(10);
+}
+}
+
+
+but i know about lambda expression:
+
+interface Inter{
+public void squareIt(int n);
+}
+
+class Main{
+psvm{
+Inter i=n-> n*n;
+sout(i.sqaureIt(4));
+}
+}
+
+
+🧠 1. Is a separate .class file generated for Lambda?
+👉 ❌ NO
+✔ Lambda does NOT create:
+Separate .class file
+Separate inner class
+🔥 Example
+Runnable r = () -> System.out.println("Hello");
+👉 This does NOT create:
+Test$1.class ❌
+
+
+how works:
+Lambda expressions are executed using JVM’s invokedynamic instruction,
+and the implementation is created
+dynamically at runtime instead of generating a separate .class file.
+__________________________________
+🔴 Anonymous Class
+Runnable r = new Runnable() {
+    public void run() {
+        System.out.println("Hello");
+    }
+};
+
+✔ What happens?
+👉 Compiler creates:
+
+Test.class
+Test$1.class  ✅ (extra file)
+
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+🧠 Step-by-Step Understanding
+🔹 1. Normal Java Code
+
+When you write:
+
+class Test {
+    public static void main(String[] args) {
+        System.out.println("Hello");
+    }
+}
+
+
+👉 Compiler creates:
+
+Test.class
+
+🔹 2. Anonymous Class
+Runnable r = new Runnable() {
+    public void run() {
+        System.out.println("Hello");
+    }
+};
+
+
+👉 Compiler creates:
+
+Test.class
+Test$1.class  ✅ (extra file)
+
+🔹 3. Lambda Expression
+Runnable r = () -> System.out.println("Hello");
+
+
+👉 Compiler creates:
+
+Test.class ✅ ONLY
+
+
+❌ No extra .class file
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+🔥 Behind the Scenes Example
+
+Your code:
+
+Runnable r = () -> System.out.println("Hello");
+
+
+👉 Internally becomes something like:
+
+private static void lambda$main$0() {
+    System.out.println("Hello");
+}
+
+
+👉 JVM links it using:
+
+invokedynamic
+
+🎯 Flow Diagram
+Lambda → Compiler → invokedynamic → JVM → runtime object → execute
+
+🧠 Why Java uses this approach?
+✅ Benefits:
+
+No extra class file
+
+Better performance
+
+Less memory usage
+
+Faster execution
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+🚀 So Java introduced: invokedynamic
+
+👉 It allows:
+
+Dynamic method linking
+
+Runtime decision
+
+No need to create class file
+
++++++++++++++++++++++++++++
+🧠 2. How Lambda uses invokedynamic
+
+Your code:
+
+Runnable r = () -> System.out.println("Hello");
+
+🔥 What compiler does:
+
+Instead of:
+❌ creating class
+
+It creates:
+✔ a dynamic call instruction
+
+🧠 JVM does this at runtime:
+
+Sees invokedynamic
+
+Calls LambdaMetafactory
+
+Creates implementation
+
+Returns object
+
+🎯 Simple Flow
+Lambda → invokedynamic → JVM → creates object → run()
++++++++++++++++++++++++++++++++++++++
+🧠 3. Real-Life Analogy
+Without invokedynamic (Old way):
+
+👉 “Prepare full dish in advance”
+
+With invokedynamic:
+
+👉 “Cook only when customer orders”
+++++++++++++++++++++++++++++++++++++
+"LambdaMetafactory is an internal JVM class used to
+create lambda implementations at runtime. It works with invokedynamic
+to dynamically generate objects for
+ functional interfaces without creating separate class files."
+
+ ================================================
+ "Lambda expressions in Java do not create a separate class
+ file like anonymous classes. Instead, the compiler uses the
+ invokedynamic instruction, and at runtime, the JVM uses
+ LambdaMetafactory to dynamically create an implementation
+ of the functional interface. This makes
+  lambdas more efficient in terms of performance and memory."
+
+  "Anonymous class creates a separate .class file at compile time,
+   but lambda does not. Lambda uses invokedynamic and creates the
+  object at runtime, so it is more lightweight and efficient."
+
+  invokedynamic = “decide later”
+  👉 LambdaMetafactory = “create object later”
+
+  | Step              | Meaning               |
+  | ----------------- | --------------------- |
+  | invokedynamic     | “Prepare when needed” |
+  | LambdaMetafactory | “Kitchen makes food”  |
+  | Output            | “Food delivered”      |
+"invokedynamic delays the execution decision,
+and LambdaMetafactory creates the lambda object at runtime."
+
+------------------------------------------------------------------
+???????????????????????????????????????????????????????????????????????
+??????????????????????????????????????????????????????????????????
+?????????????????????????????????????????????????????????????????
+????????????????????????????????????????????????????????????????????
+
+
+______________________________________________________________
+Lambda expression and collection framework-
+______________________________________________________________
+
+class MyClass extends Runnable{
+public void run(){
+for(int i=0;i<=10;i++){
+sout("child of runnable: "+ i);
+}
+}
+
+class Main {
+psvm{
+MyClass m=new MyClass();
+Thread t=new Thread(m);
+t.start();
+
+for(int i=0;i<=10;i++){
+sout("main thread is responsible to run mii..:"+ i);
+}
+}
+}
+
+here two threads are running simultaneouly
+no guarantee of output child run first or parent
+
+
+here we for run method implem we use separate class
+we can use lambda as this runnable is a functional interface
+so we do not needed separate class
+
+
+class Main{
+psvm{
+Runnable r=()->{
+for(int i=0;i<=10;i++){
+sout("runnable child thread is ruuning.. "+ i);
+}
+};
+
+Thread t=new Thread(r);
+t.start();
+
+for(int i=0;i<=10;i++){
+sout("main thread is running..."+ i);
+}
+}
+}
+
+_______________________________________________________
+
+comparator->
+int compare(Object obj1,Object obj2)
+returns -ve iff obj1 has to come before obj2
+return +ve if obj1 has to come after obj2
+returns 0 iff obj1 and onj2 are eqaul
+
+class MyComparator implements Comparator<Integer>{
+public class compare(Interger I1, Integer I2){
+
+//ternary operator fo this conditiion:
+// return(I1<I2)?-1:(I1<I2)?1 : 0 ;
+//lambda expre for this ternary is= (I1,I2)-> (I1>I2)?-1 : (I1>I2)? 1:0;
+
+if(I1<I2){
+return -1;
+}
+else-if(I1>I2){
+return 1;
+}
+else{
+return 0;
+}
+}
+
+class Main {
+psvm{
+
+ArrayList<Integer> al=new ArrayList<>();
+al.add(20);
+al.add(10);
+al.add(40);
+al.add(35);
+al.add(5);
+sout(al);
+
+Collection.sort(al,new MyComparator());
+
+//Comparator<Integer> c=(I1,I2)-> (I1<I2)? -1 : (I1>I2)? 1 : 0;
+//Collections.sort(al,c);
+//al.stream().forEach(System.out:: println);
+//List<Integer> l2=lal.stream().filter(i->i%2==0).collect(Collection.tolist());
+sout(al);
+}
+}
+//unnessary code remove
+//forEach available inside stream
+
+

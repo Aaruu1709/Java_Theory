@@ -1,0 +1,95 @@
+
+
+predicate:
+class Test
+{
+public static void main(String[] args){
+Predicate<Integer> p=i->i%2==0;
+sout(p.test(10));
+sout(p.test(15));
+}
+}
+_______________________________________________________________
+Functional Interface:
+input--------> perfrom operation--------->output
+4-------------> square operation--------->16
+
+=>Function->Functional Interface
+
+interface Function<T , R >
+{
+public R apply(T t);
+}
+-predicate->test() method
+-Function- > apply() method
+
+
+Example:1
+class Test
+{
+psvm{
+Function<Integer,Integer> f=i->i*i;
+sout(f.apply(4));
+sout(f.apply(5));
+}
+}
+
+example:2
+input is string i want length of string as return
+ input: aaruu      return : lenght (int)
+
+ class Test{
+ psvm{
+ Function<String,Interger> f= s->s.length();
+ sout(f.apply("Aaruu"));
+ }
+ }
+
+example:2
+
+class Test{
+psvm{
+Function<String,String> f=s->s.toUpperCase();
+sout(f.apply("aaruu Shinde"));
+}
+}
+____________________________________
+
+f1.andThen(f2).apply(i)
+first f1 followed by f2
+
+f1.compose (f2).apply(i)
+first f2 and then f1
+
+class Test{
+psvm{
+Function<Integer, Integer> f1=i->2*i;//4
+Function<Integer, Integer> f2=i->i*i*i;//64
+
+sout(f1.andThen(f2).apply(2));//64
+sout(f1.compose(f2).apply(2));//16
+}
+}
+
+______________________________________
+consumer:
+Predicate<T>----> boolean
+Function<T,R>---->R type
+Consumer<T> ------>void no return anything
+
+
+
+consumer: method accept(T t)
+interface Consumer<T>
+{
+public void accept(T t);
+}
+-just for printing purpose
+
+class Test{
+psvm{
+COnsumer<String> c=s->sout(s);
+
+c.accept("Durga");
+}
+}

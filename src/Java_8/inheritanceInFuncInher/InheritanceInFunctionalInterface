@@ -1,0 +1,137 @@
+Here is a **clear and simple explanation in natural human language** about **inheritance in functional interfaces** in Java.
+
+---
+
+# Functional Interface + Inheritance (Simple Explanation)
+
+A **functional interface** means an interface that has **only one abstract method**.
+
+When interfaces **inherit from other interfaces**, we must check **how many abstract methods exist in total**.
+
+---
+
+# 1️⃣ Parent has one abstract method, Child has none
+
+If the **parent interface has one abstract method** and the **child interface does not declare any new abstract method**, then the child **still has only one abstract method (inherited)**.
+
+So the **child is still a functional interface**.
+
+### Example
+
+```java
+interface Parent {
+    void show();
+}
+
+interface Child extends Parent {
+}
+```
+
+✔ Child is **functional interface**
+Because it **inherits only one abstract method**.
+
+Simple meaning:
+
+> Parent gives the method to child, so child still has only one abstract method.
+
+---
+
+# 2️⃣ Parent has one abstract method, Child adds another abstract method
+
+If the **child interface adds another abstract method**, then total abstract methods become **two**.
+
+So it **is not a functional interface anymore**.
+
+### Example
+
+```java
+interface Parent {
+    void show();
+}
+
+interface Child extends Parent {
+    void display();
+}
+```
+
+❌ Not a functional interface
+Because there are **two abstract methods**.
+
+---
+
+# 3️⃣ Child redeclares the same abstract method
+
+If the child **declares the same abstract method again**, it still counts as **one abstract method**.
+
+So the interface **remains functional**.
+
+### Example
+
+```java
+interface Parent {
+    void show();
+}
+
+interface Child extends Parent {
+    void show();
+}
+```
+
+✔ Still functional interface
+
+Because both methods are **the same method**.
+
+Simple meaning:
+
+> Child is just repeating the same method, not adding a new one.
+
+---
+
+# 4️⃣ Default and Static Methods Don't Affect Functional Interface
+
+Even if the interface contains **default methods or static methods**, it can still be a functional interface.
+
+Because **only abstract methods are counted**.
+
+### Example
+
+```java
+interface Test {
+
+    void show();  // abstract method
+
+    default void display() {
+        System.out.println("Default method");
+    }
+
+    static void print() {
+        System.out.println("Static method");
+    }
+}
+```
+
+✔ Still a functional interface.
+
+---
+
+# ⭐ Simple Rule to Remember
+
+Only **abstract methods count**.
+
+| Methods        | Functional Interface? |
+| -------------- | --------------------- |
+| 1 abstract     | ✔ Yes                 |
+| 2 abstract     | ❌ No                  |
+| default/static | ✔ Allowed             |
+
+---
+
+# ⭐ Best Interview Explanation
+
+You can say:
+
+> In inheritance, if a child interface inherits one abstract method from the parent and does not add any new abstract method, it is still a functional interface. If the child adds another abstract method, then it is no longer a functional interface. Default and static methods do not affect functional interfaces because only abstract methods are counted.
+
+---
+
+✅ If you want, I can also show you **3 tricky interview questions on functional interfaces that confuse many Java developers**.

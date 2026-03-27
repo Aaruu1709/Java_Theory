@@ -1,0 +1,73 @@
+🎯 1. Why do we need Comparator / Comparable?
+________________________________________________________________
+👉 When you want to sort objects
+Example:
+Sort numbers ✅ easy
+Sort custom objects (Student, Employee) ❌ not automatic
+👉 So Java gives:
+      Comparable
+Comparator
+
+🧠 2. Comparable (Natural Sorting)
+👉 Used when class itself defines sorting rule
+🔹 Method:
+int compareTo(T obj);
+
+🧠 Rule:
+Return  |	Meaning
+0	    |   equal
++ve 	|   greater
+-ve	    |   smaller
+
+
+🧠 3. Comparator (Custom Sorting)
+
+👉 Used when:
+
+You want multiple sorting logic
+
+You don’t want to modify class
+
+🔹 Method:
+int compare(T o1, T o2);
+
+🎯 4. Real-Life Example
+👉 Employee sorting:
+by salary
+by name
+by age
+👉 Use Comparator (multiple sorting)
+
+
+🧠 5. Comparator using Lambda (Java 8)
+list.sort((a, b) -> a.name.compareTo(b.name));
+
+🔥 6. Comparator using Method Reference
+list.sort(Comparator.comparing(s -> s.name));
+
+🚀 7. Advanced (VERY IMPORTANT)
+Sort by multiple fields:
+list.sort(Comparator
+        .comparing((Student s) -> s.marks)
+        .thenComparing(s -> s.name));
+
+
+🎯 8. Comparable vs Comparator
+Feature 	Comparable	        Comparator
+Package	    java.lang	          java.util
+Method	    compareTo()        	compare()
+Sorting 	Single	            Multiple
+Modify class	Yes 	        No
+Java 8 support	No lambda	    Lambda supported
+
+9. Where we use it?
+👉 Used in:
+Collections.sort()
+List.sort()
+TreeSet
+TreeMap
+
+"Comparable is used for natural sorting and allows only
+ one sorting logic, while Comparator is used for custom
+ sorting and allows multiple sorting logic. Comparator is more
+flexible and supports lambda expressions in Java 8."

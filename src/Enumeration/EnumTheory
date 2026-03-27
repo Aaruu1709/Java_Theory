@@ -1,0 +1,225 @@
+__________________________________________________
+Enumaration:
+________________________________________________
+enum= java 1.5 v
+group is used to declare the group of constant=enum
+gr.of constant=public static final
+
+//before enum:
+class week{
+public static final Week MON;
+public stati fianl Week TUE;
+public static final Week WED;
+}
+
+//java code with enum:
+enum Week{
+MON,TUE,WED;//public static final
+}
+
+example:
+
+enum Week{
+MON,TUE,WED;//const:publuc static final
+}
+psvm{
+Week w1=Week.MON;
+Week w2=Week.TUE;
+Week w3=Week.WED;
+sout(w1+ " "+ w2+ " "+ w3);
+
+Week[] w=Week.values();
+for(Week ww:w)
+{
+sout(ww+ " " +ww.ordinal());
+}
+}
+}
+
+
+Observation:
+//enum code before compilation     :week.java
+enum Week
+{
+MON,TUE,WED;
+}
+
+//internal enum code after compilation:    Week.class
+public fianl class Week extends Enum
+{
+private Week(String s,int i){
+super(s,i);
+}
+public static fianl Week MON;
+public static final Week TUE;
+public static final Week WED;
+private static final Week VALUES[];
+
+static{
+MON=new Week("MON",0);
+TUE=new Week("TUE",1);
+WED=new Week("WED",2);
+VALUES=(new Week[]{
+MON,TUE,WED});
+}
+}
+
+1.enum internally trated as class format
+2.enus are by default final so we can not create child enums
+3.enus are by default public
+4.default super class of enus is: Enum
+5. enum keyword to declare the enum
+enus is default super
+6.enum also compiler generated .class files
+7.enum contains private cons: so not possible to create the obj
+8.enum constants are by default: public static final
+9.enums to declare user defined constants
+10.every const is object
+
+
+example 2:
+Accessing the enums constants
+1.using normal import
+2.using static import
+
+package com.tcs.enumscons;
+enumFish{
+GOLD,STAR,CAT;
+}
+
+//normal import: access the static data using class-name
+package com.tcs.client;
+import com.tcs.enumscons.Fish;
+class TestClient{
+psvm{
+sout(Fish.STAR);
+sout(Fish.GOLD);
+sout(Fish.CAT);
+}
+}
+
+//static import: access static data direclty without using class-name
+package com.tcs.client;
+import static com.tcs.enumscons.Fish.*;
+class MAinTest{
+psvm{
+sout(STAR);
+sout(GOLD);
+sout(CAT);
+}
+}
+
+example 3:
+possible to declare the enum inside the class:
+class Gmail
+{
+enum Mail
+{
+INBOX,COMPOSE,SENT;
+}
+psvm{
+Mail[] m=Mail.values();
+for(Mail mm: m){
+sout(mm);
+}
+}
+}
+
+example 4:
+inside the enum possible to declare constructor
+enum Week{
+MON,TUE,WED;
+}
+Week{
+sout("0-args constructor");
+}
+}
+class Test{
+psvm{
+Week[] w=Week.values();
+for(Week ww:w)
+{
+sout(ww+" " + ww.ordinal());
+}
+}
+}
+
+example : observation
+case 1:
+inside the enum if are declaring only constants these constants ends with semicolon is optional.
+enum Week
+{
+MON,Tue,WED
+}
+
+case 2:
+inside the enum if we are declaring constants along with some other elements like constructor or
+method, in this case group of constans must be first line must ends with semicolon.
+
+enum Week
+{
+MON,TUE,WED;
+Week(){
+sout("0-args cons");
+}
+
+example 5:inside the enum it is possioble to declare the parametarized constructor.
+
+enum Week
+{
+MON,TUE(10),WED(10,20);
+Week(){
+sout("0-args cons");
+}
+
+Week(int a){
+sout("1-args const");
+}
+
+Week (int a,int b){
+sout("2-args const");
+}
+}
+class Test
+{
+psvm{
+Week[] w=Week.values();
+for(Week ww: w)
+{
+sout(ww);
+}
+}
+}
+
+example 7:inside enum it is possible to declare
+variavles,
+methods,
+constructor,
+instance bloack,
+static block...oops concept not possible
+enum only declare constant
+
+
+enum Week
+{
+MON,TUE(10),WED(10,20);//public static final
+static{
+sout("static block");
+}
+{
+sout("instance block");
+}
+
+Week(){
+sout("0-args cons");
+}
+
+Week(int a){
+sout("1-args constr");
+}
+psvm
+{
+sout("enum main mehtod");
+}
+}
+

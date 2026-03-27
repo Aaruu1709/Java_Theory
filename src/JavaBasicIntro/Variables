@@ -1,0 +1,626 @@
+class Test{
+variables
+method
+constructors
+block(instance&& static)
+}
+
+variables: variables are used to store the data
+-variables is named memory location
+-every variables must contains some type
+
+int num=10;
+num is variable of int type holding the value 10 with memory size 4-byte
+
+there are three types of variables in java,
+1.local variables
+2.instance variables
+3.static variables
+
+//local varibles:
+declared    :inside method or constructor or blocs
+scope       :insice method or constructor or block
+memory      : memory allocated when method starts
+                 memory destroyed when method completed
+stored in   :   stack memory
+
+class Test
+{
+public static void main(String[] args){
+int num1=10;
+int num2=20;
+int res;
+res=num1+num2;
+sout(res);
+}
+}
+memories in java:
+stack
+heap
+method area
+native method area
+string consrant pool
+
+method- used to write the logic of application
+
+two typs of method-
+1.instance method
+void add()
+{
+//logics:instance area
+}
+
+2.static method
+static void mul()
+{
+//logic : static area
+}
+
+NOTE:
+-instance method possible to override
+-static methods are not possible to override
+
+-instance method we can access using object
+-static method we can access using class-name
+
+instance variables:
+declared    :inside class
+scope       :insice class
+memory      : memory allocated when object created
+                 memory destroyed when object destroyed
+stored in   :   Heap memory
+
+Access permission:
+instance variables and methods:
+Direct Access                            access using Object-name
+instance Area                            static area
+
+class Test
+{
+//instance variables(object created--obj destroyed)
+int num1=10;
+int num2=20;
+
+
+//static method
+psvm
+{
+//static area
+Test t=new Test();
+sout(t.num1 + t.num2);
+t.add();
+}
+
+//instance method
+void add()
+{
+//instance area
+sout(num1+num2)
+}
+}
+note: you must call all userdefined methods inside the main method then
+only those methods are executed
+
+observation:
+project level we use multiple classes not single
+so,
+class Demo
+{
+int num=100;//instance variable
+}
+class Test
+{
+void disp()
+{
+Demo d=new Demo();
+SOut(d.name);
+}
+}
+
+note:Always access the instance data using object-name
+but instance to direct access is possible but only with in the same class.
+
+
+package JavaBasicIntro;
+
+class Demo{
+    int n1=10;
+    int n2=20;
+}
+class Test{
+    Demo d1;
+    Test(Demo d1){
+        this.d1=d1;
+    }
+
+    void addition(){
+        System.out.println("addition is:"+(d1.n1+ d1.n2));
+    }
+    void multi(){
+        System.out.println("multiplication is:"+(d1.n1* d1.n2));
+    }
+
+}
+public class Assignment2 {
+    public static void main(String[] args) {
+        Demo d1=new Demo();
+        Test t=new Test(d1);
+        t.addition();
+        t.multi();
+    }
+}
+
+We create the object once and pass it using constructor injection
+ so that the same instance is reused across methods.
+
+
+static variables:
+Declared         : inside the class
+scope            : inside the class
+memory           : memory allocated when class loading
+                   memory destroyed when class unloading
+stored in        : method area
+
+instance data accessing:
+instance variables and methods
+direct access                       access using object name
+instance area                       static area
+
+static data accessing:
+static variables and method
+access static data using class-name
+static area            instance area
+
+note: Always access the instance data using object name
+      Always access static data using class-name
+
+      example:
+class Test
+{
+//static variables- class loading:class unloading
+static int num1=100;
+static int num2=200;
+
+//static method
+psvm{
+//static area
+sout(Test.num1 + Test.num2);
+Test t=new Test();
+t.add();
+}
+//instance method
+void add(){
+//instance area
+sout(Test.num1 + Test.num2);
+}
+}
+
+example: the jvm will assign the default values only for instance and static variables
+but not for the local data,
+in java must initialize the local data otherwise we will get error msg
+
+class Test
+{
+int a;
+static boolean b;
+psvm
+{
+double d;//error:variable d might not have been initialized
+
+Tst t=new Test();
+sout(t.a);
+
+sout(Test.b);
+}
+}
+
+example:
+before using local variable must initialize the data.
+class Test
+{
+psvm{
+double d;
+sout("aaruu");
+d=10.5;
+sout("aaruu");
+sout(d);
+}
+}
+
+example:
+static variables accessing
+there are three ways to aaccess the static varibles
+1.using class-name
+2.direct access
+3.using object-name
+
+note:it is always recommanded to access the static data using class-name
+
+
+class Test
+{
+static int a=10;
+psvm
+{
+sout(Test.a);
+sout(a)
+Test t=new Test();
+sout(t.a);
+}
+}
+
+example:
+1.final variable are fixed constants modifications are not allowed
+2.to the local variables only one modifier applicable that is final
+
+class Test
+  {
+  psvm{
+  int a=10;
+  a += 10;//error:can not assign value to final variable a
+  sout(a);
+  }
+  }
+
+  example:
+  class Test{
+  //instance variables
+  int x,y,z;
+  int i=10,j,k;
+
+  //static variables
+  static int a=10,b=20,c;
+  static int l=10,m=20,n=30;
+  static int d,e=100,f;
+
+  psvm{
+  Test t=new Test();
+  sout(t.x + " "+t.y+ " "+t.z);
+  sout(t.i+"____"+t.j+"_____"+t.k);
+
+  sout(Test.a+ "*****"+ Test.b+"*******"+Test.c);
+  sout(Test.l+ " "+Test.m + " "+Test.n);
+  sout(Test.d + " "+ Test.e+ " "+Test.f);
+  }
+  }
+
+class Assignment2_2 {
+    int a = 20;
+    int b = 30;
+
+    static void add(Assignment2_2 obj) { // needs instance data
+        System.out.println("add: " + (obj.a + obj.b));
+    }
+
+    static void mul() { // does NOT need instance data
+        System.out.println("mul logic here");
+    }
+
+    public static void main(String[] args) {
+        Assignment2_2 obj = new Assignment2_2(); // one object
+
+        add(obj);                // pass object
+        Assignment2_2.mul();     // call via class
+    }
+}
+__________________________
+How many ways (solutions) are there to access instance data when static is involved?
+👉 There are EXACTLY 3 standard & accepted ways.
+(These are also what interviewers expect.)
+
+✅ SOLUTION 1: Pass object to static method ⭐ (MOST COMMON)
+Code
+class Assignment2_2 {
+    int a = 20;
+    int b = 30;
+
+    static void add(Assignment2_2 obj) {
+        System.out.println(obj.a + obj.b);
+    }
+
+    public static void main(String[] args) {
+        Assignment2_2 obj = new Assignment2_2();
+        add(obj);
+    }
+}
+
+Why use this?
+
+✔️ Clean
+✔️ Efficient
+✔️ Best for static utility methods
+
+🎤 Interview line:
+
+We pass the object reference to access instance variables inside a static method.
+
+✅ SOLUTION 2: Make variables static (CLASS-LEVEL DATA)
+Code
+class Assignment2_2 {
+    static int a = 20;
+    static int b = 30;
+
+    static void add() {
+        System.out.println(a + b);
+    }
+
+    public static void main(String[] args) {
+        Assignment2_2.add();
+    }
+}
+
+When to use?
+
+✔️ When data is common for all objects
+
+❌ Don’t use if each object needs different values
+
+🎤 Interview line:
+
+Static variables belong to the class, so static methods can access them directly.
+
+✅ SOLUTION 3: Make method NON-static (PURE OOP WAY ⭐)
+Code
+class Assignment2_2 {
+    int a = 20;
+    int b = 30;
+
+    void add() {
+        System.out.println(a + b);
+    }
+
+    public static void main(String[] args) {
+        Assignment2_2 obj = new Assignment2_2();
+        obj.add();
+    }
+}
+
+Why this is best in real projects?
+
+✔️ Proper OOP
+✔️ No confusion
+✔️ Most used in industry
+
+🎤 Interview line:
+
+Instance methods can directly access instance variables using object reference.
+
+__________________________________________
+When instance data is in a DIFFERENT CLASS, how many ways are there to access it?
+
+This is a VERY important interview topic.
+Let’s lock it in cleanly.
+
+✅ WHEN DATA IS IN A DIFFERENT CLASS
+
+👉 There are EXACTLY 4 STANDARD WAYS
+
+I’ll show simple code + when to use.
+
+🟢 CLASS 1 (Data class)
+class Demo {
+    int a = 10;
+    int b = 20;
+}
+
+✅ WAY 1: Create object inside method (SIMPLE, NOT OPTIMAL)
+class Test {
+    void add() {
+        Demo d = new Demo();
+        System.out.println(d.a + d.b);
+    }
+}
+
+
+✔️ Easy
+❌ Creates new object every time
+❌ Not recommended for performance
+
+🎤 Interview note:
+
+This approach is simple but not memory-efficient.
+
+✅ WAY 2: Pass object as parameter ⭐ (BEST PRACTICE)
+class Test {
+    void add(Demo d) {
+        System.out.println(d.a + d.b);
+    }
+}
+
+Demo d = new Demo();
+Test t = new Test();
+t.add(d);
+
+
+✔️ One object
+✔️ Reusable
+✔️ Industry standard
+
+🎤 Interview line:
+
+Object is created once and passed wherever required.
+
+✅ WAY 3: Constructor Injection ⭐⭐ (VERY IMPORTANT)
+class Test {
+    Demo d;
+
+    Test(Demo d) {
+        this.d = d;
+    }
+
+    void add() {
+        System.out.println(d.a + d.b);
+    }
+}
+
+Demo d = new Demo();
+Test t = new Test(d);
+t.add();
+
+
+✔️ Clean design
+✔️ Loose coupling
+✔️ Used in Spring / real projects
+
+🎤 Interview line:
+
+Dependency is provided through constructor.
+
+✅ WAY 4: Make data static (CLASS-LEVEL SHARING)
+class Demo {
+    static int a = 10;
+    static int b = 20;
+}
+
+class Test {
+    void add() {
+        System.out.println(Demo.a + Demo.b);
+    }
+}
+
+
+✔️ No object needed
+❌ Not object-oriented
+❌ Shared by all objects
+
+🎤 Interview warning:
+
+Use static only if data is common for all objects.
+
+❌ NOT RECOMMENDED / WRONG THINKING
+
+Accessing instance variables directly without object ❌
+
+Creating objects repeatedly inside methods ❌
+
+_____________________________________________________________
+Java Variables — Cases with Examples
+Case 1: Declare instance variable at class level
+
+✅ Allowed
+
+class Test {
+    int x;   // instance variable
+}
+
+
+Why:
+Instance variables define the state of an object.
+
+Case 2: Initialize instance variable at class level
+
+✅ Allowed
+
+class Test {
+    int x = 10;
+}
+
+
+Why:
+Initialization at declaration happens when the object is created.
+
+Case 3: Declare instance variable inside instance method
+
+❌ Not allowed
+
+class Test {
+    void show() {
+        int x;   // ❌ this is a local variable, not instance variable
+    }
+}
+
+
+Why:
+Variables inside methods are local, not part of the object.
+
+Case 4: Initialize instance variable inside instance method
+
+✅ Allowed
+
+class Test {
+    int x;
+
+    void setX() {
+        x = 20;   // ✔ assigning instance variable
+    }
+}
+
+
+Why:
+The method runs on an object and can modify its data.
+
+Case 5: Declare static variable at class level
+
+✅ Allowed
+
+class Test {
+    static int y;
+}
+
+
+Why:
+Static variables belong to the class, not to objects.
+
+Case 6: Initialize static variable at class level
+
+✅ Allowed
+
+class Test {
+    static int y = 30;
+}
+
+Case 7: Declare static variable inside static method
+
+❌ Not allowed
+
+class Test {
+    static void show() {
+        static int y = 10;  // ❌ compile-time error
+    }
+}
+
+
+Why:
+Local variables cannot be static.
+Static variables must live for the entire program, not just method execution.
+
+Case 8: Initialize static variable inside static method
+
+✅ Allowed
+
+class Test {
+    static int y;
+
+    static void setY() {
+        y = 40;   // ✔ assigning static variable
+    }
+}
+
+Case 9: Access instance variable in static method
+
+❌ Not allowed directly
+
+class Test {
+    int x;
+
+    static void show() {
+        x = 10;   // ❌
+    }
+}
+
+
+Why:
+Static methods have no object reference (this).
+
+Case 10: Access instance variable in static method using object
+
+✅ Allowed
+
+class Test {
+    int x;
+
+    static void show() {
+        Test obj = new Test();
+        obj.x = 10;   // ✔
+    }
+}

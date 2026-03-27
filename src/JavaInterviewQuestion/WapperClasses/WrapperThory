@@ -1,0 +1,64 @@
+is java completely Object Oriented?
+No.java is not completely object oriented Since it contains primitive data types like byte,
+short,int,etc and they are not objects.
+so not 100%
+
+so java gives us way to convert that primitive datatype to object so in that case wrapper comes into picture
+so every primitive have thire wrapper class
+like
+byte->Byte
+int->Integer
+
+Why do we need Wrapper classes?
+if primitive works.
+-bcoz of some features in java like collection, generics and few method parameters do not accept primitives.
+-they have utility methods inside them which we use a lot our daily coding life
+ boxing=converting primitive datatype into object
+ int a=10;
+ Integer obj=Integer.valueOf(a);//unnesaary manual boxing
+ =
+ compiler convert primitive datatype into object automatically
+
+ integer obj=a;//auto boxing
+
+ so it called autoboxing
+---------------------------------------------------------------
+ converted obj to primitive back
+
+ int x=obj.intValue();//manual -unboxing
+
+ int y=obj;//auto un boxing
+----------------------------------------------
+utility methods
+ String number="10";
+ we have to convert string  into integer
+ so we have utility method
+ Integer obj=Integer.valueOf(number);
+
+
+ we also have method parseInt it it will converted into primitive datatype.
+ int z=Integer.parseInt(number);
+
+ now we convert int into string:
+ for that also we have toString method
+ String number1=obj.toString();
+
+class utilityMethod{
+psvm{
+Integer i1=20;
+Integer i2=20;
+sout(i1.comapreTo(i2));
+}
+}
+//if both are equal return 0
+//if i1 is greater than i2 return 1
+//if i1 is less than i2 return -1
+
+
+//sum()
+//max()
+//min()
+//MAX_VALUE()
+//MIN_VALUE()
+
+-collection we can not used primitives

@@ -1,0 +1,889 @@
+interface:
+__________________________________
+-interface are used to declare functionalities of project
+-delcare the interface using interface keywors
+-interface also .class files are generated
+______________________________________
+
+
+interfaces are bydefault :abstract
+interfaces methods are by default : public static fianl
+variable: public static final
+
+interface Bank           //abstract
+{
+int limit=40000;          //public static final
+void rateOfInterest();    //public+abstract
+}
+
+class AxisBank implements Bank{
+public void rateOfInterest(){
+sout("SBI bank ROI 11.99...withdraw limit is:"+ Bank.limit);
+}
+}
+class SbiBank implements Bank{
+public vod rateOfInterest(){
+sout("SBI bank of interest 10.00...withdraw limit is:"+ Bank.limit);
+}
+}
+
+class TestClient
+{
+psvm{
+AxisBank ax=new AxisBank();
+ax.rateOfInterest();
+
+SbiBank sb=new SbiBank();
+sb.rateOfInterest();
+___________________________________________
+aaproach 2:
+we can write separate common method for both bank and access data from this
+void info(Bank b){
+b.rateOfinterst();
+b.display();
+}
+
+and create object :
+TestClient t=new TestClient();
+t.info(new SbiBank());
+t.info(new AxisBank());
+_________________________________________
+
+}
+}
+
+note;
+1.one interface contain multiple implemented clases
+2.inside the interface not possible to declare instance variable
+=>Any variable inside an interface is automatically:
+  public
+  static
+  final
+  So instance variables are not allowed.
+  Instance variable → belongs to object
+  Interface → cannot create objects
+  ✅ So instance variables are not possible
+
+3.inside interface constructor not allowed
+=>Constructor is used to create object
+  Interface cannot create objects
+  So constructor not allowed
+
+
+4.inside the interface instance,static block are not possible
+=> instance block:
+{
+     System.out.println("instance block");
+  }
+  👉 Instance block runs when an object is created.
+  Now the key rule:
+  ❌ Interface cannot create objects
+  So:
+  no object
+  no constructor
+  no instance block
+  👉 That’s why instance block is NOT allowed in interface.
+
+static block:
+“Static blocks are used for automatic execution when a class loads.
+Interfaces are meant to be a blueprint or contract — they don’t get loaded to execute code like classes do.
+That’s why automatic execution via static blocks is not allowed in interfaces.
+However, static methods are allowed, but they only run when explicitly called, not automatically.””
+
+
+
+5.inside tthe interface main method is not allowed,since java8 allowed
+=>Why it IS allowed (very simple)
+  main() is static
+  Interface allows static methods (Java 8+)
+-Interface cannot create objects, but
+-main() does not need an object to run.
+✅ Allowed in interface (with Java version)
+______________________________________________________
+| Feature                               | Notes                                                             | Since Java Version               |
+| ------------------------------------- | ----------------------------------------------------------------- | -------------------------------- |
+| **Abstract methods**                  | Must be implemented by classes                                    | Java 1.0+                        |
+| **Constants (`public static final`)** | Variables inside interface are always constants                   | Java 1.0+                        |
+| **Static methods**                    | Can have method with body, called explicitly using interface name | Java 8+                          |
+| **Default methods**                   | Can have method with body, inherited by implementing class        | Java 8+                          |
+| **Main method**                       | Static main method is allowed                                     | Java 8+ (because main is static) |
+
+❌ Not allowed in interface
+| Feature                | Reason                                                             | Java Version |
+| ---------------------- | ------------------------------------------------------------------ | ------------ |
+| **Instance variables** | Interface cannot have objects → only constants allowed             | All versions |
+| **Constructor**        | Interface cannot create objects → constructor meaningless          | All versions |
+| **Instance blocks**    | Run when object is created → interface has no objects              | All versions |
+| **Static blocks**      | Run automatically when class loads → interface is just a blueprint | All versions |
+
+example 2:
+interface Services{
+void laptop();
+void mobile();
+}
+abstract class Ratan implements Servives{
+public void laptop(){
+sout("this is laptop service canter");
+}
+}
+class Ram extends Ratan{
+public void mobile(){
+sout("this is mobile service center...");
+}
+}
+class TestClient{
+psvm{
+Ram r=new Ram();
+r.laptop();
+r.mobile();
+}
+}
+
+
+Example: 3
+Development process:
+level 1: interface                 :contains decalrations
+level 2:abstract classes           : contain partial implementation
+level 3: implementation classs     : conitain all implementation
+level 4: client code               : access the data
+
+
+interface Bank
+{
+void deposite();
+void withdraw();
+void Loan();
+void account();
+}
+
+abstract class Dev1 implements Bank{
+void deposite(){
+sout("deposited money successsfully");
+}
+
+abstract class dev2 implements Dev1
+{
+void withdraw(){
+sout("here also imcomplete so make it abstarct");
+}
+
+class Dev3 implements Dev2{
+sout("imple remainniing method here and complete imple")
+void loan(){
+sout("loan");
+}
+void account(){
+sout("account");
+}
+
+class ClientCode{
+psvm{
+Dev3 d=new Dev3();
+d.account();
+d.loan();
+d.deposite()
+d.withdraw();
+}
+}
+
+
+
+class extends class
+inteface extends interface
+class implements inteface
+
+case 1:one interface can extends another interface
+interface It1
+{
+void m1();
+}
+interface It2 extends It1
+{
+void m2();
+}
+interface It3 exends It2
+{
+void m3();
+}
+class Test implements It3
+{
+override-3 methods
+}
+
+case:2one class can extends only one class at a time,but
+one interface can extends multiple interfaces
+interface It1
+{
+void m1();
+}
+interface It2
+{
+void m2();
+}
+interface It3 extends It1,It2
+{
+void m3();
+}
+class Test implements It3{
+override 3-methods
+}
+
+
+
+case:3
+interface It1
+{
+void m1();
+void m2();
+}
+interface It2
+{
+void m2();
+void m3();
+}
+interface It3 extends It1,It2
+{
+void m4();
+}
+class Test implemets It3
+{
+override 4-methods
+}
+
+
+case 4:one class can implements multiple interfaces
+
+interface It1
+{
+void m1();
+}
+interface It2
+{
+void m2();
+}
+class Test1 implements It1{
+override 1-methods
+}
+class Test2 implements It1,It2{
+override 2-methods
+}
+class Test3 implements It1,It2,It3{
+override 3-methods
+}
+
+case 5:
+interfce It1
+{
+void m1();
+void m2();
+}
+interface It2
+{
+void m2();
+void m3();
+}
+class Test implements It1,It2
+{
+oveeride 3-methods
+}
+
+ session-2
+ ____________________________________________________
+
+Nested interfaces:
+case 1:
+declaring interface inside the another interface
+interfaec It1
+{
+void m1();
+interface It2
+{
+void m2();
+}
+}
+
+class Test implements It1,It1.It2
+{
+override 2-methods
+}
+
+
+case 2:
+declaring interface inside the abstract class.
+abstract class A{
+abstract void m1();
+interface It1{
+void m2();
+}
+}class Test extends A implements A.It1{
+override 2-methods
+}
+
+
+case 3:
+decalring interface inside the normal class
+class A{
+interface It1
+{ void m1();
+}
+}
+class Test implements A.It1{
+override 1-method
+}
+
+
+___________________________________________
+Adapter class:
+empty implementation of interface methods
+interface It1
+{
+void m1();
+void m2();
+;;;;
+void m6();
+}
+class X implements It1
+{void m1(){}
+void m2(){}
+;;;
+void m6(){}
+}
+class Boys implements It1
+{
+must override 6-methods
+}
+class Girls extends X{
+override required methods
+}
+
+
+-helper class->gives empty implementation for all methods of an interface
+-so we dont have to implemrnt every method of interface
+
+Why do we need an Adapter Class?
+Problem without adapter class:
+
+If an interface has many methods, then:
+interface Listener {
+    void click();
+    void doubleClick();
+    void mouseEnter();
+    void mouseExit();
+}
+If you want only click(), you still must write all methods 😖
+
+Solution:
+ -Adapter class
+class ListenerAdapter implements Listener {
+    public void click() {}
+    public void doubleClick() {}
+    public void mouseEnter() {}
+    public void mouseExit() {}
+}
+
+Now you extend the adapter 👇
+class MyApp extends ListenerAdapter {
+    public void click() {
+        System.out.println("Click handled");
+    }
+}
+✔ You override only what you need
+use:
+To reduce code
+To avoid implementing unwanted methods
+To make code clean and simple
+To provide default implementations for interface method
+-“Adapter class is used when an interface has many methods but we need only a few. It provides
+empty implementations so we can override only required methods.”
+
+interface KeyboardListener {
+    void keyPressed();
+    void keyReleased();
+    void keyTyped();
+}
+
+// Adapter class
+class KeyboardAdapter implements KeyboardListener {
+    public void keyPressed() {}
+    public void keyReleased() {}
+    public void keyTyped() {}
+}
+
+// Your class (use only one method)
+class MyKeyboard extends KeyboardAdapter {
+    public void keyPressed() {
+        System.out.println("Key is pressed");
+    }
+}
+
+// Test class
+public class TestKeyboard {
+    public static void main(String[] args) {
+        MyKeyboard k = new MyKeyboard();
+        k.keyPressed();
+    }
+}✅ Output
+ Key is pressed
+
+
+ interface Message
+ {
+ void m1()
+void m2()
+;;;;;
+void m6()
+}
+class x implememnts Message
+{
+void m1(){}
+void m2(){}
+;;;;;void m3(){}
+}
+class Boys implements Messsgae
+{
+overrirde 6-methods}
+class Girls extends X{
+overode required method
+}
+//If a class implements an interface
+and does not implement all methods, it must be declared abstract.
+
+example of adaptr:
+// Interface with many methods
+interface Message {
+    void m1();
+    void m2();
+    void m3();
+    void m4();
+    void m5();
+    void m6();
+}
+
+// Adapter class: provides empty implementations
+abstract class X implements Message {
+    public void m1() {}
+    public void m2() {}
+    public void m3() {}
+    public void m4() {}
+    public void m5() {}
+    public void m6() {}
+}
+
+// Class implementing interface directly (must override all methods)
+class Boys implements Message {
+    public void m1() { System.out.println("Boys m1"); }
+    public void m2() {}
+    public void m3() {}
+    public void m4() {}
+    public void m5() {}
+    public void m6() {}
+}
+
+// Class extending adapter class (override only required methods)
+class Girls extends X {
+    public void m3() {
+        System.out.println("Girls m3 only");
+    }
+}
+
+// Test class
+public class TestAdapterDemo {
+    public static void main(String[] args) {
+
+        Message b = new Boys();
+        b.m1();
+
+        Message g = new Girls();
+        g.m3();
+    }
+}
+
+
+3.Development process:
+
+class MyClass implements Interface
+{
+override all methods present in interface
+}
+
+class MyClass extends AbstractClass{
+override the abstract method present in absract class
+}
+
+class MyClass extends adaptorClasss{
+override required mehtods
+}
+
+class Myclass extends normalClass{
+override required methods
+}
+
+
+1. class implements interface:
+-When a class implements an interface, it must override ALL methods of the interface.
+
+interface Vehicle {
+    void start();
+    void stop();
+}
+
+class Bike implements Vehicle {
+    public void start() {
+        System.out.println("Bike started");
+    }
+
+    public void stop() {
+        System.out.println("Bike stopped");
+    }
+
+    public static void main(String[] args) {
+        Vehicle v = new Bike();
+        v.start();
+        v.stop();
+    }
+}
+-Interface contains only abstract methods (before Java 8).
+-Class must implement all interface methods.
+-If not, class must be abstract.
+-Multiple interfaces can be implemented.
+-Used to achieve 100% abstraction & multiple inheritance.
+
+
+✅ 2. Class extends Abstract Class
+📌 Rule
+
+When a class extends an abstract class, it must override only
+abstract methods, not concrete ones.
+
+🔹 Working Program
+abstract class Bank {
+    abstract void rateOfInterest();
+
+    void display() {
+        System.out.println("Bank details");
+    }
+}
+
+class SBI extends Bank {
+    void rateOfInterest() {
+        System.out.println("ROI is 10%");
+    }
+
+    public static void main(String[] args) {
+        Bank b = new SBI();
+        b.rateOfInterest();
+        b.display();
+    }
+}
+
+🎤 5 Interview Points
+
+Abstract class can have abstract + concrete methods.
+Child class must override only abstract methods.
+Can have constructors & instance variables.
+Supports partial abstraction.
+A class can extend only one abstract class.
+
+✅ 3. Class extends Adapter Class
+📌 Rule
+
+Adapter class implements interface with empty methods,
+ so child overrides only required ones.
+
+🔹 Working Program
+interface MouseListener {
+    void click();
+    void press();
+    void release();
+}
+
+abstract class MouseAdapter implements MouseListener {
+    public void click() {}
+    public void press() {}
+    public void release() {}
+}
+
+class MyMouse extends MouseAdapter {
+    public void click() {
+        System.out.println("Mouse clicked");
+    }
+
+    public static void main(String[] args) {
+        MouseListener m = new MyMouse();
+        m.click();
+    }
+}
+
+🎤 5 Interview Points
+
+Adapter class reduces boilerplate code.
+Child class overrides only needed methods.
+Adapter class is usually abstract
+Used when interface has many methods.
+Common in event handling (AWT/Swing).
+
+✅ 4. Class extends Normal Class
+📌 Rule
+
+Child class overrides methods only if behavior change is needed.
+
+🔹 Working Program
+class Parent {
+    void show() {
+        System.out.println("Parent show");
+    }
+}
+
+class Child extends Parent {
+    void show() {
+        System.out.println("Child show");
+    }
+
+    public static void main(String[] args) {
+        Parent p = new Child();
+        p.show();
+    }
+}
+
+🎤 5 Interview Points
+
+Normal class has only concrete methods.
+Overriding is optional, not mandatory.
+Used for runtime polymorphism.
+Method signature must be same.
+Access level cannot be reduced.
+
+
+4.Marker interface and cloning process:
+
+class Test implements Clonable{
+int a=10,b=20;
+psvm throws Exception{
+Test t=new Test();
+sout(t.a + " "+t.b);
+
+Test copy=(Test)t.clone();
+sout(copy.a+ " "+copy.b);
+}
+}
+
+-the marker interface does not cointain any methods but whenever our class implements that interface
+our class aquire some capabilities to perform some operations, such type of interfaces are called as marker interfaces
+
+- marker interface is empty interface, but class is aquiring capabilities these capabilities are provided by JVM
+
+- the process of creating exactly duplicat object is called cloning process
+
+- to make the cloning process the class must implement Clonable interface
+to create the cloning use clone() method and this method present in Object class.
+-throws java.lang.CloneNotSupportedException;
+clone() method throws This exception.
+it is checked exception so handle the exception using try-catch or throws keyword.
+
+note:user defined empty interfaces are not a marker interfaces
+interface It1{
+}
+
+
+-A marker interface is an interface with NO methods.
+-👉 To give information (mark) to JVM or Java classes.
+🔹 Famous Marker Interfaces in Java
+| Interface      | Purpose                          |
+| -------------- | -------------------------------- |
+| `Serializable` | Allow object to be saved to file |
+| `Cloneable`    | Allow object cloning             |
+| `RandomAccess` | Fast access in List              |
+
+Cloning process:
+👉 Cloning means creating an exact copy of an object.
+Step-by-step:
+
+Class implements Cloneable (marker interface)
+Override clone() method
+Call super.clone()
+JVM creates field-by-field copy
+
+*“Marker interfaces are used to inform JVM about special behavior.
+ Cloneable is a marker interface that allows object cloning using the clone() method.”
+
+ _____________________________________________________________
+            session - 3
+ _____________________________________________________________
+Interface java-8 features:
+
+Example 1:
+from java8 the interface allows three methods:
+1.default methods
+2.static methods
+3.abstract methods
+
+interface It1{
+void m1();
+default void m2(){
+sout(default method imple);
+}
+static void m3()
+{
+sout("static method imple");
+}
+}
+class Test implementation It1
+{
+public void m1(){
+sout("m1 method imple");
+}
+psvm{
+Test t=new Test();
+t.m1();
+t.m2();
+It1.m3();
+}
+}
+
+Example 2:
+1.to give common implementation to all imple classes, then declare the common imple inside
+the interface using default and static methods
+2. default method impl it is possible to override
+static method imple are not possible to override
+
+
+interface Party{
+void eat();
+default void common_eat()
+{
+sout("Ice-cream, fruits salad...");
+}
+}
+class Veg implements Party{
+public void eat()
+{
+sout("paneer dal sambar");
+}
+}
+class NonVeg implements Party
+{
+public void eat(){
+sout("chicken mutton fish...");
+}
+}
+class TestClient{
+psvm{
+Veg v=new Veg();
+v.eat();
+v.common_eat();
+
+NonVeg nv=new NonVeg();
+nv.eat();
+nv.common_eat();
+}
+}
+
+example 3:
+inside the interface possible to declare the main method from java8
+
+interface It1{
+psvm{
+sout("interface main method");
+}
+}
+
+example 4:
+interface It1
+{
+default void m1()
+{
+sout("It1 m1() method");
+}
+}
+interface It2
+{
+default void m1()
+{
+sout("It2 m1() mehtod");
+}
+}
+
+class Test implements It1,It2
+{
+public void m1()
+{
+sout("common method");
+}
+psvm{
+Test t=new Test();
+t.m1();
+}
+}
+}
+}
+}
+
+when the class implements multiple interfaces, if the multiple interface contains same default mehtod
+then we will get incompatible error.
+to overcome above problem override the default in the implementation class, then at runtime override method will be executed
+
+example: 5
+functional interfaces
+the interface contain only one abstract is called functional interfaces
+the functional interface can have multiple default and static methods
+
+case :1
+interface It1
+{
+void m1();
+}//not functional interface
+
+case:2
+interface It1
+{
+void m1();
+void m2();
+}//not functional interface
+
+case:3
+interface It1{
+void m1();
+static void m2(){};
+}//yes functional interface-->it may contain default and static method
+//required only one abstract method
+
+case4:
+interface It1
+{
+void m1();
+static void m2(){}
+default void m3(){}
+}//valid
+
+case 5:
+interface It1{
+void m1();
+static void m2(){}
+static void m3(){}
+default void m4(){}
+default void m5(){}
+}//yes functional interface
+
+
+
+lamda expression only work with functional interface:
+interface Message{
+void wish();
+}
+
+class Ratan implements Message{
+public void wish(){
+sout("Good morning");
+}
+}
+class TestClient{
+psvm{
+Ratan r=new Ratan();
+r.wish();
+
+Message m=()->sout("good morning");
+m.wish();
+
+}
+}
+-insteed of overriting creating object we can direclty use lambda function.

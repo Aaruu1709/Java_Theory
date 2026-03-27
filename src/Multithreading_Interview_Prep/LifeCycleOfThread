@@ -1,0 +1,53 @@
+Life Cycle of a Thread in Java Multithreading
+_____________________________________________________
+-in java thread goes through different state from its creation to its termination
+-to manage the thread in multithreading, we need to understand the life cuycle of thread
+-main states:
+a thread goes through 5 main states.
+
+👉 First state – New / Born state
+
+So first we create a thread object.
+Like:
+Test t = new Test();
+So here, thread is created.
+You can say the thread is born, but it has not started yet.
+
+👉 Second state – Runnable state
+we call:
+t.start();
+So after calling start(), the thread goes into runnable state.
+It is ready to run
+But it is waiting for CPU
+It depends on JVM and thread scheduler
+
+👉 Third state – Running state
+Now what happens, JVM will check and allocate CPU.
+Thread scheduler(part of JVM) decides which thread will run based on algorithm like scheduling
+Once CPU is allocated → thread goes into running state
+Now it starts executing the run() method
+
+👉 Fourth state- Waiting / Blocked / Timed Waiting( Non-Runnable state)
+Sometimes what happens, thread is running but we stop it for some time.
+This can happen in cases like:
+sleep() → thread goes to sleep
+waiting for lock
+waiting for another thread (join())
+suspend (temporarily stop)
+So here:
+Thread is not running
+It is in non-runnable state
+After some time or condition, it again goes back to runnable state
+
+👉 Fifth state – Dead state
+Now when thread completes its task:
+It goes into dead state
+That means execution is finished
+👉 Important:
+Once thread is dead → it cannot come back again
+🔄 Flow (same explanation)
+
+👉
+New → Runnable → Running → Non-Runnable → Runnable → Dead
+"So overall, a thread moves from creation to execution, may pause in between,
+ and finally terminates after completing its task."

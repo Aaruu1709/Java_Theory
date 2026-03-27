@@ -1,0 +1,391 @@
+----------------------------------------------------------------------
+Annonymous Inner class vs Lambda Expression
+____________________________________________________________________
+
+class Employee
+{
+String name;
+int eno;
+Employee(String name, int eno){
+this.name=name;
+this.eno=eno;
+}
+public String toString(){
+return name":"+ eno;
+}
+}
+
+class Test
+{
+psvm{
+//way 1
+//Employee e=new Employee("aaruu", 100);
+//sout(e);
+
+//way 2
+//alterantive:
+ArrayList<Employee> l=new ArrayList<Employee>();
+l.add(new Employee("Aaruu", 1234));
+l.add(new Employee("saruu", 1235));
+l.add(new Employee("paruu", 1236));
+l.add(new Employee("maruu", 1237));
+l.add(new Employee("garuu", 1238));
+sout(l);
+Collections.sort(l,(e1,e2)->(e1.eno<e2.eno)? -1 : (e1.eno>e2.eno)?1 : 0);
+sout(l);
+
+
+//sort on alpha order employee name
+COllections.sort(l,(e1,e2)->e1.name.compareTo(e2.name));
+sout(l);
+}
+}
+
+
+Comparable and comparator->sorting
+restrction: we can use lambda expression able wherever functional interface is there
+not functional interface u can not use lambda expression
+
+lambda is not replacement of anonympius inner classes(more propable)
+_____________________________________________
+1. Why do we need Comparator / Comparable?
+👉 When you want to sort objects
+Example:
+Sort numbers ✅ easy
+Sort custom objects (Student, Employee) ❌ not automatic
+👉 So Java gives:
+Comparable
+Comparator
+
+🧠 2. Comparable (Natural Sorting)
+👉 Used when class itself defines sorting rule
+🔹 Method:
+int compareTo(T obj);
+
+| Return | Meaning |
+| ------ | ------- |
+| 0      | equal   |
+| +ve    | greater |
+| -ve    | smaller |
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+we create object for its implementation clss
+anonymous inner class implement functional interface->lambda expression
+wherever anonymous inner class is there to resolve the complexity lambda exp we can use
+anonynous is more overful than lambda
+
+class MyClass implements Runnable{
+ public void run(){
+ sout("child thread");
+ }
+
+ class Main{
+ psvm{
+ Runnable r=new Runnable(){
+ public void run(){
+ for(int i=0;i<10;i++){
+ sout("child thread");
+ }
+ };
+
+ Myclass m=new MyClass();
+ Thread t=new Thread(m);
+ t.start();
+ }
+ }
+ }
+
+
+
+
+//using lambda
+class Test
+{
+psvm{
+Runnable r=()->{
+for(int i=0;i<10;i++){
+sout("child thread");
+}
+};
+
+Thread t=new Thread(r);
+t.start();
+for(int i=0; i<10;i++){
+sout("Main Thread");
+}}}
+
+
+
+
+++++++++++++++++++++++++++++++++++
+gpt trap
++++++++++++++++++++++++++++++++++++++
+
+🔥 1. Problem (Before Java 8)
+👉 To implement an interface, we had to:
+Create separate class
+Write extra code (boilerplate)
+
+❌ Old Way (Separate Class):
+interface Test{
+void m1();
+}
+
+class MyClass implements Test{
+public void m1(){
+sout("hello");
+}
+}
+
+public class main{
+psvm{
+Test t=new Myclass();
+t.m1();
+}
+}
+🚫 Problem:
+Too much code
+Separate class needed
+Not clean
+
+🔥 2. Anonymous Inner Class (Improvement)
+👉 No need to create separate class
+interface Test{
+void m1();
+}
+
+public class Main{
+psvm{
+Test t =new Test(){
+public void m1(){
+sout("hello..");
+}
+};
+t.m1();
+}
+}
+
+👍 Advantage:
+No separate class
+👎 Still Problem:
+Syntax is long and complex
+
+🔥 3. Lambda Expression (Java 8)
+👉 Shortest and cleanest way
+✅ Lambda Version
+
+interface Test{
+void m1();
+}
+public class Main{
+psvm{
+Test t=()->sout("hello...");
+t.m1();
+}
+}
+
+🚀 Advantage:
+Very short
+No boilerplate
+Easy to read
+
+🔥 4. With Parameters Example
+❌ Old Way
+
+interface Add{
+int sum(int a, int b);
+}
+
+class MyAdd implements Add{
+public int sum(int a, int b){
+return a+b;
+}
+}
+
+❌ Anonymous Class
+Add a=new Add(){
+public int sum(nit a,int b){
+return a+b;
+}
+};
+
+✅ Lambda
+Add a=(x,y)->x+y;
+
+_____________
+🔥 5. Multi-line Logic Example
+❌ Anonymous Class
+
+Add a=new Add(){
+public int sum(int a,int b){
+sout("Adding....");
+return a+b;
+}
+};
+
+✅ Lambda
+Add a= (x,y)->{
+sout("Adding...");
+return x+y;
+};
+
+🔥 6. Runnable Example (Very Important)
+
+❌ Anonymous Class
+Runnable r=new Runnable(){
+public void run(){
+soout("Thread is running...");
+}
+};
+
+✅ Lambda
+Runnable r=()->sout("Thread is running");
+
+🔥 Final Comparison Table
+
+| Feature                     | Normal Class | Anonymous Class | Lambda  |
+| --------------------------- | ------------ | --------------- | ------- |
+| Separate class              | ✅ Yes        | ❌ No            | ❌ No    |
+| Code length                 | ❌ Long       | ⚠️ Medium       | ✅ Short |
+| Readability                 | ❌ Low        | ⚠️ Medium       | ✅ High  |
+| Java version                | All          | All             | Java 8+ |
+| Functional interface needed | ❌ No         | ❌ No            | ✅ Yes   |
+
+✅ Anonymous Inner Class
+Class without name
+Used for one-time use
+Can implement interface or extend class
+
+✅ Lambda Expression
+Introduced in Java 8
+Used for functional interfaces
+Represents only method implementation
+
+👉 Anonymous Class:
+Can have multiple methods
+Has its own class
+👉 Lambda:
+Only for one abstract method
+No class creation
+Just method logic
+
+"Before Java 8, we used separate classes or anonymous inner classes to
+ implement interfaces, which increased boilerplate code. Java 8 introduced
+ lambda expressions, which provide a concise way to implement functional
+ interfaces by writing only the method logic,
+improving readability and reducing code size.
+
+🔥 1. Anonymous Class Example
+
+interface Test {
+void m1();
+void m2();
+}
+
+public class Demo{
+psvm{
+Test t=new Test(){
+public void m1(){
+sout("method 1...");
+}
+
+public void m2(){
+sout("Method m2");
+}
+};
+t.m1();
+t.m2();
+}
+}
+//anonymous -> can have multiple methods
+
+
+
+🔥 2. Lambda Example
+Now try same with lambda:
+interface Test {
+    void m1();
+    void m2();
+}
+
+❌ This will NOT work:
+Test t = () -> System.out.println("Hello");
+❓ Why?
+👉 Lambda works only with:
+👉 Functional Interface (ONLY ONE abstract method)
+
+✅ Correct Lambda Example
+interface Test{
+void m1();
+}
+
+public class Demo{
+psvm{
+Test t=()->sout("hello from lambda");
+t.m1();
+}
+}
+👉 Lambda = only method body (logic)
+👉 No full class creation
+
+✅ Anonymous Class
+
+Can implement multiple methods
+Creates a hidden class
+More code
+
+✅ Lambda
+Works only with one method
+No class creation (conceptually)
+Very short
+
+🔥 Anonymous Inner Class vs Lambda (Interview Points):
+____________________________________________________________
+Anonymous Class:
+-A class without a name
+-Can have multiple methods
+-Anonymous Class 👉 More boilerplate code ❌
+-Functional Interface Requirement
+ Anonymous Class 👉 ❌ Not required
+-Syntax
+ Anonymous Class
+ Test t = new Test() {
+     public void m1() {
+         System.out.println("Hello");
+     }
+ };
+-this Keyword Behavior ⭐ (Very Important)
+ Anonymous Class 👉 this refers to anonymous class object
+-Performance
+ Anonymous Class 👉 Slightly heavier
+-Use Case
+ Anonymous Class 👉 When multiple methods or complex logic needed
+
+
+
+Lambda :
+-Just implementation of a method (no class)
+-Only works with one abstract method (functional interface)
+-Lambda 👉 Very short and clean ✅
+-Functional Interface Requirement
+ Lambda 👉 ✅ Must be functional interface
+ -SYntax:
+ Lambda
+ Test t = () -> System.out.println("Hello");
+ -this Keyword Behavior ⭐ (Very Important)
+  Lambda 👉 this refers to enclosing class object
+-Performance
+   Lambda 👉 More efficient (less overhead)
+-Use Case
+ Lambda 👉 When single method logic (functional programming)
+
+
+
+ "Anonymous inner class is a way to create a class without a name
+  and can contain multiple methods, whereas lambda expression is a
+  concise way to implement a functional interface with a single abstract method.
+   Lambda reduces boilerplate code and improves readability. Also,
+    'this' in lambda refers to enclosing class, while in anonymous class
+    it refers to the anonymous object."
+🔥 1. this Keyword Difference (Core Trap)

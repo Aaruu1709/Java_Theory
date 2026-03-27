@@ -1,0 +1,181 @@
+_________________interfaces______________
+-only declare functionalities of projecct
+-interface is a placed where we declare only declaration
+-but in abstract class we dec;are both abstract and normal
+-interface are by default abstract ..object creation not possible
+-interface keyword
+-inside interface we declare method
+-interface method by default public and abstract
+-we write implementation in implemetnatation class
+-we overrirde method
+-interface can hold implentation class object
+-different implementation class contain different method
+
+-incomplete class means some of this implementation is not completed
+-child class taht mean implementation class have complete all implementation if not then we need to declare it abstract
+-we can take n number of implementation classes but we have complete all implementation of abstract methods
+-if implementation class is unable to complete implementation then declara those class as abstract
+
+interface method have any number of return type and any no. of arguments
+
+Example-1
+interface It1{
+String m1(int a, int b);
+int m2(char ch,String str);
+void m3(int a);
+}
+complete the impl in 2-child classes
+
+example-2
+overloading :yes
+interface It2{
+void m1(int a, int b);
+void m1(int a);
+void m1(char ch)
+}
+inside interface main method is not allowd: java 7
+
+
+interface vs inheritance
+class=class=>extends
+interface=interface=>extends
+class=interface=>implements
+
+case 1: one interface extending other interface
+case 2: one interface extending multiple interfaces
+
+one interface can extends multiple interfaces
+interface It1{
+void m1();
+}
+interface It2
+{
+void m2();
+}
+interface It3 extends It1,It2{
+void m3();
+}
+class Test implements It3{
+override 3-methods
+}
+
+case 3:
+if multiple interface having common method write implementation only one
+
+case 4:one class can implements one or more Interfaces
+interface It1{
+void m1();
+}
+interface It2{
+void m2();
+}
+class Test1 implements It1
+{
+override 1 method
+}
+class Test2 implements It1,It2
+{override 2 method
+}
+
+case 5:
+one class can implements multiple interfaces,multiple interface having common method write implementation only one time
+
+interface It1{
+void m1();
+void m2();
+}
+interface It2{
+void m2();
+void m3();
+}
+class Test2 implements It1,It2
+{
+override 3 methods
+}
+
+
+one class can extends only one class at a time
+class A  extends B  -> valid
+class A  extends B,C -> invalid
+class A extends A ->invalid
+class A implements It1 ->valid
+class A implements It1,It2-->valid
+
+Interface  It1  extends It2-> valid
+interface  It1 extends It2,It3->valid
+interface It1 extends It1->invalid
+interface It1 implements It2->invalid
+interface It1 extends A ->Invalid
+
+***extends must be first keyword
+
+class A extends B implements It1,It2->Valid
+class A implements It1,It2 extends B->invalid
+
+
+nested interface=
+1.declaring interface inside another interface
+2.declaring interface inside abstract class
+3.declaring interface inside normal class
+
+case:1
+interface  It1{
+void m1();
+interface It2{
+void m2();
+}
+class test implements It1,It1.It2{
+override 2 method
+}
+
+
+case:2
+abstract class A{
+abstract void m1();
+interface It1{
+void m2();
+}
+}
+class Test extends A implements It1
+{
+must override 2 method
+}
+
+
+case:3
+
+class A{
+interface It1{
+void m2();
+}
+}
+class Test implements A.It1
+{
+override 1 method
+}
+
+inside interface possible to declare variable also..variable by default are public,static and final
+inside interface not possible to declare instance variable
+
+suppose we have ,
+interface It1{
+int a=10;
+}
+interface It2{
+int a=100;
+}
+class Test implements It1,It2{
+public void print()
+{
+sout(a);//error a is ambiguos
+
+sout(It1.a);
+sout(It2.a);
+}
+psvm{
+new Test().print();
+}
+}
+
+interface allow to declare abstract method till java 7,,from java 8 onwards it allow abstract method,
+default method,static method

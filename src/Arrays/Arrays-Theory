@@ -1,0 +1,358 @@
+__________________________________________
+Arrays- Theory
+___________________________________________
+
+Arrays are used to store group of element and
+these elements are homogeneous and fixed number
+
+int[] a={ 10,20,30,40}
+double[] d={10.2, 20.4,30.2}
+Arrays are index based, index starts from zero.
+these are two ways to declare the array,
+
+1.int[] a;      //declaration
+ a=new int[4];  //instantiation
+
+ a[0]=10;       //initialization
+ a[1]=20;
+
+ 2.int[] ={10,20,30,40}  //decalration and instantiation and initialization
+
+ example 1:
+ public class Test{
+ psvm{
+ int[]a={10,20,30,40};
+ sout(a[0]);
+ sout(a[1]);
+ sout(a[2]);
+ sout(a[3]);
+
+ //way-1
+ for(int i=0;i<a.length;i++){
+ sout(a[i]);
+ }
+
+ //way-2
+for(int x:a){
+sout(x)
+}
+
+example 2:
+once we create the array, the arrays is created with default values.
+public class Test2
+{
+psvm{
+int[] a =new int[5]; // 0 0 0 0
+
+a[0]=10;
+a[2]=20;
+a[3]=30;
+
+for(int x:a)
+{
+sout(x);// 0 0 0 0
+}
+//if we dont know how many elements, then we dont go for array
+//memory is wasted
+
+String[] s=new String[3];//null null null
+s[1]="ratan";
+for(String ss:s){
+sout(s);
+}
+}
+}
+
+Observation:
+1.if we are not giving the size of the array we will get error.
+ int[] a=new int[];  //error: array dimension missing
+
+2.if we give size is negative we will get exception
+
+int[] =new int[-3];  java.lang.NegativeArraySizeException:-3
+
+3. the array object is created internally
+int[]a =new int[5];
+sout(a.getClass());
+sout(a.getClass().getName());
+
+4.there is no limit to create the number of array object, depends on memory supported by system
+int[] a=new int[1000000000];
+Exception in the thread "main" java.lang.OutOfMemoryError:java heap space
+
+
+example 3:
+Storing the group of employess into emp[].
+
+public class Emp{
+int eid;
+String ename;
+double esal;
+public Emp(int eid,String ename, double esal){
+super();
+this.eid=eid;
+this.ename=ename;
+this.esal=esal;
+}
+}
+
+public class Test3{
+psvm{
+Emp e1=new Emp(111,"ratan", 10000.45);
+Emp e2=new Emp(222, "anu", 20000.45);
+Emp e3=new Emp(333,"kayra",3000.45);
+
+Emp[] e=new Emp[3];
+e[0]=e1;
+e[1]=e2;
+e[2]=e3;
+
+for(Emp emp: e)
+{
+sout(emp.eid+ " "+ emp.ename+ " "+ emp.esal);
+}
+}
+}
+
+example 4:
+EXAMPLE 4: Student Array & NullPointerException
+❌ Problem Code (will crash)
+public class Student{
+int sid;
+String sname;
+double marks;
+public Student(int sid,String sname, double marks){
+super();
+this.sid=sid;
+this.sname=sname;
+this.marks=marks;
+}
+}
+
+class Test{
+psvm{
+Student[] s=new Student[5];  //null null null
+s[0]=new Student(1,"ratan",78);
+s[1]=new Student(2,"anu",88);
+s[2]=new Student(3,"shauryaa",90);
+
+for(Student ss:s){
+sout(ss.sid + " "+ss.sname+" "+ss.marks );
+}
+}
+}
+
+if i want null when my data is null insteed of null pointer exception
+then :Solution: Handle null safely
+
+class Test{
+psvm{
+Student[] s=new Student[5];  //null null null
+s[0]=new Student(1,"ratan",78);
+s[1]=new Student(2,"anu",88);
+s[2]=new Student(3,"shauryaa",90);
+
+for(Student stu:s){
+if(stu==null){
+sout(stu);
+}
+else{
+sout(ss.sid + " "+ss.sname+" "+ss.marks );
+}
+}
+}}
+
+example 5:
+It shows that when you create an array of objects in Java,
+the unused positions are automatically filled with null.
+
+class Test
+{
+psvm{
+String[] s=new String[5];
+s[0]="ratan";
+s[2]="sauruu";
+s[4]="aaluu";
+
+for(int i=0;i<s.length;i++){
+if(s[i]==null){
+sout(i);
+}}}}
+
+
+example: 6:
+
+Assignment
+create the int Array with 5 elements
+1.print the addition of all elements
+2.print the min number of array
+3.print the max number of array
+->
+solution:
+
+public class Assignment 6{
+psvm{
+int[] a={10,5,20,8,15}
+
+int sum=0;
+int min=a[0];
+int max=a[0];
+
+for(int x:a){
+sum=sum+x;
+
+if(x<min) min=x;
+if(x>max) max=x;
+
+}
+sout("Sum="+ sum);
+sout("Min="+min);
+sout("max="+ max);
+}
+}
+
+example:7
+the parent array can hold all the child objects
+class Animal
+{
+}
+class Dog extends Animal{
+}
+class Puppy extends Dog{
+}
+public class Test{
+psvm{
+Animal animal=new Animal();
+Dog dog=new Dog();
+Puppy puppy=new Puppy();
+
+Aniaml[] a =new Animal[3];
+a[0]=animal;
+a[1]=dog;
+a[2]=puppy;
+for(Animal x:a){
+sout(x)
+}
+}
+}
+}
+
+example :8
+
+Assignment
+what is jagged array
+java supports or not, if support write one example
+
+👉 What is Jagged Array?
+A jagged array is an array where each row can have different size.
+👉 Does Java support it?
+✅ YES
+
+
+example :9
+Arrays are polymorphic:
+👉 Meaning:
+Parent array can store child objects.
+class Animal { }
+class Dog extends Animal { }
+class Puppy extends Dog { }
+
+public class Test {
+    public static void main(String[] args) {
+
+        Animal[] a = new Animal[3];
+        a[0] = new Animal();
+        a[1] = new Dog();
+        a[2] = new Puppy();
+
+        for (Animal x : a) {
+            System.out.println(x);
+        }
+    }
+}
+
+// Parent class
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+// Child class 1
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+// Child class 2
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Cat meows");
+    }
+}
+
+// Main class
+public class Test {
+    public static void main(String[] args) {
+
+        // Polymorphic array
+        Animal[] animals = new Animal[3];
+
+        animals[0] = new Animal();
+        animals[1] = new Dog();
+        animals[2] = new Cat();
+
+        // Runtime polymorphism
+        for (Animal a : animals) {
+            a.sound();   // method call depends on object type
+        }
+    }
+}
+
+👉 To execute child-specific behavior in a polymorphic array,
+use instanceof to identify the object and then type cast safely.
+
+class Animal {
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+
+    void run() {
+        System.out.println("Dog is running");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+
+        Animal[] animals = new Animal[3];
+        animals[0] = new Animal();
+        animals[1] = new Dog();
+        animals[2] = new Cat();
+
+        // Run ONLY Dog objects
+        for (Animal a : animals) {
+            if (a instanceof Dog) {
+                Dog d = (Dog) a;   // safe casting
+                d.run();
+            }
+        }
+    }
+}

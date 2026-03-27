@@ -1,0 +1,62 @@
+🥇 1. Concurrent Collections ⭐⭐⭐⭐⭐
+🥈 2. Atomic Classes ⭐⭐⭐⭐
+🥉 3. Locks (ReentrantLock) ⭐⭐⭐
+4. synchronized ⭐⭐ (basic use only)
+5. volatile ⭐ (special case only)
+-----------------------------------------------------
+🚀 2. Solution: Make ArrayList Thread-safe
+-----------------------------------------------------
+✅ SOLUTION 1: synchronizedList (most basic)
+👉 “ArrayList is not thread-safe,
+so in multi-threaded environments it can cause data inconsistency
+and race conditions.
+To fix this, we can wrap it using Collections.synchronizedList(),
+which synchronizes all operations using internal locking.
+However, iteration still needs external synchronization to avoid
+concurrency issues.”
+
+❌ PROBLEM (Non-thread-safe ArrayList):
+public class unsafeExample{
+List<String> transactions=new Arraylist<>();
+psvm{
+Runnable task=()->{
+for(int i=0;i<1000;i++){
+transactions.add(Thread.concurrentThread().getName()+"Transaction..."+ i);
+}
+};
+
+Thread t1=new Thread t1(task);
+Thread t2=new Thread t2(task);
+Thread t3=new Thread t3(task);
+
+t1.start();
+t2.start();
+t3.start();
+
+try{
+t1.join();
+t2.join();
+t3.join();
+}catch(Exception e){}
+sout("total transaction: "+ transactions.size()));
+}
+💥 WHAT GOES WRONG?
+In real system:
+⚠ Problems:
+Missing transactions (data loss)
+Inconsistent size
+Sometimes exceptions
+Race condition during resizing
+
+🧠 WHY THIS HAPPENS?
+
+Because:
+ArrayList is NOT thread-safe
+Internal array is modified by multiple threads simultaneously
+👉 So memory gets corrupted logically
+
+✅ SOLUTION (Thread-safe ArrayList using synchronizedList)
+
+-----------------------------------------------------
+✅ SOLUTION 2: CopyOnWriteArrayList (BEST MODERN WAY 🚀)
+✅ SOLUTION 3: External synchronization (manual lock)

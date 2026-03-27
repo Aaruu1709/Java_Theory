@@ -1,0 +1,245 @@
+INHERITANCE
+_____________________________________________
+intro:
+-a process of creating new class by using the properties of existing class is called inheritance.
+-the process of aquaring properties (variables) and methods(behaviors) from one
+class to another class is called as inheritance
+-achieve -extends keyword
+-also known as "IS-A" relationship
+-parent| super| base
+-child | sub | derived
+
+the class is giveing the properties is called: parent
+taking->child
+
+child class recommanded-we can access all properties
+the default super calss in java is- Object
+
+the root class in java-Object
+in java every class contain parent , except object(itself)
+Object->java.lang
+
+object->methods->11 methods
+javap-to check predefied support
+javap java.lang.Object
+
+how to prevent inheritance->class declares as final
+
+types of inheritance:
+1.single->one parent with one child
+2.multilevel -> generation by generation
+3.hierarchical-> one parent with multiple childs
+4.multiple->one child with multiple parent classes
+
+-java not support-> multiple inhe.
+-in java one class can extends only one class
+
+5.hybrid->nultiple+hierarchical-not supported
+
+intanceof:
+to check the type of object use instancof keyword
+instanceof keyword returns boolean value
+
+syntax: reference-var intanceof class-name
+
+if the relation is child to parent: true
+parent -> child=false
+
+note:use the instance of class-name and reference-variable must be in relation
+otherwise we will get error
+(incompactible type)
+
+__________________________________________________
+super keyword :
+__________________________________________________
+
+package Inheritance;
+
+//same variable name:
+class Parent2{
+    int a=10,b=20;
+
+}
+class  Child2 extends Parent2{
+    int a=100,b=200;
+    void addition(int a,int b){
+        System.out.println(a+b);
+        System.out.println(this.a+this.b);
+        System.out.println(super.a + super.b);
+
+    }
+}
+public class Example2 {
+    public static void main(String[] args) {
+        Child2 c=new Child2();
+        c.addition(1000,2000);
+    }
+}
+
+
+example 2: super class method
+
+this is optional to call in method same(current)
+super to call parent class method
+
+super constructor:
+case 1:
+to call the current class constructor use this keyword
+to call the parent class constructor use super keyword
+
+case 2:
+-super must be first statemnt
+
+case 3:
+inside the constructor it is possible to use either this keyword or super keywrd but,
+1.two super not allowed
+2.two this not allowed
+3.both super and this keyword also not allowed
+
+
+when we did not give super() keyword then compiler automatically
+generate it
+
+
+🧱 OBJECT CREATION FLOW (MOST IMPORTANT)
+
+Whenever you create a child object, Java follows this order:
+
+👉 Parent instance block
+👉 Parent constructor
+👉 Child instance block
+👉 Child constructor
+
+1️⃣ super() or this() must be the first statement in a constructor
+2️⃣ If you don’t write either → compiler inserts super()
+3️⃣ Parent constructor always executes before child constructo
+
+____________________________________________
+
+package Inheritance;
+
+public class SuperError {
+    SuperError(int a){
+        System.out.println("parent 1-args cons");
+    }
+}
+class Child6 extends SuperError{
+    Child6(){
+        super(10);
+        System.out.println("child 0-args const");
+    }
+    Child6 (int a){
+        super(10);//if not not give super here then compiler give error
+        //super();
+        System.out.println("child-1 -args const"+ a);
+    }
+
+    public static void main(String[] args) {
+        new Child6();
+    }
+
+}
+//❌ Why super() alone is NOT allowed here
+//
+//Because:
+//
+//super() means → call parent 0-arg constructor
+//
+//Parent has NO 0-arg constructor
+//
+//So compiler error occurs
+
+//What compiler tries internally:
+//Child() {
+//    super();   // 👈 compiler inserts this
+//    System.out.println("child");
+//}
+//
+//
+//❌ ERROR:
+//
+//constructor Parent() is undefined
+//
+//
+//Because Parent() does not exist.
+//
+//✅ Case 2: NO error (you explicitly call parent constructor)
+//class Child extends Parent {
+//    Child() {
+//        super(10);   // 👈 explicitly calling existing constructor
+//        System.out.println("child");
+//    }
+//}
+//
+//
+//✔ Compiles fine.
+
+
+
+//.
+//
+//🔑 Golden rule (MEMORIZE THIS)
+//
+//In a child class, if the parent has no 0-arg constructor,
+then EVERY child constructor must explicitly call super(arguments)
+as its first statement.
+//
+//One-line exam answer 🎯
+//
+//Compilation fails because the compiler implicitly inserts super()
+ in child constructors, and if the parent has no no-argument constructor,
+ this implicit call becomes invalid.
+ _______________________________
+ class Parent {
+     Parent() {
+         System.out.println("parent 0-args");
+     }
+ }
+
+ class Child extends Parent {
+     public static void main(String[] args) {
+         new Child();
+     }
+ }
+
+
+2️⃣ Code as GENERATED by the COMPILER (conceptual)
+
+⚠️ This is NOT real source code you can see —
+it’s what the compiler behaves like internally.
+
+class Parent {
+
+    // compiler keeps this constructor as-is
+    Parent() {
+        System.out.println("parent 0-args");
+    }
+}
+
+class Child extends Parent {
+
+    // compiler AUTO-GENERATED constructor
+    Child() {
+        super();   // automatically inserted
+    }
+
+    public static void main(String[] args) {
+        new Child();  // calls the generated constructor
+    }
+}
+
+
+while calling method the named object is recommanded
+class Test{
+void m1(){}
+void m2(){}
+void m3(){}
+}
+Test t=new Test();
+t.m1();
+t.m2();
+t.m3();
+
+new Test().m1();
+new Test().m2();
+new Test().m3()

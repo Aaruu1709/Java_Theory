@@ -1,0 +1,258 @@
+MAIN METHOD:
+______________________________________________________________________
+public static void main(String[] args)
+
+public->to give access permission to jVM
+static->direct permission to JVM without object creation
+void->no return value
+main->method name configurured in JVM
+
+String[] args-> used to take the command line arguments
+String->any type of data
+[]-> any number of value
+args->it is a variable of String[]
+
+modifications->
+1.modifires order is not important
+ public static
+ static public
+ static public void main(String[]args)
+
+2.different ways of arrays declaration
+String[] args
+String []args
+String args[]
+
+3.String[]--->String...(variable argument)
+static public void main(String...args)
+
+4.in place of 'args' it is possible to take any name
+static public void main(String...ratan)
+
+5.public static final strictfp synchronized
+2-modifiers are mandatory: public static
+3-modifiers are optional : final strictfp synchronized
+
+strictfp:(strict floating point)
+10/6=1.435435
+if we declare strictfp of any method ,any class they must follow the some IEE rule to become
+java platform independent
+strictfp forces Java to give the SAME floating-point result on every machine.
+1.the floating point calculations are varied from os and processor to processor
+it will generate platform dependent output
+2.to overcome above problem to get the platform independent
+result use strictfp modifier
+3.strictfp modifier is applicable to methods , classes
+4. if a method declared as strictfp , inside the method all floating point calculations will fallow IEEE754.
+5.if a class declared as strictfp inside the class, all methods will fallow the IEEE754
+
+
+synchronized modifier:
+-it is applicable to only  method
+-two types of methods:
+t1 t2 t3
+
+1) non-synchronized method:
+-multiple thread can access
+-performance increased
+-not a thread safe
+-void add(){
+}
+
+2) synchronized method:
+-only one thread can access at a time
+-performance is decreased
+-thread safe
+-synchronized void mul()
+{
+}
+
+example:1
+class Test{
+public static final srticfp syncronized void main(String... aaruu){
+System.out.println("this is a main method...");
+}
+}
+
+example 2:
+ class Parent{
+ psvm{
+ sout ("parent main");
+ }
+ }
+ class Child extends Parent{
+ psvm{
+ sout("child main");
+ }
+ }
+-when we run parent it give parent main and when child it give child main
+-but when we remove psvm and sout from child the what happens:
+it execute parent main
+when child class has no main then it exceute parent main.
+
+class Parent{
+ psvm{
+ sout ("parent main");
+ }
+ }
+ class Child extends Parent{
+ }
+
+-the child class can inherit parent class main method.
+
+example 3:
+we can overload main method
+but JVM call String[] main method
+
+class Test{
+psvm(String[] args){
+sout("String[] main method");
+main(100);
+}
+psvm(int a){
+sout("int main method");
+main('r);
+}
+psvm(char ch){
+sout("char main method");
+}
+}
+
+//output
+//String[] main method
+int main method
+char main method
+
+example 4:
+can we override main method -NO
+bcoz main method is static
+
+command line Argument:
+-the argument we are passing at runtime to the application
+-All the command line arguments are stored in String[] in the form of String
+-the command line argument separator is space
+
+CLA:
+Input is given before program starts
+Stored as String array
+No interaction during execution
+Best for fixed / predefined input
+
+Scanner:
+Input given during execution
+Interactive (user types values)
+Can read different data types directly
+Slower than CLA
+
+example:to space in CLA take that argument with in double quotes
+class Test{
+psvm{
+sout(args[0]);
+sout(args[1]);
+}
+}
+>java Test corejava aaruu
+corejava
+aaruu
+
+>java Test core java ratan
+core
+ratan
+
+>java Test "core java" ratan
+core java
+ratan
+
+variable arguments:
+String...
+....=allow to take any number of value
+Allow method 0-args,1-args,2-args
+
+class Test
+{
+void m1(int... a)
+{
+sout("good morning")
+}
+psvm(String[] args){
+Test t=new Test();
+t.m1();
+t.m1(10);
+t.m1(10,20);
+t.m1(10,20,30);
+}
+}
+//4 times good morning
+
+... is called varargs (variable-length arguments).
+
+👉 It means:You can pass 0, 1, or many values
+Normal main method:public static void main(String[] args)
+-args is an array of String
+-Size is decided at runtime
+
+Varargs version:public static void main(String... args)
+-You can pass any number of String arguments
+-Java internally converts it to a String[]
+👉 Both are 100% SAME for main()
+
+❌ Rules (exam-important)
+Varargs must be last parameter
+void test(int a, String... s) // ✅
+void test(String... s, int a) // ❌
+Only one varargs allowed
+
+example 3:along with the varible argumnet it i possible to take normal arguments
+
+class Test{
+void m1(char ch,int...a){
+sout(ch);
+for(int aa:a)
+{
+sout(aa)
+}
+sout("_______________");
+}
+psvm{
+Test t=new Test();
+t.m1('a');
+t.m1('b',10);
+t.m1('c',10,20)
+
+example 4: method allow only one variable argumnet,
+that should be the last argument of the method.
+
+example 5:if the application contains variable arguments and normal arguments it will execute normal argumnets.
+
+class Test{
+void m1(int...a){
+sout("var arg method");
+}
+void m1(int a){
+sout("normal arg method");
+}
+psvm{
+Test t=new Test();
+t.m1(10);
+}
+}//normal arg method
+
+example 6:
+
+class Test{
+void m1(int ...a){
+for(int aa:a){
+sout(aa);
+}
+}
+void m1(boolean...b){
+for(boolean bb:b)
+{
+sout(bb);
+}
+}
+psvm{
+Test t=new Test();
+t.m1(10,20,30);
+t.m1(true,false,true);
+t.m1();//error:reference to m1 is ambiguous

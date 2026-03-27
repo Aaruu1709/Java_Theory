@@ -1,0 +1,149 @@
+default method inside interfCE
+____________________________________
+-until 1.7 =>only abstract method allowed=>wherter we declare by writing or not
+-silimalry public static final varible were allowed
+-since java 8 we can have concrete mehtods as well inside interface
+
+default method=>method with body
+
+
+case 1:
+interface A{
+default void sayHello(){
+sout("hello");
+}
+}
+
+class Child implements Parent{
+
+
+}
+
+public class MyClass{
+psvm{
+Child c=new Child();
+c.sayHello();
+}
+}
+
+case 2:we can ovrride default mehtod
+interface A{
+default void sayHello(){
+sout("hello");
+}
+}
+
+class Child implements Parent{
+public void sayHello(){
+sout("child say hello");
+}
+
+}
+
+public class MyClass{
+psvm{
+Child c=new Child();
+c.sayHello();///child implementation..child overridden method works
+}
+}
+
+case 3: when we create object of child but reference is parent still child mehtod works
+interface A{
+default void sayHello(){
+sout("hello");
+}
+}
+
+class Child implements Parent{
+public void sayHello(){
+sout("child say hello");
+}
+
+}
+
+public class MyClass{
+psvm{
+Parent  p=new Child();
+p.sayHello();///child implementation..child overridden method works..even we refere parent
+
+}
+}
+
+
+case 4: but when we do
+Parent p=new Parent()//it give error bcoz still parent is functional interface
+ ...so it may be possible is there any absract method in that in that case we try to make object so  who give implementation of this
+ still we can not create object ,,we need to give child imple
+
+ interview persepective:
+ both child and parent have same method=>error duplicate method
+case 1:ambiguity error
+ interface A{
+ default void sayhello(){
+ sout("A say hello");
+ }
+ }
+ interface B{
+  default void sayhello(){
+  sout("B say hello");
+  }
+  }
+
+  public class MyClass implements A,B{
+  psvm{
+  MyClass myClass =new MyClass();
+  myClass.sayHello();
+  }
+  }
+
+  in that case we have same method in both classes
+  =>give error//ambiguity=>which sayhello
+
+case 2:  =>but when we give parameter one of them/ change signature  then it run defineltyly
+
+ interface A{
+ default void sayhello(){
+ sout("A say hello");
+ }
+ }
+ interface B{
+  default void sayhello(int a){
+  sout("B say hello");
+  }
+  }
+
+  public class MyClass implements A,B{
+  psvm{
+  MyClass myClass =new MyClass();
+  myClass.sayHello();
+  }
+  }
+//ptint parent
+
+
+case 3:
+
+
+ interface A{
+ default void sayhello(){
+ sout("A say hello");
+ }
+ }
+ interface B{
+  default void sayhello(){
+  sout("B say hello");
+  }
+  }
+
+  public class MyClass implements A,B{
+  psvm{
+  MyClass myClass =new MyClass();
+  myClass.sayHello();
+  }
+  public void sayHello(){
+  B.super.sayHello();
+  //A.super.sayHello();
+  sout("my own implementation")
+  }
+  }
+  }

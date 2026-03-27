@@ -1,0 +1,25 @@
+multitasking-Doing multiple task simultaneously
+why we use:
+to increase the effective utilization of CPU or resources
+any blocking task can not have affect the other running task so that we use multitasking
+
+process:
+schedular =>task choose=>higher priority task->CPU
+types:
+round robin(time slice based) and priamtive based
+thread=subpart of process-independent
+proccess->multiple task->thread->share common address space
+heap and method area=sharing bew acreoss multiple thread common address space
+
+lifecycle of thread
+not yet created to-> newly created thread
+variase stages
+single interface->runnable->functional interface
+single abstact method->public void run()
+it contain busiiness logic or thread execution logic
+
+extend thread
+implememts runnable
+
+
+

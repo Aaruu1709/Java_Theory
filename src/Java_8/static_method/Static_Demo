@@ -1,0 +1,41 @@
+ -static methods in Interface are those mehtodes,
+ which are defined in the interface with the keyword static
+ -static methods contains the complete definition of the function
+ -can not be overridden or changed in the implementation class
+
+ interface A{
+ static void sayHello(){
+ sout("hello");
+ }
+ default void sayBye(){
+ sout("bye");
+ }
+ }
+ public class MyClass implements A{
+ psvm{
+ Myclass obj=new Myclass();
+ obj.sayBye();//it is default so we can call it
+ A.sayHello();//works
+ }
+ }
+
+
+ interface A{
+ static void sayHello(){
+ sout("hello");
+ }
+ }
+
+ public class myclass implements A{
+ psvm{
+ Myclass obj=new MyClass();
+ MyClass.sayHello();//imple class can not able to see interface static method..
+ //so it is not override class//so this is there own method..when we change implementation no matter ..bcoz it is not overridden mehtod...we can make it private , static does not impact
+ A.sayHello();
+ }
+ }
+
+
+ //we can write main method inside interface
+ //but after java 8 is mandatory
+ //java 1.7 =>errror

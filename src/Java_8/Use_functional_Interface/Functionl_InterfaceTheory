@@ -1,0 +1,24 @@
+functional interface:
+-interfCE Hving exactly single abstract method but can have any number of default and static methods.
+-we can invoke lambda expression by using functional interface
+-before 1.8 public absrtraxct mwthod allowed only
+-1.8 default and static
+
+SAM | default && static(any no of)
+
+session:3
+____________________
+inheritance in functional interface
+1.if we have two classes one is parent another is child
+if parent have abstract method and child doesnt still this is functional interface bcoz child inherit from parent
+so parent method ->child so child also functional interface
+
+=>so child not any but parent have abstrsact =>functional interface
+
+2.parent have one abstract method and child also have one abstract method then child is not Functional interface
+
+3.even if we define same absrtract method as parent still child it is functional interface
+
+4.default or static no matter
+
+5.

@@ -1,0 +1,39 @@
+🔹 1. Collection
+________________________________________________________________
+-A collection is a group of objects.
+-It allows you to handle many objects together, instead of one by one.
+-Helps store, access, and manage objects easily.
+-Examples:
+A classroom of students
+A basket of fruits
+A list of books
+-is like a putting many things into one container.
+______________________________________________
+🔹 2. Framework
+-A framework is a set of classes and interfaces which provide
+ready-made architecture
+-It provides a pre-defined way to build programs.
+You don’t need to write everything from scratch.
+Examples:
+Spring (for web apps)
+Java Swing (for GUI apps)
+Think of it as a toolkit with instructions.
+____________________________________________
+🔹 3. Collection Framework
+-is an API(classes and interface library)
+-A Collection Framework is a set of ready-made classes and interfaces in Java.
+-It helps store, manage, and manipulate groups of objects easily.
+-Instead of writing your own logic to handle objects,
+you can use this framework..
+-store multiple object together
+-Provides ready-made methods to:
+Add objects
+Remove objects
+Search objects
+Sort objects
+-Part of the java.util package.
+Examples:
+ArrayList (list of things)
+HashSet (unique items)
+HashMap (key-value pairs)
+- container for objects.

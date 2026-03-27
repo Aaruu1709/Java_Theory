@@ -1,0 +1,413 @@
+Wrapper Classes:
+_______________________________________________________
+-Wrapper classes wrap the primitive data type into objects
+-java is an object oriented programming language so represent everything in the form of object,
+but java support 8-primitive data types these all are not part of the object
+-to represent 8-promitive datatype in the form of object we required 8 jav classes
+these classes are called wrapper classes.
+
+Primitive types
+byte
+short
+int
+long
+float
+double
+char
+boolean
+all wrapper classes are: immutable classes: belongs to java.lang
+
+Advantages:
+-Collections allowed only object data
+-on object data we can call multiple methods->compareTo(), equals(), toString()
+-cloning process only object
+-object data allowed null value ,,not primitive
+-Serialization only object data
+
+//conversion of primitive or string wrape object
+
+Integer i1=new Integer(10);
+Integer i2=new Integer("10");
+
+Float f1=new Float(10.5);
+Float f2=new Float(10.5f);
+flaot f3=new Float("10.5");
+
+character ch=new Character('a');
+
+to the boolean constructor if we are passing other than true or false, always it
+return false.
+Boolean b1=new Boolean(true);          -true
+Boolean b2=new Boolean("TRUE");         -true
+Boolean b3=new Boolean("FaLsE");        -false
+Boolean b4=new Boolean("aaruu");        -false
+Boolean b5=new Boolean(null);           -false
+Boolean b6=new Boolean(TRUE);           -invalid
+
+📌 Rule:
+Only the string "true" (case-insensitive) gives true.
+Anything else → false.
+
+
+
+From Java 9 onwards, constructors are deprecated.
+Always use valueOf().
+
+There are two ways to create wrapper classes obj:
+1.by passing cons
+2.valueof() method
+
+example 1:
+primitive/string----->wrapper object
+
+class Test{
+psvm{
+//constructor apprpach
+Integer i1=new Integer(10);
+Integer i2=new Integer("100");
+Integer i2=new Integer("one");//unable to convert Integer
+format(number format exception)
+
+sout(i1+it2);
+
+
+//valueof() approach
+Integer x1=Integer.valueof(100);
+Integer x2=Integer.valueof("100");
+sout(x1+x2);
+
+}
+}
+
+note:
+If the type conversion is not possible JVM generate NumberFormatException
+Integer a=new Integer("ten");  java.lang.numberFormatException
+Integer b=Integer.valueOf("one") java.lang.numberFormatException
+
+
+
+
+wrapper object---->primitive/string
+example 2:
+class Test{
+psvm{
+Integer x1=Integer.valueOf(10);
+Integer x2=Integer.valueOf("20");
+
+//conversion of wrapper to primitive:  xxxValue()
+where xxx=all data types
+
+int num1=x1.intValue();
+float num2=x2.floatValue();
+sout(nu1+num2);
+
+//conversion of wrapper to string  : toString()
+
+String str1=x1.toString();
+String str2=x2.toString();
+sout(str1+str2);
+}
+}
+
+example 3:
+Autoboxing vs Auto-unboxing java-5 feature
+
+class Test
+{
+psvm{
+//Autoboxing: automatic conversiion of primitive to wrapper object: valueof();
+Integer x1=10;
+Integer x = 10; // internally: Integer.valueOf(10)
+
+sout(x1);
+
+//auto-unboxing:automatic conversion of wrapper object to primitive:xxxValue()
+double d=Integer.valueOf(100);
+double d = Integer.valueOf(100); // intValue() internally
+
+sout(d)
+}
+}
+
+example 4:
+toString() methodd.
+public class Test{
+psvm{
+//object class toString():class-name@hashcode->Test@3feba861
+
+Test t=new Test();
+sout(t);
+sout(t.toString());
+
+//String class toString() executed it returns the data
+String s="ratan";
+sout(s);
+sout(s.toString());
+
+//Stringbuffer class toString() executed it returns the data
+StringBuffer sb=new StringBuffer("durga");
+sout(sb);
+sout(sb.toString());
+
+//all wrapper classes toString() return the data
+Integer i=new Integer(100);
+sout(i);
+sout(i.toString());
+}
+}
+📌 Conclusio
+toString() is present in Object class
+String, StringBuffer, and all Wrapper Classes override toString()
+It returns actual object data, not class name
+
+toString() method will be automatically called when we print reference variable in java
+toString present in object class it return string representation of object (class-name@hashcode),
+string,stringbuffer all wrapper classs are overriding toString() it returns content of objects
+They are immutable, part of java.lang, and required for collections, serialization, cloning, null handling, and object-level methods.
+
+“Primitive to wrapper is done using valueOf() or autoboxing.
+ Wrapper to primitive is done using xxxValue() or auto-unboxing.
+ Wrapper to string uses toString().
+ If conversion fails, Java throws NumberFormatException.”
+
+1️⃣ Primitive ➜ Wrapper
+int a = 10;
+
+// manual
+Integer w1 = Integer.valueOf(a);
+
+// auto (autoboxing)
+Integer w2 = a;
+
+2️⃣ Wrapper ➜ Primitive
+Integer w = 10;
+
+// manual
+int p1 = w.intValue();
+
+// auto (auto-unboxing)
+int p2 = w;
+
+3️⃣ String ➜ Wrapper
+String s = "10";
+
+// manual
+Integer w = Integer.valueOf(s);
+
+4️⃣ Wrapper ➜ String
+Integer w = 10;
+
+// manual
+String s1 = w.toString();
+
+// auto (while printing)
+System.out.println(w);
+
+🧠 SINGLE MEMORY LINE (VERY IMPORTANT)
+
+valueOf() → go INTO wrapper
+xxxValue() → come OUT as primitive
+toString() → convert to text
+assignment does it automatically
+
+
+example:
+== operator always check the references (objects) return Boolean
+
+equals() method present in object class perform:    reference comparison
+String class overriding equals() : content comparison
+StringBuffer no equals() it uses object class equals: reference comparison
+All wrapper classes overriding equlas() method  : content comparison
+
+class Test{
+psvm{
+Integer i1=new Integer(10);
+Integer i2=new Integer(10);
+sout(i1==i2);//false
+sout(i1.equals(i2));//true
+
+Integer x1=new Integer(200);
+Integer x2=new Integer(200);
+sout(x1==x2);//false
+sout(x1.equals(x2));//true
+}
+}
+🔹 EXAMPLE 1: valueOf() and Integer Cache (−128 to 127)
+Code (conceptually correct version)
+Integer i1 = Integer.valueOf(10);
+Integer i2 = Integer.valueOf(10);
+
+System.out.println(i1 == i2);        // true
+System.out.println(i1.equals(i2));   // true
+
+Integer x1 = new Integer(200);
+Integer x2 = new Integer(200);
+
+System.out.println(x1 == x2);        // false
+System.out.println(x1.equals(x2));   // true
+
+✅ Explanation (VERY IMPORTANT)
+🔹 Why i1 == i2 is true?
+
+Integer.valueOf() uses cache
+
+Cache range: −128 to 127
+
+Value 10 is inside cache
+
+Both i1 and i2 point to same memory
+
+📌 == → reference comparison → same memory → true
+
+🔹 Why x1 == x2 is false?
+
+new Integer() always creates new objects
+
+Two different memory locations
+
+📌 == → different references → false
+
+🔹 Why equals() is always true?
+
+Wrapper classes override equals()
+
+It compares content, not memory
+
+🔹 EXAMPLE 2: Autoboxing uses valueOf()
+Code
+Integer i1 = 10;
+Integer i2 = 10;
+
+System.out.println(i1 == i2);        // true
+System.out.println(i1.equals(i2));   // true
+
+Integer x1 = 200;
+Integer x2 = 200;
+
+System.out.println(x1 == x2);        // false
+System.out.println(x1.equals(x2));   // true
+
+✅ Explanation
+
+Autoboxing internally calls Integer.valueOf()
+
+So same cache rules apply
+
+Value	Inside Cache?	== result
+10	yes	true
+200	no	false
+
+📌 equals() → always content comparison → true
+
+🔹 EXAMPLE 3: String ➜ Primitive (parseXXX())
+Code
+String s1 = "100";
+String s2 = "200";
+
+System.out.println(s1 + s2); // 100200
+
+int num = Integer.parseInt(s1);
+float f = Float.parseFloat(s2);
+
+System.out.println(num + f); // 300.0
+
+✅ Explanation
+
+"100" + "200" → string concatenation
+
+parseXXX() converts String → primitive
+
+After conversion → numeric addition
+
+📌 Rule:
+
+parseXXX() → String → primitive
+
+🔹 EXAMPLE 4: Number Parent Class
+Code
+void disp(Number n) {
+    System.out.println(n);
+}
+
+disp(Integer.valueOf(10));
+disp(Float.valueOf(10.4f));
+
+✅ Explanation
+
+Number is parent class
+
+Integer, Float, Double, etc. extend Number
+
+Parent reference can hold child object
+
+📌 This is polymorphism
+
+🔹 EXAMPLE 5: compareTo() Method
+Code
+Integer i1 = Integer.valueOf(10);
+Integer i2 = Integer.valueOf(20);
+Integer i3 = Integer.valueOf(20);
+
+System.out.println(i1.compareTo(i2)); // -1
+System.out.println(i2.compareTo(i1)); // 1
+System.out.println(i2.compareTo(i3)); // 0
+
+✅ Explanation
+Comparison	Result
+smaller.compareTo(bigger)	-1
+bigger.compareTo(smaller)	1
+equal.compareTo(equal)	0
+
+📌 Used for sorting
+
+🔹 EXAMPLE 6: String ➜ Primitive (Multiple Types)
+Code
+String s1 = "100";
+String s2 = "200";
+
+int a = Integer.parseInt(s1);
+float b = Float.parseFloat(s2);
+double c = Double.parseDouble(s2);
+
+System.out.println(a + c); // 300.0
+
+✅ Explanation
+
+parseXXX() exists in all wrapper classes
+
+Converts String → primitive
+
+Output is numeric addition
+
+🔹 EXAMPLE 7: Autoboxing + Number Parent
+Code
+void disp(Number n) {
+    System.out.println(n);
+}
+
+disp(10);      // int → Integer → Number
+disp(10.4f);   // float → Float → Number
+
+✅ Explanation
+
+Primitive → wrapper (autoboxing)
+
+Wrapper → parent (Number)
+
+Happens automatically
+
+📌 This is autoboxing + polymorphism
+
+🧠 FINAL SUPER-EASY MEMORY MAP
+valueOf()   → primitive/string → wrapper
+parseXXX()  → string → primitive
+xxxValue()  → wrapper → primitive
+==           → memory comparison
+equals()    → content comparison
+compareTo() → sorting (-1, 0, 1)
+
+🎯 INTERVIEW ONE-LINER (CONFIDENT ANSWER)
+
+“Integer caching works from −128 to 127 and is used by valueOf and autoboxing.
+== compares references, equals() compares content.
+parseXXX() converts String to primitive, and compareTo() is used for sorting.”

@@ -1,0 +1,49 @@
+
+
+_________________________________________________
+ Points about Collection (Interface)
+ -------------------------------------------
+-Collection is an interface in Java.
+-It represents a group of objects that can be handled together.
+-Part of the java.util package.
+-Provides basic methods like add(), remove(), size(), clear(), and iterator().
+-Implemented by classes like ArrayList, HashSet, LinkedList.
+- actual objects stored in memory.
+-Cannot be instantiated that mean can not create object directly;
+ must use an implementing class to create object.
+-Supports generics for type safety.
+Example:
+Collection<String> list = new ArrayList<>();
+list.add("Apple");
+list.add("Banana");
+========================================================================
+🔹 Points about Collections (Utility Class)
+---------------------------------------------------------------
+-Collections is a final class in Java.
+-It provides static helper methods to operate on collections.
+-In Collections class, all methods are static →
+ we don’t need to create a Collections object.
+ -These methods help you work with collection objects easily.
+ Examples of things we can do:
+ Sort a list → Collections.sort(list)
+ Reverse a list → Collections.reverse(list)
+ Shuffle a list → Collections.shuffle(list)
+-Part of the java.util package.
+-Common methods include sort(), reverse(), shuffle(), binarySearch(), max(), and min().
+-Cannot be extended; all methods are static.
+-Does not store objects itself; works on existing collections.
+-Cannot be instantiated; methods are called statically.
+-Works with any collection type (List, Set, etc.).
+Example:
+ArrayList<String> fruits = new ArrayList<>();
+fruits.add("Banana");
+fruits.add("Apple");
+fruits.add("Mango");
+
+Collections.sort(fruits);   // Sorts the list
+Collections.reverse(fruits); // Reverses the list
+
+🔹 Quick Spoken Tip for Interviews
+Collection → “It’s an interface to store and handle groups of objects.”
+Collections → “It’s a utility class that provides static methods
+ to manipulate collections like sort, reverse, shuffle.”

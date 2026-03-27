@@ -1,0 +1,334 @@
+last intreoductory session:
+what is lambda expression
+how to write lambda expression
+functional interface basic
+___________________________________________________________
+session 2:
+___________________________________________________________
+Test.java
+public void m1(){
+sout("hello");
+}
+
+lambda expression is:
+()->sout("hello");
+
+lambda expression is nothing but anonymous function:
+no name
+no return type
+no modifier
+-> symbol to use
+after arg just add arrow symbol
+in body only one statement so we can remove curly braces
+for multiple statement curly is required
+
+
+public void add(int a, int b){
+sout(a+b);
+}
+
+lambda=>
+
+(int a,int b)-> sout(a+b);
+(a,b)->sout(a+b);
+//body contains only one line so we can remove curly
+//compiler automatically detect(guess) the type automatically so can remove type also
+
+public int squareIt(int n){
+return n*n;
+}
+
+int n->{return n*n}//only one stmt so remove curly but without curly we should not write return compiler can give error
+n->n*n;//consise/small code
+
+
+n->return n*n;------>invalid=>..we can not return without {}
+n->{return n*n;};----->valid
+n->{return n*n};------>Invalid(semicoln missing..java stsmt end with semicolon)
+n->n*n;------>valid
+n->{n*n;};---->invalid(last rule)
+
+ Return Rule:
+-without curly we can not use return keyword.
+compiler will consider returned value automatically
+-within curly if we want to return some valve compalsory
+ we should use return statement
+
+ ✅ 1. Without curly braces {}
+ n -> n * n
+ ✔ No return keyword
+ ✔ No semicolon
+ ✔ Expression result is automatically returned
+
+✅ 2. With curly braces {}
+n -> { return n * n; }
+✔ Must use return (if returning a value)
+✔ Must use semicolon ;
+✔ Treated like a normal method body
+
+👉 A lambda is NOT a method itself
+👉 It is just a shortcut way to provide implementation of ONE method of a functional interface
+👉 "Lambda expression provides implementation of one method of a functional interface."
+👉 "Anonymous class contains a method without giving class name.
+____________________________________________________________
+👉 Lambda expression can be used ONLY with functional interfaces(only one abstract method)
+
+Runnable->only one run() method
+Collable-> call()
+Comparable->compareTo()
+ActionListener->actionPerformed()
+
+above 1.8->public and abstract
+from 1.8-> default and static method allowed
+restriction is applicable only for abstract method only one in functional interface
+
+interface inter{
+public void m1();
+default void m3(){}
+public static void m3(){}
+}
+------> valid...one abstract method..no matter default and static
+
+@FunctionalInterface annotation->restrict the interface to functional interface
+-it is optional
+-help us compiler should contains only one abstract method
+-errror:no abstract method found
+-error: multiple non- overriding abstract methods found in interface inter
+-any no of default and static method, only restriction is on abstract method
+-it should functional interfac, it contains only one abstract method
+
+
+
+🔹 What is @FunctionalInterface?
+
+👉 It is an annotation in Java used to indicate that an interface is a functional interface
+(i.e., it has only one abstract method)
+
+✅ 1. Ensures Only One Abstract Method
+👉 If you write more than one abstract method → compile-time error
+@FunctionalInterface
+interface Test {
+    void method1();
+    // void method2(); ❌ Error
+}
+
+✅ 2. Annotation is Optional (But Recommended)
+👉 Even without annotation, interface can still be functional
+interface Test {
+    void method1();
+}
+✔ Works fine with lambda
+👉 But annotation gives safety
+
+✅ 3. Supports Lambda Expressions
+👉 Functional interfaces support lambda
+
+@FunctionalInterface
+interface Square {
+    int calc(int n);
+}
+
+Square s = n -> n * n;
+
+✅ 4. Can Have Multiple Default & Static Methods
+👉 Only restriction is on abstract methods
+@FunctionalInterface
+interface Demo {
+    void show();  // only one abstract method
+
+    default void m1() {}
+    static void m2() {}
+}
+✔ Valid
+
+✅ 5. Can Override Methods from Object Class
+👉 These do NOT count as abstract methods
+@FunctionalInterface
+interface Demo {
+    void show();//abstract method
+    boolean equals(Object obj); // allowed bcoz it come from Object class
+}
+
+❓ Why no error?
+👉 Because:
+equals() is already present in Object class
+So Java does NOT count it as a new abstract method
+"Ignore methods that already exist in Object class"
+"Methods inherited from Object class like equals(), hashCode(), toString()
+are not counted while checking functional interface."
+
+"Object class provides methods like toString() for printing, equals()
+ for comparison, hashCode() for hashing, getClass() for runtime info,
+ clone() for copying,
+and wait/notify methods for thread communication."
+________________________________________________________
+
+functional interface wrt Inheritance concept
+_______________________________________________________
+example 1:
+@FunctionalInterface
+interface A{
+public void m1();
+}
+
+@FunctionalInterface
+interface B extends A{
+
+}
+//A is valid only only abstract method
+//B is also valid child extends parent so parent method automatically inherited
+//if we not providing any method still valid..bcoz parent mehtod is came
+
+
+example 2: we are overriding so it also valid
+@FunctionalInterface
+interface A{
+public void m1();
+}
+
+@FunctionalInterface
+interface B extends A{
+public void m1();
+}
+
+
+
+example 3: invalid bcoz child have another method ..
+one is coming from parent and child itself is so not valid
+
+@FunctionalInterface
+interface A{
+public void m1();
+}
+
+@FunctionalInterface
+interface B extends A{
+public void m2();
+}
+
+example 4: valid bcoz child is normal interface, we remove annotation so it is valid
+
+@FunctionalInterface
+interface A{
+public void m1();
+}
+
+interface B extends A{
+public void m2();
+}
+//optional annotation
+//if interface contain only one abstract mehtod then when we
+ declare or not method is always functional interface
+
+ _______________________________________________________________
+ Lambda Expression with the functional interfaces:
+ _______________________________________________________________
+
+ interface Interf{
+ public void m1();
+ }
+
+ class Demo implements Interf{
+ public void m1()
+ {
+ sout("hello im implementation class of Inter");
+ }
+ }
+
+ class Test{
+ psvm{
+ Demo d=new Demo();
+ d.m1();
+ }
+ }
+ //i want to implement this functional interface so
+ we need another implementation class to write implementation
+ //for calling we need to write
+  0. creating object of the implementing (Demo  class)
+  1. You create object of implementing class
+  2. Call method using object reference, not interface name
+
+  //for implementing inter we take separate class
+  //for that we use lambda expression to reduce code size
+
+  interface inter
+  {
+  public void m1();
+  }
+
+  class Impl implements inter{
+  public void m1(){
+  sout("im method of impl class , for we this have to use another class");
+  }
+  }
+
+  class Main{
+  psvm{
+  Impl i=new Imple();
+  i.m1();}
+  }
+
+
+  but when we use lambda we did not need to write separate class we can provide imple in main itself
+
+  interface inter{
+  void m1();
+  }
+
+  public class Main{
+  psvm{
+  Interf i=()->sout("im declare using lambda expression");
+  i.m1();
+  i.m1();
+  }
+  //if we want to calling lambda then functional intef required
+  //functional interface acts can be used to provide reference to
+  lambda expression
+  Functional interface is required to use (call) a lambda expression.
+  It acts as a reference type for the lambda expression.
+
+
+  Without Lambda:
+  You need a separate class
+  More boilerplate code
+  With Lambda:
+  No separate class needed
+  Direct implementation inside main()
+
+
+  interface Inter{
+  pulic void add(int a, int b);
+  }
+
+  class Imple extends Inter{
+  public void add(int a,int b){
+  sout("addition of a && b is: "+  a+b);
+  }
+  }
+
+  class Main{
+  psvm{
+  Inter i=new Imple();
+  i.add(10,20);
+  }
+  }
+
+  but we know about lambda so we do not needed extra class for write imple only
+
+  interface Inter{
+  public void add(int a, int b);
+  }
+
+  class Main{
+  psvm{
+  Inter i=(a,b)->sout("addition of a && b :"+ a+b);
+  i.add(10,20);
+  i.add(100,200);
+  i.add(30,60);
+  }
+  }
+
+  //“Hey, what are you guys talking about?”
+  //lambda expression always associated with functional interfaces
+  //if two abstract method then compiler confused,so only one abstract method
+

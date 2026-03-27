@@ -1,0 +1,498 @@
+one by one- single threaded
+all simultanelously moving-multithreading
+mul important for ->gaming application-mul thread run at time
+for muktithrading->multitasking-executine more than one task .
+typing app, listining music,downloading=multiplication-separate independent process->not dependent
+
+executing more than one thread at a time=multithtreading
+each thread is separate indepenent process of same application
+thread is lightweight process
+
+thrad is user defined process
+how to create thread =- my own thread-two approach
+1.extending thread class
+2.implementing runnable interface
+
+two present is java.lang package -default package
+default modifire -default
+common root class in java -object
+
+application contains only one thread=single threaded:
+singlr thread model:
+only one thread:
+class Test{
+psvm{
+sout("hello")
+sout(hello")
+}..main thread only
+
+multithreaded:
+1.extending thread class:
+our normal java class become thread class when we extend thread class
+class MyThread extends Thread{
+}
+2.write business logic of thread to overrirding run() method
+which is already present is thread class with empty implememtation
+
+class MyThread extends Thread{
+public void run()
+{
+//
+}
+}
+3.once logic ready..how to instantiating
+
+MyThrad t=new MyThread();
+
+4.after instantiate..how to start
+
+t.start();
+
+
+to start 99+ thread we need main thread..program exceution always start from main thread
+to start user defined thread we must depends on main thread...start always write in main
+
+package MultiThreading;
+
+class Mythread extends Thread{
+    public void run(){
+        for(int i=0;i<10;i++){
+            System.out.println("user defined Thread...");
+        }
+    }
+}
+public class MyThread11 {
+    public static void main(String[] args) {//main thread
+       //user defined thread starting code
+        Mythread t=new Mythread();
+        t.start();//2 threads
+        //logic of main thread
+        for(int i=0;i<10;i++){
+            System.out.println("main thread");
+
+        }
+        }
+
+    }
+//if aapplication contains more thna one thread then thread execution decided by thread schedular
+//thrrad chedular is component of JVM
+//it follows two algorithm:to allocte the cpu
+//-priative algorithm
+//-time slicing algo
+//to allocate cpu for this thread
+//JVM first check start() method in MyThread Class then Thread class
+//thrad class start is executing
+
+1.whenever thread class start executed the thread class start method register into thread sceduler..then only say thread is created
+thread not registerd-thread is not created
+2.thread class start method code automatically call run() method.so run() will be executing.
+when run() executed application begins;
+
+thread schedular-unable to predict behavior-unable to say exact output
+it says possible output
+unexpected behavior of thread shedular
+
+//You call:
+//
+//        t.start();
+//
+//
+//JVM executes Thread class’s start() method
+//
+//start() internally:
+//
+//Creates a new thread
+//
+//Calls run() method automatically
+//
+//Since you overrode run(), your run() executes
+//
+//📌 You should NEVER override start()
+//Only override run() ✔️
+
+//Thread Scheduler explanation (clean version)
+//
+//Thread Scheduler is part of JVM
+//
+//It decides which thread gets CPU
+//
+//Algorithms used:
+//
+//Preemptive scheduling
+//
+//Time slicing
+//
+//⚠️ Output order is NOT guaranteed
+
+
+difference between start() and run():
+when we call t.start() Thread class Start() method is executeed then thread is register into thread schedular then decide your thread is created.
+when i call t.run()...myThread class method is executed just like normal method
+only one thread=>expected output we will get
+not overrideing run then thread class run is exceuted which is having empty implementation
+recommanded run to override run() to write logic of thread..if we not writr thread classs run() exeuted with no output
+
+not recommanded to override start() method
+overloading run()->thread class run()always check 0-arg run() will be exceuted
+its not like that we only write or all task in run only.
+.we can write it outside run() and call in run() its will be okay
+
+public void run(){
+m1();
+m2();
+}
+void m1(){sout("m1 method")}
+void m2(){sout("m2 method")}
+
+mutiple thread performing sinlge task
+one car->Multiple thread
+just before calling main method stack will be created
+for main thread one stack is created
+4 thread=stack 4 created
+whenever thread completed stack is distracted/destoyed
+
+mutiple thread= single task
+
+3 thread = 3 different task
+class MyThread1 extends Thread
+public void run(){
+sout("aaruu-1")}
+}
+class MyThread2 extends Thread{
+public void run(){
+sout("aaruu-2")
+}
+
+class ThrreadDemo{
+psvm{
+Mythread1 t1=new MyThread1();//named object
+t1.start();
+Mythread1 t2=new MyThread2();
+t2.start();
+
+2-nd way:
+new MyThread1().start();//nameless object
+new MyThread2().start();
+}
+
+______________________________________
+
+default name of main=main
+default name of user defined thrrad start from =thread-0, thread-1...
+getName()=retrive which thread is running
+we can set name using setName()
+thread.currentThread().getName()=main
+we can also setName for name
+
+it also have ID
+getId();
+
+thread is alive or not
+isAlive()
+
+how many no. of thread present
+Thread.activeCount();/unexpected output
+
+
++____________________________
+thread priority:
+priority range : 1 to 10
+default is 5
+setPriority
+getPriority
+default priority if main is : 5 and user defined also 5
+MX-PRIORITY=1
+NORM-PRIORITY=5
+MAX-PRIORITY=10
+
+mut have same priority=thread excecution decided by Thread schedular decided=unexpected output
+before start() set priority
+1️⃣ What is Thread Priority?
+
+Thread priority is a hint to the JVM Thread Scheduler about which
+ thread should get CPU preference when multiple threads are in runnable state.
+⚠️ Priority does NOT guarantee execution order
+2️⃣ Priority Range in Java
+
+Java supports 10 priority levels:
+
+1  → MIN_PRIORITY
+5  → NORM_PRIORITY (default)
+10 → MAX_PRIORITY
+
+
+Constants:
+
+Thread.MIN_PRIORITY   // 1
+Thread.NORM_PRIORITY  // 5
+Thread.MAX_PRIORITY   // 10
+Default Priority Behavior
+
+Main thread priority = 5
+
+Child thread inherits parent’s priority
+Setting Thread Priority
+Syntax
+thread.setPriority(int priority);
+
+Example
+class PriorityDemo extends Thread {
+    public void run() {
+        System.out.println(
+            Thread.currentThread().getName() + " : " +
+            Thread.currentThread().getPriority()
+        );
+    }
+
+    public static void main(String[] args) {
+        PriorityDemo t1 = new PriorityDemo();
+        PriorityDemo t2 = new PriorityDemo();
+
+        t1.setPriority(10);
+        t2.setPriority(1);
+
+        t1.start();
+        t2.start();
+    }
+}
+
+
+📌 Higher priority thread MAY execute first, but not guaranteed
+Invalid Priority → Runtime Error=>IllegalArgumentException
+Thread Scheduler is JVM + OS dependent
+
+Priority is only a suggestion
+
+JVM may ignore priority
+7️⃣ OS Dependency (INTERVIEW GOLD ⭐)
+OS Type	Priority Effect
+Windows	Weak priority enforcement
+Linux	Time-slicing dominates
+Real-time OS	Priority respected more
+
+📌 Same program → different output on different machines
+✅ CASE 1: Main thread → Child thread (default priority)
+Main thread priority = 5
+
+Child created by main
+
+Child inherits 5
+
+📌 Most basic inheritance
+
+✅CASE 2: Main thread priority changed BEFORE child creation:
+Main priority changed to 8
+
+Child thread created after change
+
+Child inherits 8
+
+📌 Priority at creation time matters
+Inheritance is from creator thread, not main.
+✅ CASE 4: Parent changes its priority AFTER child creation
+Code
+class Case4 extends Thread {
+    public void run() {
+        System.out.println("Child priority: " + getPriority());
+    }
+
+    public static void main(String[] args) {
+        Thread.currentThread().setPriority(6);
+
+        Case4 t = new Case4();   // child created here
+        Thread.currentThread().setPriority(9); // change later
+
+        t.start();
+    }
+}
+
+Output
+Child priority: 6
+
+Explanation
+
+Child is created when main priority = 6
+
+Parent priority changed later to 9
+
+Child does NOT change
+
+Priority inheritance happens only once at creation
+
+📌 No dynamic inheritance
+________________________________________
+🔹 Hook Thread (Shutdown Hook) in Java
+A Hook Thread (Shutdown Hook) is a special thread that JVM executes just before it shuts down.
+
+📌 Used for:
+Resource cleanup
+Logging
+Closing DB connections
+Releasing files
+Graceful shutdown
+hook Thread
+just like normal thread
+just before abnormal termination hook thread is exceuted
+2️⃣ When does JVM shut down?
+
+JVM shuts down when:
+System.exit() is called
+Main thread finishes and no non-daemon threads exist
+User presses Ctrl + C
+OS shutdown / kill signal
+
+➡️ Before JVM exits, it runs all registered hook threads
+
+How to create a Hook Thread?:
+Runtime.getRuntime().addShutdownHook(Thread t);
+
+Basic Example (MOST IMPORTANT)
+class HookDemo {
+    public static void main(String[] args) {
+
+        Thread hook = new Thread(() -> {
+            System.out.println("Shutdown hook executing...");
+        });
+
+        Runtime.getRuntime().addShutdownHook(hook);
+
+        System.out.println("Main thread working...");
+
+        try {
+            Thread.sleep(3000);
+        } catch (Exception e) {}
+
+        System.out.println("Main thread ending...");
+    }
+}
+Output (Normal Execution)
+Main thread working...
+Main thread ending...
+Shutdown hook executing...
+
+
+📌 Hook executes after main ends but before JVM exits
+___________________________________________
+Hook Thread with System.exit()
+class ExitDemo {
+    public static void main(String[] args) {
+
+        Runtime.getRuntime().addShutdownHook(
+            new Thread(() -> System.out.println("Hook thread running"))
+        );
+
+        System.out.println("Before exit");
+        System.exit(0);
+        System.out.println("After exit"); // never executes
+    }
+}
+
+Output
+Before exit
+Hook thread running
+__________________________________________
+Ctrl + C Example (REAL WORLD)
+class CtrlCDemo {
+    public static void main(String[] args) throws Exception {
+
+        Runtime.getRuntime().addShutdownHook(
+            new Thread(() -> System.out.println("Ctrl+C detected. Cleaning up..."))
+        );
+
+        while (true) {
+            System.out.println("Application running...");
+            Thread.sleep(1000);
+        }
+    }
+}
+
+
+➡️ Press Ctrl + C
+
+Ctrl+C detected. Cleaning up...
+
+
+⭐ Very common interview demo
+
+9️⃣ When Hook Thread will NOT run?
+❌ JVM crash
+❌ kill -9 (SIGKILL)
+❌ Power failure
+A shutdown hook is a special thread that executes just before JVM shutdown, used for resource cleanup and graceful termination.
+📌 Hook runs only during graceful shutdown.
+Q: Will hook thread run if System.exit() is called?
+✅ Yes
+____________________________________________
+life cycle of thhread:
+_____________________________________________
+daemon thread:
+working at backgrond and give support to foreground thread
+garbage collector
+javap java.lang.thread
+automatically closed after main
+main never wait to daemon
+4️⃣ Inheritance Rule
+
+👉 Daemon nature is inherited from parent thread
+
+Parent = daemon → child = daemon
+
+Parent = user → child = user
+
+📌 Happens only at thread creation
+JVM terminates when:
+
+No user threads exist
+
+Even if daemon threads are still running
+
+👉 Daemon threads are abruptly stopped
+| Aspect               | Daemon | Shutdown Hook |
+| -------------------- | ------ | ------------- |
+| Runs during JVM life | ✅      | ❌             |
+| Runs at JVM shutdown | ❌      | ✅             |
+| Guaranteed execution | ❌      | ✅             |
+| Used for cleanup     | ❌      | ✅             |
+
+IllegalThreadStateException (FAV TRAP)
+t.start();
+t.setDaemon(true); // ❌
+ JVM runs as long as USER threads exist
+   |       (Daemon threads don't matter)
+   Threads run inside JVM
+
+   JVM controls:
+   Thread creation
+   Thread execution
+   Thread termination
+
+   👉 Daemon thread’s life is controlled by JVM lifetime
+   Daemon threads are terminated when the JVM exits.
+   JVM exits as soon as all user threads finish execution.
+   Therefore daemon threads are bound to JVM lifetime
+   💥 Runtime exception
+
+   _______________________________________________________
+   join():
+   inturrupt():
+   inner method:
+   no name thread:
+
+
+
+_____________________________________________________________
+
+synchronization:
+____________________________________________________________
+synchronixation:by default fasle
+non sync-data inconsistancy
+
+1.non queue=non sync=multiple thread arw running at a time=not thread safe=multiple thread run at a time=performance of cpu increase=proble data inconsistancy
+
+
+2.with queue=synchronized=only one thread able to access=second thread have to wait until completion of first=data consistancy good
+but performance low...other thread wait..waiting time increased
+
+thread-safe and data consistancy=synchronous used
+if you want performance=non-synchronous
+

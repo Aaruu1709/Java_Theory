@@ -1,0 +1,42 @@
+Immutable class:
+-it is a class where the state of objrct can not be changed once it is created
+-once the field of an object are assigned some values, it can't be updated
+-it is read only class
+
+when we create immutable classes it follow the set of ruleS:
+Rules of Immutability in a class:
+1) no setter method inside class
+2)filed must be private
+3)initialization of fields using constructor
+
+player.java
+public class Player{
+String name;
+int age;
+public void setName(String name){
+this.name=name;
+}
+
+public void setAge(int age){
+this.age=age;
+}
+
+public void print(){
+sout("name: "+ this.name+ "age:"+ this.age);
+}
+}
+
+public class Main{
+psvm{
+Player p1=new Player();
+p1.setName("Rohit sharma");
+p1.setAge(38);
+p1.print();
+
+
+p1.setName("aaruu");
+p1.setAge(26);
+
+p1.print();
+}
+}

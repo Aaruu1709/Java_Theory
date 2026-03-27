@@ -1,0 +1,97 @@
+Relationship Between Classes in Java
+multiple classes interact with or depends on each other=relationship
+help=structure and organize code
+type:
+1.Assocition(HAS-A)
+2.Dependency(USES-A)
+3.Inheritance(IS-A)
+
+ 1. Association (HAS-A relationship)
+Definition : Association is a relationship where one class interacts with another class.by holding reference to it
+Example :
+Student HAS-A Address
+Car HAS-A Engine.
+How to achieve association ?
+Association is achieved by declaring object references as instance variables inside a class.
+HOw to Achieve:
+achieve=achieve by declaring object reference as a instance variable inside a class
+we can inject those dependent object by using
+1)Direct reference varible-creating object directly inside the class
+2)Constructor injection-passing depndent object through constructor
+3)setter injection-injecting dependent object using public setter method
+
+
+Types of Association:
+Aggregation
+Weak relationship between classes.
+Objects can exist independently of each other.
+Example:
+A Car HAS-A Music Player.
+The Music Player can be removed, reused, or replaced — it can exist without the car.
+Composition
+Strong relationship between classes.
+One object is fully dependent on the other.
+Example:
+A Car HAS-A Engine.
+The Engine is an essential part of the car — if the car is destroyed, the engine has no real standalone meaning.
+Associations can be:
+One-to-One
+One-to-Many
+Many-to-One
+Many-to-Many
+*These are also known as Cardinality of Associations. Cardinality is the count or the number of connections.
+
+_________________________________________________________
+Dependency (USES-A Relationship) in Java
+
+ Dependency (USES-A relationship)
+Definition :
+Dependency is a relationship where one class uses another class temporarily to perform a specific task. This means the dependent object is often used within a method, rather than being stored as an instance variable.
+It represents a USES-A relationship.
+The dependency is typically short-lived, existing only during the execution of a method.
+Example :
+Teacher USES-A Whiteboard
+Office Worker USES-A Printer
+How to achieve dependency ?
+Dependency is achieved by creating or using objects of another class inside a method,
+instead of holding them as instance variables.
+
+We can inject dependent objects using:
+
+1.Local Variable inside Method
+-The dependent object is created directly in a method
+2.Method Parameter
+The dependent object is passed as a method argument
+
+________________________________________________________
+Inheritance:
+ Introduction:
+ A child class automatically gets the properties and methods of a parent class, and can modify or extend them.
+
+Inheritance means acquiring the properties and behaviors of a parent class in a child class.
+It allows a subclass (child class) to inherit fields and methods from a superclass (parent class), promoting code reuse and method overriding.
+Inheritance represents an IS-A relationship, also known as a parent-child relationship
+For example:
+A Car IS-A Vehicle.
+A Dog IS-A Animal.
+A Surgeon IS-A Doctor.
+How to achieve inheritance in Java?
+By using the extends keyword for class inheritance.
+By using the implements keyword for interface inheritance.
+
+Advantaages:
+code reusability
+easy to change
+method overridiung
+poly
+_____________________________________--
+ Types of Inheritance
+There are 5 types of inheritance in Java:
+Single Inheritance: One class inherits the properties and behaviors of one parent class.
+Multilevel Inheritance: One class inherits the properties and behaviors of a parent class, and that class is inherited by another class.
+Hierarchical Inheritance: Multiple classes inherit the properties and behaviors of a single parent class.
+Multiple Inheritance: One class inherits the properties and behaviors of multiple classes. (Not supported in Java directly, but can be achieved using interfaces.)
+Hybrid Inheritance: A combination of two or more types of inheritance. (Not supported in Java directly, but can be achieved using interfaces.)
+
+multiple inheritance is not supported in java but we can
+achieve this using interfaces and abstract classes.

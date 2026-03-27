@@ -1,0 +1,45 @@
+  finally:
+        -fianlly is a block which is used along with try class
+        -try catch is uded for exception handling and finally is the block that always gets executed.
+       - fianlly always exceuted whether or not get error
+        -catch is executed when error is occured when not then not executed
+       -definetly print=cleannup logic,file close
+
+-finally is a block that always runs after try-catch,
+whether an exception happens or not.
+-✅ When is finally executed?
+
+ 👉 In almost all cases:
+
+ ✔ Exception occurs → runs
+ ✔ No exception → runs
+ ✔ Return statement → still runs
+ ❌ Only NOT executed when:
+ System crash
+ System.exit() is called
+
+ 🎯 Where do we use finally?
+ 👉 Used for cleanup work, like:
+ Closing file
+ Closing database connection
+ Releasing resources
+
+ -finally always runs (no matter what happens).
+ -Used to clean resources (file, DB, network).
+ -Runs even if return statement is inside try/catch.
+ -Helps avoid memory/resource leaks.
+ -Comes after try and catch block.
+ -You can use try + finally (without catch also).
+ -If JVM stops (System.exit()), then finally will NOT run.
+
+👉 finally will NOT execute when:
+System.exit() is called
+JVM is forcefully stopped (halt())
+Infinite loop (control never reaches finally)
+System crash / power failure
+
+⚠️ Important Warning (Interview + Real life)
+👉 Using return in finally is BAD practice
+Because:
+It hides original return value
+It can hide exceptions

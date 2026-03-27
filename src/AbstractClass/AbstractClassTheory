@@ -1,0 +1,359 @@
+Abstract classes:
+____________________________________________________
+
+There are two types of methods:
+a.normal methods:
+the method contains declaration and implementation
+void add()
+{
+body
+}
+b.abstract methods:
+-the abstract method contain only method declaration
+-the absract method end with semicolon
+-to represent the method as a abstract use absract modifier
+
+abstract void mul();
+
+based on above imple the classes are divided into two types:
+normal classes
+abstract classes
+
+ a.normal classes:
+ the class contain only normal methods
+
+ class Test{
+ void m1(){}
+ void m2(){}
+ void m3(){}
+ }
+
+ b. abstract classes
+ 1. abstract class Test
+ {
+ void m1(){}
+ void m2(){}
+ abstract void m3();
+ }
+
+ 2.abstract class Test
+ {
+ void m1(){}
+ void m2(){}
+ void m3(){}
+ }
+ note:abstract class may contains abstract or may not contain
+ abstract method but for abstract classes object creation is not allowed.
+
+
+example 1:
+one abstract class contains multiple implementation classes
+package AbstractClass;
+
+
+abstract  class Message{
+    abstract  void wish();
+}
+
+class Aaruu extends Message{
+    void  wish(){
+        System.out.println("Good morning");
+    }
+
+}
+class Anu extends Message{
+    void wish(){
+        System.out.println("good evening");
+    }
+}
+public class Example1 {
+    public static void main(String[] args) {
+//        Message m=new Message();//error:message is abstract , can not be instatiated(cant create object)
+        Aaruu r= new Aaruu();
+        r.wish();
+        Anu a=new Anu();
+        a.wish();
+
+        sout("_____________");
+
+        Message m1=new Aaruu();
+        m1.wish();
+        Message m2=new Anu();
+        m2.wish();
+    }
+}
+
+//Good morning
+  good evening
+  _____________
+  Good morning
+  good evening
+
+1. one abstract class contain multiple imple classes
+2. the abstract class can hold impl class object
+
+
+Example 2:
+package AbstractClass;
+
+abstract  class Operations{
+    abstract void add(int a,int b);
+    abstract  void mul(int a,int b);
+}
+
+abstract class Dev1 extends Operations{
+    void add(int a,int b){
+        System.out.println(a+b);
+    }
+}
+class Dev2 extends Dev1{
+void mul(int a,int b){
+    System.out.println(a*b);
+}
+}
+public class Example2 {
+    public static void main(String[] args) {
+        Dev2 d=new Dev2();
+        d.add(10,20);
+        d.mul(4,5);
+    }
+}
+
+
+example 3:inside the abstract class possible to declare main method
+abstract class Demo{
+psvm{
+sout("this is absratct method");
+}
+}
+
+example 4:
+abstract class Demo{
+Demo(){
+sout("Abstract class:demo construcor");
+}
+}
+class Test extends Demo{
+Test(){
+sout("normal class cons");
+}
+psvm{
+new Test();
+}
+}
+note:inside the abstract class it is posible to declare the variable ,method,cons,blocks
+
+
+absract and private combination is illegal:
+abstract means:
+No body
+Must be implemented by child class
+Child has to override it
+----------------------
+private mean:
+Accessible only inside the same class
+NOT visible to child classes
+Cannot be overridden
+=put them together:
+This says:
+“Child class MUST override this method”
+“Child class CANNOT see this method”
+🤯 Impossible situation.
+
+abstract and private cannot be used together because abstract
+methods must be overridden, but private methods cannot be overridden.
+🟢 Extra info (good to know)
+abstract + final → ❌ illegal (same reason)
+private methods can exist in abstract class ✔️
+Abstract class can have private concrete methods ✔️
+
+
+observation:
+case 1:
+abstract class Message{
+abstract final void morning(String name);
+}
+error: illegal combination of modifiers: abstract and final
+
+case 2:
+abstract class Message{
+abstract static void morning(String name);
+}
+error:illegal combination
+abstract+static
+
+case 3:
+abstract class Message{
+abstract private void morning(String name);
+}
+error:illegal combinatiion abstract+private
+
+note:abstract methods means we have override that method in child classes but final , static, private methods
+not possible to override so the combination of modifires is illegal
+
+case 4:
+we can overload the abstract method
+abstract class Test{
+abstract void add(int a,int b);
+abstract void add(int a,int b,int c);
+}
+
+case 5:  can we override abstract method:yes
+case 6:
+Assignment:
+abstract class services{
+abstract String login(String username,String password);
+abstract double totalBill(productName,pcost,pquantity);
+abstract int add(num1,num2);
+abstract void wish();
+}
+complete impl in three child classes
+
+
+
+
+
+
+
+ _____________________________________
+normal classes and abstarct classes:
+absract class may contain abstarct method or may not contain abstract method
+
+if any one abstarct metod present in abstract class which we declare class as abstarct class
+but class may not have any abstarct method still we can declare class abstarct
+we can not create object of abstact class.
+when we create abstact method then we need to provide class as abstact...rather than it will get error like
+Abstract method in non-abstract class
+abstarct class Test{
+void m1(){};
+void m2(){};
+}//valid
+
+abstarct class Test{
+void m1();
+abstarct void m2();
+}//valid
+
+we need to override metod in child class to write implementation
+in child class
+
+abstact class can hold child class object
+
+example 1:
+abstact class contain abstact and normal method....but we need to implent all those methods in chid class and
+create object of child class and access that mehtods
+
+example 2:
+we write Abstact method in topmost class and try to implemet it in next child (test1) but this also unavle to implement every method so this test1 also abstact
+again we create test2 and write implementation of next one method but this class also unable to create all imple,,so i have declare that class also abstact finnaly
+ we create Test3 class and here implementation last method so now all methodhas body so now we are able to create that class test3 object
+....but not before ....either we implement all method or declare that class to abstact.
+
+we can take any number of child classes no issue..only we have to complete implementation
+
+example 3:
+abstact method have any return type and any number of
+abstact class test{
+abstact int m1(char h,int a)
+abstact String m2(boolean b)
+abstact String login(String username, String Password);
+}
+//write implentation in 2 child classes
+
+example 4:
+abstact method can be overloaded
+abstract class test{
+abstact void m1(int a);
+abstract void m1(int a, int b);
+abstract void m1(char ch)
+}
+complete the impl two child classes
+
+------------------------
+example 5:inside abstact class main method  is possible no issues
+abstact class Test
+{
+psvm{
+sout("abstact class main method is possible")
+}
+}
+
+example 6:
+inside abstact class constructor declaration is possible
+//where constructor are executed but object is not created
+Parent class constructor ALWAYS executes first, then child class constructor.
+abstact class constructor extends only when we declare child class:no child class abstract class construcor not possible
+-to execute abstract class constructor child class is mandatory
+
+example 7:
+inside the abstract class:
+-variable possible
+-methods possible
+-constructor possible
+-instance block possible
+-static block
+
+package AbstractClass;
+
+abstract class AbstractBlocks {
+    {
+        System.out.println("abstact class instance block");
+    }
+    static {
+        System.out.println("abstract class static block");
+    }
+    AbstractBlocks (){
+        System.out.println("Abstract class Constructor");
+    }
+}
+class BlockDemo extends AbstractBlocks{
+    BlockDemo(){
+        System.out.println("normal class constructor");
+    }
+
+    public static void main(String[] args) {
+        new BlockDemo();
+    }
+}
+//output:
+abstract class static block
+abstact class instance block
+Abstract class Constructor
+normal class constructor
+👉// Abstract constructor is called ONLY because a child object is created
+//A normal class constructor can be called directly
+ because the class can be instantiated. An abstract class
+ constructor cannot be called directly since abstract classes
+ cannot be instantiated;
+it is executed only when a concrete subclass object is created.
+
+example 8:
+//hiding implementation in abstact is called abstation
+
+
+interview que:
+-we can override abstract method
+-but when method is abstract final not possible
+-static abstract also not possible =>can not override
+
+abstact class Test{
+public final abstact void m1();
+}
+error:illegal combination of modifiers:abstactc and final
+
+abstract class Test{
+Static abstract void m1();
+}
+error:illegal combination of modifiers : abstract and static
+
+-abstact and private also not possible
+so that we understand we can override absractc mehtod but can not private, final, static
+
+- weaker access privialge
+abstract class test{
+public abstract void m1();
+}
+class Test1 extends Test{
+void m1(){}
+}//not possible bcoz parent has higher accessibilty and child low
+//just for providing security=abstraction

@@ -1,0 +1,75 @@
+final=final is a keyword
+finally = is a block
+finalize= method
+=final filed must be initialze we need to provide value before
+synatx: final String company="google"
+     -     since we already give value to the company "google" and make it
+          final so that we can not change the value of it
+       -  does not allow us to change
+
+       public class Employee{
+       long id;
+       String name;
+       final String company="Google";
+
+       }                     //main method
+       then when we create object we did not need to assign value again it give error
+       -we can diretly give value in place of instance variable or we can use constructor
+
+                               public class Employee{
+                               long id;
+                               String name;
+                               final string company;
+
+                              public Employee(){   //constructor
+                              company="google";
+                              }
+        -suppose i create another employee object then it also won'nt work bcoz of finallly
+        -so  need different value for different object
+        -insteed of writing hardcoded value in consructor we do it dynamically we pass this in construcor
+        - public Employee(String comapany){
+        this.company=company;
+        }
+        tw diff value for diffrent object it works
+
+        ________________________
+        how it work on method:
+        does not allow method to override
+        we can extends class and override other non fianl
+        with class:
+        we can not inherit final class
+   _____________________________________________________
+   ____________________________________________________________
+          finalize is the method which is called at the time of garbage collection by JVM
+           garbage collection is the process where JVM frees up the memory by deleting all the unreferenced object
+           no one pointing that object so gargabe collection   ..cleaup object
+           this method is part of object class(parent Class all clases in java)..now we not used after java 8 is is derprecated
+           whenever garbage collection take place we do system.gc() ,finalize method is called
+                    Method called by Garbage Collector
+
+Runs before object is removed from Heap
+Called at most once
+Execution not guaranteed
+Cannot predict when it runs
+Used for cleanup (old practice)
+Deprecated (avoid using)
+Prefer finally / try-with-resources
+Memory line to remember:
+finalize() = unreliable last chance cleanup
+Prefer try-with-resources not finalize.
+finalize() is a method of Object class.
+It is called by the Garbage Collector before an object is destroyed.
+Used for cleanup work (like closing resources, releasing memory).
+Syntax:
+protected void finalize() throws Throwable
+
+It is NOT guaranteed to run (depends on GC).
+You cannot control when it executes.
+It runs only once per object (even if GC runs multiple times).
+It is deprecated from Java 9 onward ❌
+Replaced by better alternatives like:
+try-with-resources
+Explicit cleanup methods
+Using finalize() is bad practice now (slow + unpredictable).
+🎯 Interview One-liner:
+“finalize() is a cleanup method called by GC before object destruction, but it is deprecated and unreliable.”

@@ -1,0 +1,134 @@
+Collection Framework
+_________________________________________________________
+1.Arryas vs, Collection
+_________________________________________________________
+both Arrays and coolction are used to represent group of object as a single entity
+but the differences are as shown below:
+
+Arrays:
+store the group of objects:homogeneous
+arrays are fixed in size: we can not increase or decrease the size
+memory:int [] 1000:memory wise bad
+Arrays do not have methods:operation are complex
+Arrays can store primitive int[] it can store object data Emp[]
+
+Collection:
+store the group of objects:homogeneous and heterogeneouse
+collection are growable in nature:size will increase and decrease
+memory wise it is good
+collection supports methods operations are easy
+collection can store only object data
+
+defination of collection:
+-the main objective of collection framework is to represent group of objects as a sinngle entity.
+-java collection framework provide very good architecture to store and manipulate the group of object
+-collection contains group of classes and interfaces that make it easy to handle group of objects
+
+2.part of collection framework:
+two parts:
+a.Collection=used to store single object format[10,20,30,40]
+List-> ArrayList,LinkedList,vector,Stack
+Set->HashSet,LinkedHashSet,TreeSet
+Queue->PrioorityQueue
+
+b.map=uset to store data two object format, key:value {111:"aaruu",222,"anu"}
+
+HAshMap,LinkedHashMap,TreeMap,HashTable
+
+1.the root interface of collection framework is           :Collection
+2.The root interface of map is                            : Map
+3.The collection contains parent interface                :java.lang.Iterable
+4.THe collection related info presetnin package           :java.util
+5.Collection framework introduced in                      : jdk 1.2 version
+
+
+collection vs. Collections
+
+collection: is root interface of collection frawork
+collections is class it contains some methods to perform oprations.
+
+4. topics covers in collection framework:
+
+List implementation classes:
+ArrayList, LinkedList, Vector, Stack
+
+Set implementation classes:
+HashSet, LinkedHashSet,TreeSet
+
+Queue imple classes:
+PriorityQueue
+MAp imple classes: HashMap,LinkedHashMap,TreeMAp
+
+cursors:   Enumeration, Iterator, ListIterator
+Collection sorting :Comparable,Comparator
+
+clonening and serialization: Clonebale , serializable
+collection stream API: java.util.stream
+
+
+collection with generics
+
+_____________________________________________________
+List implementation classs:
+ArrayList,LinkedList,Vector,Stack
+
+Iterable(i) 1.5v
+| extends
+|
+collection(i) 1.2v
+|extends
+|
+Lists(i) 1.2v
+|
+|
+ArrayList(c) 1.2v
+LinkedList(c)1.2v
+vector(c) 1.0v->stack(c) 1.0v
+
+
+list vs set:
+List classes allows duplicates objcet
+set classes duplicate are not allowed
+
+each have thire own cahracteristics:
+Characteristics of collection classes:
+1-duplicate object are allowed or not allowed
+2-inserion object preserve or not
+   input: e1 e2 e3------>output: e1 e2 e3
+   input: e1 e2 e3------> output: e3 e1 e2
+
+3-null insertion
+4-methods- synchrnized or non-synchronized
+ java 1.0 version class methods are :synchronized
+5-DS: based on DS the data will be stored internally
+
+ArrayList: 1.2
+1.ArrayList Duplicate object are allowed
+2.insertion order preserve
+3.method are non-sync
+4.ArrayList Underlaying data structure is Resizable-array
+
+
+_____________________________________________________________
+1. hasNext() Method:
+hasNext() checks whether there is another element available in the collection or not.
+If another element exists → returns true
+If no more elements → returns false
+👉 Simple meaning:
+“Is there a next element?”
+
+
+2. next() Method:
+next() returns the next element from the collection and moves the iterator pointer to the next position.
+👉 Simple meaning:
+“Give me the next element.”
+
+hasNext() → check
+next() → get element
+----------------------------------------------------
+| Method               | Purpose                       |
+| -------------------- | ----------------------------- |
+| `hasNext()`          | Checks if next element exists |
+| `next()`             | Returns next element          |
+| `remove()`           | Removes current element       |
+| `forEachRemaining()` | Processes remaining elements  |

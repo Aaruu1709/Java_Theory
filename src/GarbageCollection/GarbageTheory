@@ -1,0 +1,43 @@
+----------------------------------------------------
+
+Garbage collector:
+_______________________________________________________
+
+language                          memory allocation         memory desctoy
+________________________________________________________________________
+c language                         malloc()                    free()
+cpp                                constructors                destructor
+java                               object creation             GC
+
+garbage collector will collect the garbage.
+garbage: an object without reference
+
+In application level the good practice is:
+1.create object
+2.use object
+3.once usage completed give the object to GC then GC will destoy the object
+(giving object to garbage collector is nithing but making the object without reference..)
+
+
+4-ways to give the object to GC:
+1.Assign the null value to the object.
+Test t=new Test();
+-------
+t=null;
+
+2.name less object
+new Test();
+
+3.reassign reference-variable:
+str1----ratan
+str2----anu
+str1----str2  //here str1 is pointing to str2
+        ----ratan
+ str2,str1 -----anu
+
+4.once we create the object inside the method, once the method completed object is eligible to GC.
+
+void m1(){
+Test t=new Test();
+stack     heap
+}

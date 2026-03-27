@@ -1,0 +1,382 @@
+String manipulation:
+____________________________________________________
+String , StringBuffer,StringBulilder
+String=string is used to represent group of character or
+character array enclosed within the double quotes.
+
+different ways to create array:
+package String;
+
+public class Example1 {
+    public static void main(String[] args) {
+        System.out.println("______________1__________________");
+
+        String str="Aaruu";
+        System.out.println(str);
+
+        System.out.println("_______________2_________________");
+
+        String str1=new String("aaruu");
+        System.out.println(str1);
+
+        System.out.println("______________3__________________");
+
+        //conversion of char[] to string format
+        char [] ch={'a','a','r','u','u'};
+        String str2=new String(ch);
+        System.out.println(str2);
+
+        System.out.println("____________4____________________");
+
+        char [] ch1={'a','a','r','u','u'};
+        String str3=new String(ch1,2,3);
+        System.out.println(str3);
+
+        System.out.println("________________________________");
+
+        //conversion of to string format
+        byte[]b1={65,66,67,68,69,70};
+        String str4=new String(b1);
+        System.out.println(str4);
+
+        System.out.println("________________________________");
+
+        byte [] b2={65,66,67,68};
+        String str5=new String(b2,1,2);
+        System.out.println(str5);
+
+    }
+}
+_______________________________________________________________
+diff bet new and without new operator:
+String str1="aaruu";
+String str2="aaruu";
+String str3="meerab";
+
+without using new= object created in SCP(String Constant POOL)
+str1,str2--->aaruu
+str3      --->meerab
+in scp at the time of object creation it is always check prevoius object present in SCP or NOt:
+
+1.if prevoius object is not available it will create the new object
+2.if the previous object is available with the same name(content)the reference variable is pointing to existing object.
+
+==: reference comparison
+str1==str2: true
+str1==str3:false
+
+scp does not allow duplicate object
+
+as str 1 and str2 same so it points to same memory ref
+
+//creating a string object by using new operator
+String str1=new String("aaruu");
+String str1=new String("meerab");
+String str1=new String("aaruu");
+the object are created in heap memory
+when we create object in heap area insteed of checking prevoius object
+it directly create new object
+str1----aaruu
+str2----meerab
+str3----aaruu
+
+str1==str2:false
+str1==str3:false
+str2==str3:false
+
+equals method of object class=reference comparison
+string class equals method =content comparison
+equals belongd to object class
+string class overriding equals methods
+
+for primitive type == means: content comparioson
+but for non promitive == means:reference comparison
+
+//stringbuffer class not overriding equlas():use object class equals and obj class eqls for reference comparison
+
+
+package String;
+
+public class Example2 {
+    public Example2(String string){
+
+    }
+    public static void main(String[] args) {
+        //object class equals: reference comparison
+        Example2 e1=new Example2("aaruu");
+        Example2 e2=new Example2(("aaruu"));
+        System.out.println(e1.equals(e2));//false
+        System.out.println(e1==e2);//false
+        System.out.println("_____________________");
+
+
+        //string class overriding equlas():content comparison
+        String s1="aaruu";
+        String s2="aaruu";
+        System.out.println(s1.equals(s2));//true
+        System.out.println(s1==s2);//true
+        System.out.println("_____________________");
+
+
+        String s3=new String("saruu");
+        String s4=new String("saruu");
+        System.out.println(s3.equals(s4));//true
+        System.out.println(s3==s4);//false
+        System.out.println("_____________________");
+
+        //Stringbuffer class not overriding equals():uses object class equals() so it for reference
+        StringBuffer sb=new StringBuffer("aaruu");
+        StringBuffer sb1=new StringBuffer("aaruu");
+        System.out.println(sb.equals(sb1));//false
+        System.out.println(sb==sb1);//false
+
+
+    }
+}
+.....equals method present in object class used for reference comparison
+it return boolean value
+if two reference varibles are pointing to same object retur true otherwisw false
+string is a child class of object and it is overriding equals() method used to perform data comparison
+if tw object data is same then returns true otherwise false
+Stringbuffer class is child class of object and it is not overriding equals () method hence
+it is using parent class (object) equals() method used for reference comparison
+
+note:
+equals() method class to class behavior changed
+but == operator always meant ref comparison
+equalls () method of object class=reference comparison
+equals () string= content(due to it override from object so change behavior in string)
+Stringbuffer do not override so it used object /parent class equals method so it for=reference comparison
+
+__________________________
+assignment 1
+package String;
+
+public class Assignment1 {
+    public static void main(String[] args) {
+        String str1="hello";
+        String str2="hello";
+        String str3=new String("hello");
+        System.out.println("________________________");
+
+        //identity checking:
+        System.out.println(str1==str2);
+        System.out.println(str1==str3);
+        System.out.println(str2==str3);
+
+        System.out.println("________________________");
+
+        //data checking
+        System.out.println(str1.equals(str2));
+        System.out.println(str1.equals(str3));
+        System.out.println(str2.equals(str3));
+    }
+
+}
+
+
+case sencetive =false
+_________________________________
+example:
+string:compareTo() vs. equlas()
+
+equals()----boolean
+aaruu aaruu=>true
+aaruu  meerab=>false
+
+compareTo()------int a=97   A=65
+
+aaruu   aaruu   =  0  same
+ratan    aaruu  = +ve   17   :if the first string unicode value is bigger tha second string unicode value
+aaruu  ratan   =-ve    -17  : if the first string unicode value is less than second string unicode value
+ ratan  ratna  = -ve
+
+ anu compareTo("anutntn") -4(first less char than second so take -ve then 4 means unmactce next 4 char)(bcoz first unicode less than second and 4 means 4 char unmatched)
+ anutntn.compareTo("anu") 4 (here first more charactre so take positive) and (check no of character which is not matched)
+
+ if string diff only check first character and decided result
+ if char same then check and comapre character length and give example
+ package String;
+
+ public class Assignment2 {
+     public static void main(String[] args) {
+         String str1="ramu";
+         String str2="durga";
+         String str3="ramu";
+
+         System.out.println(str1.equals(str2));//false
+         System.out.println(str1.equals(str3));//true
+         System.out.println(str2.equals(str3));//false
+         System.out.println("ramu".equals("RAMU"));//false
+         System.out.println("ramu".equalsIgnoreCase("RAMU"));//true
+         System.out.println("_________________");
+
+         System.out.println(str1.compareTo(str2));//+ve 14
+         System.out.println(str1.compareTo(str3));//0
+         System.out.println(str2.compareTo(str1));//-ve -14
+         System.out.println("ramu".compareTo("ramun"));//-1
+         System.out.println("ramu".compareTo("RAMU"));//+32
+         System.out.println("ramu".compareToIgnoreCase("RAMU"));//0
+
+         System.out.println("__________________");
+
+         System.out.println("anu".compareTo("anutnrtn"));//-5
+         System.out.println("anurtn".compareTo("anu"));//3
+     }
+ }
+//false
+  true
+  false
+  false
+  true
+  _________________
+  14
+  0
+  -14
+  -1
+  32
+  0
+  __________________
+  -5
+  3
+
+  _________________
+  it is possible to concat string data in two ways
+  concat and + operator
+
+  string str1="ratan"
+  String str2="soft";
+
+  //approach 1:using concat
+  String result1=str1.concat(str2);
+  sout(result1);
+
+  //approach 2: + operator
+
+  String result2=str1+str2;
+  Sout(result2)
+
+  ____________________________________________________________
+  leccture -2
+
+equals():
+Object->reference comparison
+string->content comaprison
+stringbuffer->it uses object class equals perform reference comparison
+
+==: it is always ment for reference comparison
+comapreTo(): compare the data return int
+aaruu  aaruu: 0
+aaruu anu: +ve
+anu  ratan : -ve
+
+
+String Manipulation:
+
+//string class mehtods:
+class Test{
+psvm{
+String s1="     ratan   ";
+sout(s1);
+sout(s1.trim());
+sout(s1.length);
+sout(s1.trim().length());
+}
+}
+output:
+    ratan
+ ratan(without space)
+ 11
+ 5(using method chaining)
+
+ trim-remove starting ,ending spaces
+ ____________________________________________
+
+
+String s2="ratanit";
+sout(s2.charAt(2));
+sout(s2.charAt(12));//StringIndexOutOfBoundException
+sout(s2.indexOf('a'));
+sout(s2.indexOf('t'));
+sout(s2.lastIndexOf('a'));
+
+
+String s3="hi sir how r u";
+sout(s3.endsWith("u"));
+sout(s3.endsWith("how"));
+sout(s3.startsWith("hi"));
+sout(s3.startWith("r"));
+
+string s4="hi ratan sir how are you";
+String[] s= s4.split(" ");
+for(String ss:s){
+sout(ss);
+}
+
+string s5="hi sir RATAN  sir";
+sout(s5.toupperCase());
+sout(s5.toLowerCase());
+
+String s5="hi ratan sir";
+sout(s6.contains("ratan"));
+sout(s6.contains("anu"));
+
+
+String s7="hi ratan sir";
+sout(s7.replace("ratan","naresh"));
+sout("anu","ramu");
+sout(s7.replace(" ", ""));
+
+
+String s8="nareshit";
+sout(s8.substring(2));
+sout(s8.substring(2,5));//start index included: end index excluded
+
+
+//length variable vs. length() method
+int[]a={10,20,30};
+sout(s.length);   //3
+sout("ratan".lenght());   //5
+
+
+
+Assignment:1
+case 1: Take the name form end user print the vowels and consonents
+output: enter your name :ratanit
+        vowels are      :aai
+        consonents are  : rtnt
+
+case 2: take the name from enduser print the vowels and consonents
+without duplicates.
+
+output: enter your name   : ratanit
+        vowels are        : ai
+        consonents are    : rnt
+
+
+ assignment 2:
+ print all the fruits
+ s1="hi mango is good apple is great orange is fruit"
+
+ Assignment 3:
+ s2="today class is completed"
+
+ output:
+ Lower-case           Upper-case    lenght
+ today   -------     TODAY       --5
+ class   ------      CLASS      ---5
+ is      --------    IS         -- 2
+ completed  -------COMPLETED    --9
+
+ case 2: concat() used to combine the two string , the result value is stored in new String
+ class Test{
+ psvm{
+ //string is immutable:one we create th estring modifications are not allowed
+ String str="ratan";
+ string res=str.concat("soft");
+ sout(res);
+ }
+ }
+
+ str----ratan
+ res----ratan

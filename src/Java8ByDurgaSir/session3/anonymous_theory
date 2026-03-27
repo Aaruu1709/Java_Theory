@@ -1,0 +1,16 @@
+lambda expression
+functional interface
+Anonymous inner class vs lambda expression
+______________________________________________________
+
+Anonymou inner class can extend a normal class
+Anonymous inner class can extend an abstract class
+anonymous inner class can implements an nterface which contains any no. of abstract method
+
+lambda expression can implement an interface which contains a single abstract method
+
+Anonymous inner class != Lambda Expression
+Anonymous inner class> lambda expression
+_______________________________________________________
+defaule methods:
+______________________________________________________

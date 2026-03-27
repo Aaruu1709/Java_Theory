@@ -1,0 +1,60 @@
+
+
+👉 Cursor = object used to traverse collection step-by-step
+=>“to traverse a collection element by element”we use cursor or loops
+
+Types:
+
+Iterator (universal)
+ListIterator (only List)
+Enumeration (legacy)
+Cursors are one of the ways to traverse (iterate) a collection, not the only way.
+
+Ways to print elements one by one:
+
+1.using iterator
+2.using for each loop
+3.using for loop->only for list
+4.using listIterator
+5.using Enumeration
+6.using stream java 8
+
+✔️ 1. Using Iterator (most common)
+Iterator<Integer> it = set.iterator();
+while(it.hasNext()) {
+    System.out.println(it.next());
+}
+
+✔️ 2. Using for-each loop (very common & simple)
+for(Integer num : set) {
+    System.out.println(num);
+}
+
+
+👉 Internally this also uses Iterator, but you don’t see it.
+
+✔️ 3. Using for loop (for List only)
+for(int i = 0; i < list.size(); i++) {
+    System.out.println(list.get(i));
+}
+
+✔️ 4. Using ListIterator (only for List)
+ListIterator<Integer> li = list.listIterator();
+
+✔️ 5. Using Enumeration (old, legacy)
+Enumeration e = vector.elements();
+
+6.stream java=8
+list.stream().forEach(System.out::println);
+👉 Here:
+You are not controlling iteration
+Java internally handles it
+👉 Rarely used today
+
+| Output      | Use       |
+| ----------- | --------- |
+| Print       | forEach   |
+| Collection  | collect   |
+| Number      | count     |
+| One element | findFirst |
+| Boolean     | anyMatch  |

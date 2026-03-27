@@ -1,0 +1,213 @@
+From 1.8 version inside interface
+without effecting implementation classes if we want to add new methods to the interface
+(extending interface functionality)->default methods
+
+to define general utility method inside interface with static
+sum(int a,int b)
+{ sout(a+b)}
+___________________________________
+case 1: normal to call m1
+interface Interf{
+public static void m1()
+{
+sout("Interface static method");
+}
+}
+
+class Test
+{
+psvm{
+Interf.m1();
+}
+}
+
+case 2: if it is implementation class..only one way to call static method is using interface name
+
+interface Interf{
+public static void m1()
+{
+sout("Interface static method");
+}
+}
+
+class Test implements Interf
+{
+psvm{
+Interf.m1();
+}
+}
+_____________________________________________________
+prefined functional interfaces:
+______________________________________________________
+Predicate
+Function
+Consumer
+Supplier
+______________________________________________________
+
+Two argument Predefied Functional interfaces:
+BiPredicate
+BiFUnction
+Biconsumer
+
+Primitive functional interfaces:
+________________________________________________________
+IntPredicate
+IntFunction
+IntConsumer
+
+
+//to call lambda expression functional interfaces is required
+//java.util.function
+
+____________________________________________________________
+Predicate(I):
+-condtion checks
+//only one abstract method
+-it is functional interface
+- public abstract boolean test(T t)
+interface Predicate<T>{
+public boolean test(T t);
+}
+
+
+example 1:
+public boolean test(Integer I)
+{
+if(I % 2==0){
+return true;
+}
+else{
+return false;
+}
+}
+
+lambda:
+(Integer I )-> I%2 ==0;
+I ->I%2==0;
+
+
+example 2:
+import java.util,function.*;
+class Test implements Interf
+{
+psvm{
+Predicate<Integer> p1=i->i%2==0;
+sout(p1.test(10));
+sout(p1.test(15));
+}
+}
+
+example 3:
+import java.util.function.*;
+class Test{
+psvm{
+Predicate<Employee> p1=e->e.salary>1000 &&
+e.isHavingGf==true;
+sout(p1.test(e));
+}
+}
+
+example 4:
+write a predicate to check wheter length of string is > 5 or not.
+Predicate <String> p=s->s.length()>5;
+
+class test{
+psvm{
+String[] s={"nag", "aaruu", "saruu","prena","surkhi"};
+Predicate <String> p=s->slength()>5;
+
+//is length of string is even
+Predicate <String> p=s->slength()%2==0;
+
+for(String s1:s){
+if(.test(s1)){
+sout(s1);
+}}}}
+//return type is always boolean
+//not needed to specify
+
+
+example 5:
+import java.util.function.*;
+class Employee{
+String name;
+double salary;
+Employee(String name,double salary){
+this.name=name;
+this.salary=salary;
+}
+}
+
+class Test{
+psvm{
+ArrayList<Employee> l=new ArrayList<Employee>();
+l.add(new Employee("Durga", 1000));
+l.add(new Employee("aaruu",30000));
+l.add(new Employee("saruu",60000));
+l.add(new Employee("paruu",70000));
+l.add(new Employee("karuu",20000));
+
+Predicate<Employee> p=e-> e.salary> 3000;
+for(Employee e1: l){
+if(p.test(e1)){
+sout(e1.name+ ":"+ e1.saalry);
+}
+}
+}
+}
+//whenever condtional check required-> predicate
+
+P1--->to check wheter the number is even or not
+P2---> to check wheter the number > 10 or not
+
+P1.and(p2).test(34);
+
+Predicate joining:
+p1.or(p2)
+
+
+p1.negate()//opposite of p1
+
+example:
+class PredicateExample{
+psvm{
+
+int [] x= {0,5,10,15,20,25,30,35};
+
+Predicate<Integer> p1 = i-> i%2==0;
+Predicate<Integer> p2=i->i>10;
+
+//and() , or() , neagte()
+sout("the number which are even or > 10 are: ");
+
+for( int x1: x)
+{
+if(p1.and(p2).test(x1))// for and
+
+if(p1.or(p2).test(x1))//for or
+
+if(p1.test(x1))//only even
+
+if(p1.negate().test(x1))//not even
+
+{
+sout(x1);
+}
+}
+}
+}
+
+Input-->Perform some operation ad produce result(rather than boolean):
+then we should go for function
+-it is another functional interface->Function
+
+Function:
+i--->i*i;
+int no---> square(int)
+
+s----->s.length()
+String---->int
+
+s---->s+s
+string ---> double

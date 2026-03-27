@@ -1,0 +1,182 @@
+____________________________________________________
+Set
+___________________________________________________
+-set is the implemented class of collection framework
+-it store only unique elements
+-duplicates remove automatically
+-ordeer is not guaranteed
+-fast operation= add, remove and search
+-about null values:
+1.HashSet -> 1 null allow.. can store single null
+2.LinkedHashSet-> 1 null allow... one null is allowed
+3.TreeSet->throw error if you add null
+
+-LikedHashSet keep insertion order
+-no index based access
+- store element:
+1.hashSet:hashing/ order is not guaranteed
+2.LinkedHashSet:Uses hashing + linked list
+                Internally uses: LinkedHashMap
+                =>It maintains insertion order, NOT index-based storage
+                ->It uses hashing like HashSet but also maintains a doubly linked list to preserve insertion order.”
+3.treeset:sorting(red black tree) /Order: ✅ Sorted (natural or custom comparator)
+-set contains heterogeneous elements
+
+Methods:
+add()
+addAll()
+remove()
+removeAll()
+retainAll()
+contains()
+containsAll()
+size()
+clear()
+isEmpty()
+interator()
+
+____________________________________________________
+👉 HashSet
+👉 LinkedHashSet
+👉 TreeSet
+----------------------------------------------------
+🧩 1. HashSet – Features
+❌ No duplicates allowed
+❓ No order (random order)
+⚡ Very fast (O(1) operations)
+⚠️ Allows one null value
+🔁 Uses hashing internally
+🚫 No index-based access
+🔍 Uses hashCode() and equals()
+💡 Best for fast storage & retrieval
+-----------------------------------------------------
+🧩 2. LinkedHashSet – Features
+❌ No duplicates
+✅ Maintains insertion order
+⚡ Slightly slower than HashSet
+⚠️ Allows one null
+🔁 Uses hashing + linked list
+🚫 No index
+💡 Best when you want order + uniqueness
+---------------------------------------------------------
+🧩 3. TreeSet – Features
+❌ No duplicates
+✅ Sorted order (ascending by default)
+❌ Does NOT allow null
+🐢 Slower than HashSet (O(log n))
+🔁 Uses tree structure (Red-Black Tree)
+🔍 Uses compareTo() / Comparator
+🚫 No index
+💡 Best when you need sorted data
+----------------------------------------------------------
+
+| Feature    | HashSet    | LinkedHashSet | TreeSet   |
+| ---------- | ---------- | ------------- | --------- |
+| Duplicates | ❌ No       | ❌ No          | ❌ No      |
+| Order      | ❌ No       | ✅ Insertion   | ✅ Sorted  |
+| Null       | ✅ One      | ✅ One         | ❌ No      |
+| Speed      | ⚡ Fastest  | ⚡ Fast        | 🐢 Slower |
+| Structure  | Hash table | Hash + Linked | Tree      |
+--------------------------------------------------------------
+❗ HashSet and LinkedHashSet do NOT have their own unique methods
+They mostly use methods from the Set interface
+
+👉 Only TreeSet has special/unique methods
+👉 TreeSet has extra powerful methods (because of sorting)
+🔹 first()
+👉 Returns smallest element
+last()
+👉 Returns largest element
+set.last();
+🔹 higher(E e)
+👉 Returns element just greater than given
+set.higher(20);
+lower(E e)
+👉 Returns element just smaller than given
+set.lower(20);
+ceiling(E e)
+👉 Returns:
+same element if present OR
+next greater element
+set.ceiling(20);
+🔹 floor(E e)
+👉 Returns:
+same element if present OR
+next smaller element
+🔹 pollFirst()
+👉 Removes & returns first element
+🔹 pollLast()
+👉 Removes & returns last element
+
+---------------------------------------------------
+TreeSet<Integer> set = new TreeSet<>();
+set.add(10);
+set.add(20);
+set.add(30);
+set.add(40);
+
+👉 Case 1: Element EXISTS
+Input: 20
+Method	Output
+higher(20)	30
+ceiling(20)	20
+✔ Explanation:
+higher() → strictly greater → 30
+ceiling() → equal allowed → 20
+
+👉 Case 2: Element DOES NOT EXIST
+Input: 25
+Method	Output
+higher(25)	30
+ceiling(25)	30
+✔ Both return next greater → 30
+
+👉 Case 3: No greater element
+Input: 40
+Method	Output
+higher(40)	null
+ceiling(40)	40
+✔ Explanation:
+higher() → needs greater → none → null
+ceiling() → equal allowed → 40
+--------------------------------------------------------
+🌿 3. SET Hierarchy:
+
+Set
+├── HashSet
+│     └── LinkedHashSet
+│
+├── SortedSet
+│     └── NavigableSet
+│            ├── TreeSet
+│            └── ConcurrentSkipListSet   (Thread-safe ✅)
+│
+├── EnumSet
+│
+└── CopyOnWriteArraySet   (Thread-safe ✅)
+
+🔐 Thread-safe Set options:
+✅ CopyOnWriteArraySet
+✅ ConcurrentSkipListSet
+✅ ConcurrentHashMap → newKeySet()
+✅ Collections.synchronizedSet()
+
+------------------------------------------------------
+| Requirement | Best Choice                     | Performance |
+| ----------- | ------------------------------- | ----------- |
+| Hashing     | `ConcurrentHashMap.newKeySet()` | 🚀 Fastest  |
+| Ordering    | `synchronized LinkedHashSet`    | 🐢 Slower   |
+| Sorting     | `ConcurrentSkipListSet`         | ⚡ Medium    |
+
+
+“If I need hashing and high performance, I use ConcurrentHashMap.newKeySet().
+If I need insertion order, I use Collections.synchronizedSet with LinkedHashSet.
+If I need sorting, I use ConcurrentSkipListSet.”
+
+Hash → ConcurrentHashMap
+Order → synchronized LinkedHashSet
+Sort → SkipListSet
+
+-------------------------------------------------
+Reads (get/iterate) happen MUCH more than
+Writes (add/remove)

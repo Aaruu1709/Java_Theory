@@ -1,0 +1,88 @@
+------------------------------------------------------------
+Multithreading in Java
+------------------------------------------------------------
+What is Multithreading in Java?
+-Multithreading is a process of executing multiple threads simultaneously
+ within a single program.
+-A thread is the smallest unit of execution in a program
+-multithreading allows multiple threads to share the same memory and
+resources while running concurrently.
+-This improves the performance of programs
+-because:
+Without multithreading:
+Program runs one task at a time
+CPU may sit idle (wasted time)
+With multithreading:
+While one thread is waiting (e.g., file, network),
+👉 another thread uses the CPU
+
+In Java, multithreading can be implemented by:
+
+Extending the Thread class
+Implementing the Runnable interface
+
+1.Multithreading Using Extending the Thread Class
+
+-we can create a thread by extending the Thread class and overriding
+its run() method.
+-The run() method contains the code that defines the thread’s task.
+-After creating an object of the subclass,
+-we start the thread using the start() method.
+
+-Example of creating thread using thread class
+-here we extending the theread class
+The following example shows that creating a thread by extending the Thread class:
+
+class MyClass extends Thread{
+
+@override
+public void run(){
+for(int i=0;i<=10;i++){
+sout("i");
+}
+}
+}
+
+public class MainMethod{
+psvm{
+Myclass mobj=new MyClass();
+mobj.start();
+}
+}
+-run()=>code exceuted by thread class
+-start()=>initialize new thread
+-start() intialize new thread and execute the run() method concurrently
+with main method
+
+2.Multithreading by Implementing the Runnable Interface
+
+Another way to creating thread=>runnable interface
+-Runnable providing implementation for run() method
+-then we pass those runnable object to thread object and call the start()
+- This approach can be used when your class is already extending another class.
+👉 Use Runnable when:
+You already extend a class
+You want better design
+You separate task from thread
+
+class MyClass implements Runnable{
+public class run(){
+sout("run method of runnbale interface");
+}
+}
+public class Main{
+psvm{
+myclass mobj=new myClass();
+Thread t1=new Thread(mobj);
+}
+}
+-You write the work inside the run() method
+-run() method contains the code to execute
+-Thread does not know the task directly
+ So we pass the Runnable object to Thread
+-Thread is started using start()
+ This internally calls the run() method
+ -You can reuse the same task with multiple threads
+ -Supports multiple inheritance indirectly
+  Your class can extend another class
+  And still implement Runnable

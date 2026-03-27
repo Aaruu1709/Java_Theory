@@ -1,0 +1,162 @@
+🔥 1. this Keyword Difference (Core Trap)
+✅ Anonymous Inner Class:
+interface Test{
+void m1();
+}
+
+public class Demo{
+int x=10;
+public void show(){
+Test t=new Test(){
+int x=20;
+
+public void m1(){
+sout(this.x);
+}
+};
+t.m1();
+
+psvm{
+new Demo().show();
+}
+}
+
+🧠 Why?
+👉 this refers to anonymous class object
+
+🔥 2. Same Example with Lambda
+interface Test {
+    void m1();
+}
+
+public class Demo {
+    int x = 10;
+
+    public void show() {
+        Test t = () -> {
+            System.out.println(this.x);
+        };
+        t.m1();
+    }
+
+    public static void main(String[] args) {
+        new Demo().show();
+    }
+}
+
+🔍 Output:
+10
+
+🧠 Why?
+👉 this refers to outer class (Demo)
+
+______________________________________________________
+🚨 INTERVIEW TRAP #1
+_________________________________________________________
+
+
+👉 Question:
+"What does this refer to in lambda?"
+
+✔ Answer:
+👉 Enclosing class object
+
+🔥 3. Variable Shadowing (BIG TRAP)
+❌ Anonymous Class (Allowed)
+public void show() {
+    int x = 100;
+
+    Test t = new Test() {
+        int x = 200;
+
+        public void m1() {
+            System.out.println(x); // 200
+        }
+    };
+}
+
+
+✔ Works fine
+
+❌ Lambda (NOT Allowed)
+public void show() {
+    int x = 100;
+
+    Test t = () -> {
+        int x = 200; // ❌ ERROR
+        System.out.println(x);
+    };
+}
+
+❌ Error:
+
+👉 Variable already defined
+
+🧠 Why?
+
+👉 Lambda does NOT create new scope
+👉 It uses parent scope
+
+🚨 INTERVIEW TRAP #2
+
+👉 Question:
+"Can we declare same variable inside lambda?"
+
+✔ Answer:
+👉 ❌ No, because lambda shares enclosing scope
+
+🔥 4. Accessing Outer Variable
+✅ Lambda
+int x = 50;
+
+Test t = () -> {
+    System.out.println(x);
+};
+
+
+✔ Works
+
+⚠️ Condition:
+
+👉 Variable must be final or effectively final
+
+🚨 INTERVIEW TRAP #3
+int x = 10;
+
+Test t = () -> {
+    // x = 20; ❌ ERROR
+};
+
+
+👉 Cannot modify
+
+🧠 Rule:
+
+👉 Lambda → variable must be effectively final
+
+🔥 5. this inside Method Call
+Anonymous Class
+System.out.println(this);
+
+
+👉 Prints: anonymous object reference
+
+Lambda
+System.out.println(this);
+
+
+👉 Prints: outer class object
+
+Feature	Anonymous Class	Lambda
+this refers to	Anonymous object	Outer class
+New scope	✅ Yes	❌ No
+Variable shadowing	✅ Allowed	❌ Not allowed
+Variable modification	✅ Allowed	❌ Must be effectively final
+
+
+
+"In anonymous inner class, 'this' refers to the anonymous
+object and it creates a new scope, so variable shadowing is allowed.
+But in lambda, 'this' refers to the enclosing class and it does not create
+a new scope, so variable shadowing is
+not allowed and variables must be effectively final.

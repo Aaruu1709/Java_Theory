@@ -1,0 +1,106 @@
+lambda Expression:
+-anonymous function
+-not having any name
+-not having any return type
+-not having modifier
+
+public class Main{
+private void SayHello(){
+sout("hello...");
+}
+}
+
+steps to make any fun lambda expression
+1.remove modifier
+2.remove return type
+3.remove method name
+4.place arrow
+
+example 1:
+private void sayHello(){
+sout("hello");
+}
+
+|to
+
+()->{System.out.println("hello....");}
+
+example 2:
+private void add(int a,int b){
+sout(a+b);
+}
+
+|to
+
+(int a, int b)->{System.out.println(a+b);}
+
+
+modifier,name,return type=remove =>lambda expression
+
+characteristic:
+1.If body has just one statement then we can remove curly brackets
+private int getStringLength(String str){
+return str.length();
+}
+
+|to
+
+(String str)->return str.length()}
+
+|to
+
+(String str)-> return str.length();
+
+
+2.use type inference, compiler guess the situation or context
+private void add(int a,int b){
+sout("hello");
+}
+
+|to
+(int a,int b)->{sout(a+b);}
+
+|to
+
+(a,b)->sout(a+b);
+
+3.no return keyword
+private int getStringLength(String str){
+return str.length();
+}
+
+|to
+
+(String str)->{return str.length();}
+
+|to
+
+(str)->str.legth();
+
+4.single parameter , skip curly braces
+
+(str)->str.length();
+
+|to
+
+str->str.length();
+
+Benefits of lmbda expression:
+-enable functional programming
+-make code more readable, maintanable and concise code
+-enable parralel proceesing
+-JAR file size reduction
+-elimination of shodow variables
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+| Interface    | Purpose                      |
+| ------------ | ---------------------------- |
+| `Runnable`   | Thread execution             |
+| `Comparator` | Sorting                      |
+| `Predicate`  | Condition checking           |
+| `Function`   | Data transformation          |
+| `Consumer`   | Accept data & perform action |
+| `Supplier`   | Return data                  |
+
+
+

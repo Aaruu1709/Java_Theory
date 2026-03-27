@@ -1,0 +1,286 @@
+
+static- allocate memory class loaded time
+instance=object creation
+constructor=object creation
+
+which execute first->instance
+
+static execute only once=>instance=> constructors
+package Blocks;
+
+
+example 1:instance block vs statci block
+public class Example1 {
+    Example1(){
+        System.out.println("0-args constructor");
+    }
+    Example1(int a){
+        System.out.println("1-args constructor");
+    }
+    {
+        System.out.println("instance block");
+    }
+    static {
+        System.out.println("static block");
+    }
+
+
+    public static void main(String[] args) {
+        new Example1();
+        new Example1(10);
+    }
+}
+
+1.static blocks are executed during class loading only once
+2.instance block & constructors both are executed during object creation.
+but instance block are executed before constructor execution.
+
+ note:
+ constructo logics are specific to object but
+ instance block logic are common to all objects
+ multiple instance block is possible,const,static block,varible posible
+
+ Instance initialization blocks execute every time an object
+ is created because they are part of object initialization and run before the constructor.
+
+ ❓ Why instance block executes every time?
+ Simple reason:
+ 👉 Instance block belongs to the object, not the class
+ Every time you write:
+ new Example1();
+ You are saying:
+ “Create a NEW object”
+ So Java:
+ Initializes the object
+ Runs all instance initialization code
+ Then runs the constructor
+ That’s why it executes once per object.
+
+ Key rule to remember 🧠
+ 🔹 Static block
+ Executes ONLY ONCE
+ Executes when the class is loaded
+ Does not depend on objects
+
+ 🔹 Instance block
+ Executes EVERY TIME an object is created
+ Executes before the constructor
+ Is tied to object creation
+
+note:
+constructor logic are specific to object but instance block logic are common to all object
+
+example2:
+inside the class it is possible to decalre multiple instance and static blocks,
+the execution order is top to bottom
+
+example 3:
+package Blocks;
+
+public class Example3 {
+    Example3(){
+        this(10);
+        System.out.println("0-args constuctor");
+    }
+    Example3(int a){
+        System.out.println("1-args const");
+    }
+    {
+        System.out.println("instance block");
+    }
+
+    public static void main(String[] args) {
+        new Example3();
+    }
+}
+
+-instance block execution depends on object creation but not constructor execution
+-in above example two construcor executed but one object created so instance block exceuted only once
+
+example4:
+case 1:fianl instance variable
+1.it is not possible to make the default values as final constant
+2.so it is possible to initialize the final instance variables either
+by using constructor or by using instance block but not both
+
+Class Test
+{
+final int num;
+Test(){
+num=100;
+}
+void disp(){
+sout(num)
+}
+psvm{
+Test t=new Test();
+t.disp();
+}
+}
+
+class 2:
+fianl static variable
+1.it is not possible to make default values as final constant
+2.so it is possible to initialize the final static variables using static blocks
+
+class Test{
+static final int num;
+static{
+num=100;
+}
+void disp(){
+sout(Test.num);
+}
+psvm{
+Test t=new Test();
+t.disp();
+}
+}
+___________________________________________
+🔹 Final instance variable
+Must be initialized once per object
+Can be initialized using:
+Constructor OR
+Instance block
+Cannot use default values
+
+CASE 1: final instance variable
+
+✅ Valid ways to initialize final instance variable
+Option 1: Constructor=>
+
+final int num;
+Test() {
+    num = 100;
+}
+
+Option 2: Instance block
+final int num;
+{
+    num = 100;
+}
+
+❌ NOT allowed (assigned twice)
+final int num;
+{
+    num = 50;
+}
+
+Test() {
+    num = 100; // ❌ error: already initialized
+}
+__________________________________________________
+CASE 2: final static variable
+🔹 Final static variable
+
+Must be initialized once per class
+Can be initialized using:
+Declaration OR
+Static block
+Cannot be initialized inside constructor
+✅ Valid ways to initialize final static
+Option 1: At declaration
+static final int num = 100;
+
+Option 2: Static block
+static final int num;
+
+static {
+    num = 100;
+}
+❌ NOT allowed
+static final int num;
+
+Test() {
+    num = 100; // ❌ constructor is for objects, not class
+}
+____________________________________________
+
+example 1:
+
+(Demo1)
+a.when object is created the class is loaded the static blocks will be executed
+b.when we load the class using forName() the class is loaded
+the static blocks will be executed
+
+to load the class use forName(), it is static method of Class.
+to create the object of loaded class, use newInstance()
+
+
+local variable:
+--JVM will create the empty stavk before calling the main method
+--JVM will destroy the empty stock after completion of main method
+-when JVM calls method the method name and local variable store in stac memory
+once method is completed the local variables and mehtod removed from stack memory
+
+
+example:
+class Test{
+void m2(){
+m1();
+}
+void m1(){
+m2();
+}
+psvm{
+Test t=new Test();
+t.m1();
+}
+}
+//stack overflow error
+infinite calling
+
+example:
+//code before compilation(.java)
+class Test{
+Test(){
+sout("0-args cons");
+}
+Test(int a){
+sout("instance block");
+}
+psvm{
+Test t1=new Test();
+Test t2=new Test(10);
+}
+}
+a.during compilation the compiler wil copy all instance block code to every constructor first lines
+b.JVM point of view we have only constructor
+
+//after compilation(.class code)
+class Test
+{
+Test(){
+sout("instance block...");
+sout("0-args cons");
+}
+
+Test(int n){
+sout("instance bloack");
+sout("1-args cons");
+}
+
+public static void main(final String[] array){
+final Test test=new Test();
+final Test test2=new Test(10);
+}
+}
+
+Recursion is a process in which a method calls itself until a base condition is satisfied.
+java support method recursion- fibbo,factorial
+
+class RecursionDemo {
+
+    static void printNum(int n) {
+        if (n == 6) {        // base condition
+            return;
+        }
+        System.out.println(n);
+        printNum(n + 1);     // recursive call
+    }
+
+    public static void main(String[] args) {
+        printNum(1);
+    }
+}
+

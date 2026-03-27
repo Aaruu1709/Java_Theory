@@ -1,0 +1,106 @@
+Java 8 Features:
+_______________________________________
+session 1:
+- to enable parrallel programming:
+Parallel programming means executing multiple tasks
+at the same time using multiple CPU cores to improve performance.
+-more compatible code for multi core processors:
+Java 8 can better utilize multiple CPU cores to run tasks
+ in parallel and improve performance.
+-java 8 was introduced to make java programming easier, shorter and more powerful.
+-it added features like lambda experession and stream API which allow developers to
+write less code and process data more efficiently
+- It also improved performance with parallel processing and
+ introduced a better date and time API.
+ ______________________________________________
+ session 2:
+ Features of java 8:
+ 1.lambda expression:
+ similar to methods,
+ but they do not need a name
+ and they can be implemented right in the body of method
+ -You can write it directly inside another method instead of creating a separate method.
+-Reduces boilerplate code.
+ example:
+ (x,y)->x+y
+
+ 2.stream API
+ -java stream API for bulk data Operation on collection
+ -It allows developers to perform operations like filtering, sorting, and mapping data in a more readable and efficient way.
+-Before Java 8, if we wanted to process a list (filter, sort, etc.), we had to write many loops and lines of code.
+
+3.date and time Apl:
+packeage: java.time
+java 8 offers a new date - time API
+
+4.base64 encode and decode
+
+5.
+method reference and constructor reference
+
+6. funcrtional interface
+-one abstract mehtod
+-we don't need to use @functionlanterface
+-Example:
+ Runnable, Comparator
+
+ 7. Default Methods in Interfaces
+   Interfaces can now have method implementation using default.
+
+   Example:
+   default void show() {
+       System.out.println("Hello");
+   }
+
+8. Static Methods in Interfaces
+ Interfaces can contain static methods.
+ Example:
+ static void display(){
+     System.out.println("Static method");
+ }
+
+ 9. Method References
+
+ Short way to call methods using ::.
+
+ Example:
+
+ System.out::println
+
+ 10.Optional Class
+    Used to avoid NullPointerException.
+    Example:
+
+    Optional<String> name = Optional.of("Java");
+
+ 11.Parallel Streams
+    Allows parallel processing of data.
+    Example:
+    list.parallelStream().forEach(System.out::println);
+
+ 12. Nashorn JavaScript Engine
+    Allows running JavaScript code inside Java.
+
+ 13. Collectors Class
+    Used with Stream API to collect results
+    Example:
+
+    list.stream().collect(Collectors.toList());
+
+ 14. forEach() Method
+    Iterates through collections easily.
+    Example:
+    list.forEach(System.out::println);
+    -----------------------------------
+
+    ⭐ Most Important Java 8 Features (Interview Focus)
+    Lambda Expressions
+
+    Functional Interfaces
+
+    Stream API
+
+    Method References
+
+    New Date & Time API
+    ____________________________________________________

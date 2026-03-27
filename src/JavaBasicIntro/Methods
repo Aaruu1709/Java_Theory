@@ -1,0 +1,233 @@
+Methods:
+____________________________________________________
+class Test{
+variables
+methods
+constructors
+blocks(instance and static)
+}
+
+case 1:
+Invalid:
+inside the class it is not possible to write the logics directly
+
+class Test{
+sout("good morning");
+}
+
+case 2:
+valid:
+inside the class declare the method,inside method write the logics.
+
+class Test{
+void wish(){
+sout("good morning");
+}
+}
+-methods are used to write the logics of application.
+-there are two types of methods in java
+1.instance method
+void add(){//instance method
+//logic:instance area
+}
+2.static method
+static void mul(){//static method
+//logic:static area
+}
+
+note:
+1.instance method it is posible to override
+static methods it is not possible to override
+
+2.access instance data using object name
+access static data using class-name
+
+method coding convenstions:
+method name start with lower case and inner word start with uppercase
+
+class Operations{
+//instance method:using object name
+void wish(){
+sout("morning");
+}
+//instace method access using object name
+void add(int num1,int num2){
+int res;
+res=num1+num2;
+sout(res);
+}
+//static method:access using class-name
+static void login(String usrname,String password){
+if(username.equals("aaruu") && password.equals("anuu"))
+
+{
+sout("login success"+name);
+}
+else{
+sout("login fail"+name);
+}
+}
+
+//static:access using class-name
+static void courseInfo(String name,String cource)
+{
+if(course.equals("corejava"))
+{
+sout("hi "+ name+ "corejava faculty: mr. ratan fee:3000");
+}
+else if(course.equals("python"))
+{
+sout("hi "+ name+ "python faculty mr ram fee:5000");
+}
+else{
+sout("hi "+ name+ "the course is not available");
+}
+
+//static method display using class-name
+static void disp(int a,char c,double d,boolean b){
+sout(a+" "+ch+ "  "+d+ " "+b);
+}
+}
+
+class TestClient
+{
+psvm{
+Operations op=new Operations();
+op.wish();
+op.add(10,20);
+
+Operations.login("aaruu", "anuu");
+Operations.courseInfo("rani","Python");
+}
+}
+
+
+package JavaBasicIntro;
+
+class Demo {
+    int a = 10;
+    int b = 20;
+
+    void show() {
+        System.out.println("a = " + a + ", b = " + b);
+    }
+}
+
+class Test {
+    Demo d;   // instance variable (class-level)
+
+    // initialize object
+    void init() {
+        d = new Demo();
+    }
+
+    // use the same object in another method
+    void use() {
+        System.out.println("Using Demo object:");
+        d.show();
+    }
+}
+
+public class MainApp {
+    public static void main(String[] args) {
+        Test t = new Test();
+
+        t.init();   // object created here
+        t.use();    // object reused here
+    }
+}
+We store objects in instance variables so that they can be reused across multiple methods,
+ since local variables are limited to method scope.
+
+ example2:
+ case 1:
+ problem:here we are creating object multiple time
+ class Demo
+ {
+ void info(){}
+ }
+ class Test{
+ void m1(){
+ Demo d=new Demo();
+ d.info();
+ }
+ void m2(){
+ Demo d=new Demo();
+ d.info();
+ }
+ void m3()
+ {
+ Demo d=new Demo();
+ d.info();
+ }
+ }
+
+
+ case 2:
+ solutiion:
+ one time create the object instance level use that object multiple times.
+
+ class Demo
+ {
+ void info(){}
+ }
+ class Test
+ {
+ Demo d;
+ void m1(){
+ d=new Demo();
+ d.info();
+ }
+ void m3(){
+ d.info();
+ }
+ }
+
+
+ method syntax:
+ modifires_list  return_type  method_name(argument_list) throws Exception
+
+ method_name         : functionality name           :mandatory
+ argument list       : input                        :optional
+ return type         : return value                 :mandatory
+ modifires list      : to give the permission       :optional
+ throws Exception    : to handle the exception      :optional
+
+ example:
+ public void disp()
+ private String Login(String username,String password)
+ protected int add(int num1,int num2) throws Exception
+
+ method signature: method name and argument list is called method signatures
+ method_name(argument_list)
+
+
+example 2:
+ case 1:return type mandatory
+ class demo{
+   add(){
+   }
+   }
+   error:invalid method declaration,return type requirrd
+
+cse 2:inside the class more than one method with same singnature is not allowed
+error:method 1(int) is already defined in class Test
+class Test
+{
+void m1(int a){
+}
+void m1(int a){
+}
+}error:already defined mehtod
+
+case 3:
+class Test{
+void m1()
+{
+void m2(){//inner method:error:illegal start of expression
+}
+}
+}
+-java support inner classes concept
+-java does not support inner methods
+

@@ -1,0 +1,144 @@
+Aggregation:
+________________________________________________________
+
+Address.java
+class Address{
+int roomno;
+String street;
+String city;
+String state;
+}
+}
+
+Movies.java
+class Movie{
+String hollywood;
+String bollywood;
+}
+
+Hero.java
+class Hero{
+//instance variable
+String name;
+int age;
+int height;
+Address addr;
+Movie mov;
+
+Hero(String name,int age, int height,Address addr,Movie mov){
+this.name=name;
+this.age=age;
+this.height=height;
+this.addr=addr;
+this.mov=mov;
+}
+
+void display(){
+sout("name: "+ name);
+sout("age: "+age);
+sout("height: "+ height);
+sout("address: "+ addr.roomno+ " "+ addr.street+ " "+ addr.city+" "+addr.state);
+sout("movies: "+ mov.hollywood+" "+mov.bollywood);
+
+
+public static void main(String[] args){
+
+//named object
+Address a=new Address(205,"narhe","pune","maharashtra");
+movie m=new Movie("shadii mein jarur aana","96");
+Hero h=new Hero("aaruu",26,5,a,m);
+
+sout("________________________");
+
+//nameless object
+ Hero h2=new Hero("sauruu",26,168,new Address(200,"Maltahn","Pune","Maharashtra"),new Movie("Saiyara","Marjava"));
+
+}
+}
+
+
+one class has a reference of another class=aggregation
+= HAS-A relation
+in above example Hero class has reference of Address,movies
+Aggregation is a Weak relation.
+
+
+composition: Strong aggregation is called composition
+example= rel bet collage and dept
+once we destroy clg obj the dept objcet becomes useless
+
+
+Assignment 1:
+
+class Parent{
+String fname, lname;
+Parent(String fname,String lname){
+this.fname=fname;
+this.lname=lname;
+}
+
+class Marks{
+int m1,m2,m3;
+Marks(int m1,int m2,int m3){
+this.m1=m1;
+this.m2=m2;
+this.m3=m3;
+}
+
+class Address{
+int dno;
+String street;
+int pincode;
+String country;
+
+Address(int dno,String street,int pin,String country){
+this.dno=dno;
+this.street=street;
+this.pincode=pincode;
+this.country=country;
+}
+
+class Student{
+int sid;
+String sname;
+String schoolName;
+Parent p;
+Marks m;
+Address addr;
+
+Student(int sid,String sname,String schoolName,Parent p,Marks m,Address addr){
+this.sid=sid;
+this.sname=sname;
+this.schoolName=schoolName;
+this.p=p;
+this.m=m;
+this.addr=addr;
+}
+
+void status(){
+int total=m1+m2+m3;
+if(total >=150){
+sout("You are pass");
+sout(sname + " DATA");
+sout("name:"+ sname );
+sout("School:" + schoolName);
+sout("parent Data: "+ p.fname+ " "+ p.lname);
+sout("Marks: "+ m1+ " "+ m2+ " "+ m3);
+sout("Address: "+ addr.dno+ " "+ addr.pincode +" " + addr.pincode + " "+ addr.country);
+}
+else{
+sout("You are fail");
+sout(sname + " DATA");
+sout("name:"+ sname );
+sout("School:" + schoolName);
+sout("parent Data: "+ p.fname+ " "+ p.lname);
+sout("Marks: "+ m1+ " "+ m2+ " "+ m3);
+sout("Address: "+ addr.dno+ " "+ addr.street+ " "+ addr.pincode + " "+ addr.country);
+
+}
+}
+
+psvm{
+Student s=new Student(1,"aaruu","SPIT Poly KURUND","kalpana","shinde", 50,50,70,"200","malthan",12345,"india");
+s.status();
+}

@@ -1,0 +1,38 @@
+equals() and hashCode()
+__________________________________________________
+-eqals() method belongs to Object parent class which is parent class of all classes
+-since employee is child class of object,basically every java class is child class of object,so
+every java class can call this method equals()
+-hashcode also object class method , so every java class can call this method
+-------------------------------------------------------
+equals() method of object class:reference check:
+
+-equals() method used == so it comapare address reference
+so we can say that equls method in object class internally used == operator it check references so
+even if we calling equals method behnd this we call equals method of object call and
+eventally it check == refe
+
+
+equals() method in String class: content check
+string overrite this quals method and give its own implementation
+basically.
+its taking character and comparing
+if they match return true else false
+
+------------------------------------------------
+-They are used to compare if two objects are same or not
+-they are used in hashing based data structure like HashSet,HashMap and HashTable
+-they are used in string
+-java 8 collection and stream API
+
+===================================================================
+
+hashCode:
+---------------------------------------------------------------
+-hashcode is used to create a hash value (integer) for object.
+-it represents object in hashing.
+-whenever you override equals, you should also override hashcode.
+-this is a Java contract.
+-hashing based structures like HashSet and HashMap use both equals and hashcode.
+-HashSet and HashMap they do not allow duplicates.
+-duplicate checking depends on both methods.

@@ -1,0 +1,187 @@
+before java 8..we write like below
+
+//make interface
+public interface Employee{
+String getName();
+}
+
+
+//make class which implement those employee interface
+public class SoftwareEngineer implements Employee{
+public String getName(){
+return "software Engineer";
+}
+}
+
+//main method
+//create object of software engg
+public class Main{
+psvm{
+Employee employee=new SoftwareEngineer();
+sout(employee.getName());
+}
+}
+Here is your explanation **corrected and organized in simple human language**, the way you can explain it **in an interview** for Java 8 Lambda Expressions.
+
+---
+
+# Before Java 8 (Traditional Approach)
+
+Before Java 8, if we wanted to implement an interface, we had to do **multiple steps**.
+
+### Steps
+
+1️⃣ Create an **interface**
+
+```java
+public interface Employee {
+    String getName();
+}
+```
+
+2️⃣ Create a **separate class that implements the interface**
+
+```java
+public class SoftwareEngineer implements Employee {
+
+    public String getName() {
+        return "Software Engineer";
+    }
+}
+```
+
+3️⃣ Use the class in the **main method**
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+
+        Employee employee = new SoftwareEngineer();
+        System.out.println(employee.getName());
+    }
+}
+```
+
+### Output
+
+```
+Software Engineer
+```
+
+### Problem with Old Approach
+
+* Too much **boilerplate code**
+* Need to create **separate classes**
+* More **lines of code**
+
+---
+
+# Java 8 Solution (Lambda + Functional Interface)
+
+Java 8 introduced **lambda expressions** to reduce this extra code.
+
+A **functional interface** is an interface that has **only one abstract method**.
+
+Lambda expressions allow us to **provide the implementation directly without creating a separate class**.
+
+---
+
+# Important Concept
+
+A **functional interface acts as a data type for a lambda expression**.
+
+Just like:
+
+```
+int a = 10;
+String name = "Aaru";
+```
+
+Similarly:
+
+```
+Employee emp = lambda expression
+```
+
+Here **Employee is the type** and the **lambda expression is the value**.
+
+---
+
+# Java 8 Lambda Example
+
+```java
+interface Employee {
+    String getName();
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Employee employee = () -> "Software Engineer";
+        System.out.println(employee.getName());
+
+        Employee editor = () -> "Editor";
+        System.out.println(editor.getName());
+    }
+}
+```
+
+### Output
+
+```
+Software Engineer
+Editor
+```
+
+---
+
+# What Lambda Improved
+
+With lambda expressions:
+
+✔ No need to create a **separate implementation class**
+✔ Implementation can be written **directly inside main method**
+✔ Code becomes **shorter and cleaner**
+
+---
+
+# Simple Interview Explanation (Best Answer)
+
+You can say:
+
+> Before Java 8, to implement an interface we had to create a separate class and override its method, which increased boilerplate code. Java 8 introduced lambda expressions and functional interfaces, which allow us to provide the implementation directly without creating a separate class. This makes the code shorter, cleaner, and easier to maintain.
+
+---
+
+✅ If you want, I can also show you **one hidden interview trick question from this topic that many candidates answer incorrectly** (very commonly asked).
+
+
+//output: software engg
+
+
+make interface
+we make separate class
+use main
+...3 task ....but i know about lambda and functional interface so
+function interface act as type(data type) for lambda expression;
+int a=1;
+string name="aaruu";
+
+
+public interface Employee{
+void sayHello();
+}
+
+
+public class Main{
+psvm{
+Employee employee=()->"software engg";
+sout(employee.getName());
+
+Employee editor=()->"editor";
+}
+
+we write implementation here only..we do not need separate class
+

@@ -1,0 +1,125 @@
+___________________________________________________________________________
+Method and Constructor reference:
+__________________________________________________________________________
+functional interface->Lambda expression
+
+class Test{
+psvm
+{
+Runnable r=()->{
+for(int i=0;i<10;i++){
+sout("child thread");
+}
+};
+Thread t=new Thread(r);
+t.start();
+for(int i=0;i<10;i++){
+sout("Main  thread");
+}
+}
+}
+
+-lambda implement lambda expression
+-it has alternative Method and Constructor reference
+-in method and constructor reference we used already existance code
+
+
+class Test{
+public static void m1(){
+for(int i=0;i<10;i++){
+sout("child thread");
+}
+
+psvm
+{
+Runnable r= Test::m1;
+Thread t=new Thread(r);
+t.start();
+for(int i=0;i<10;i++){
+sout("Main  thread");
+}
+}
+}
+-whenever we required runnable interface we used m1 in that runnable
+-code reusability biggest advantage
+-you can take any instance or static  method
+-if it is static syntax is:
+classname:: method name
+
+if it is instance method then:
+object reference:: method name
+
+Example:
+if it is instnce method then:
+class Test{
+public void m1()
+{
+for(int i=0;i<10;i++){
+sout("child thread-1");
+}
+}
+psvm{
+Test t1=new Test();//here create object and used this reference to call
+Runnable r=t1::m1;//here t1 is method refe
+Thread t=new Thread(r);
+t.start();
+for(int i=0;i<10;i++){
+sout("Main Thread-1");
+
+example:
+method argument must match
+run() and m1()
+-different return type ->error
+-type ->must same
+-in case of method reference different type of return type is allowed
+-runnable return typ void and we used m1() int..but arg must match
+
+example:
+class Test{
+private int m1(int x){//errror
+for(int i=0;i<10;i++){
+sout("child thread-1");
+}
+return 10;
+}
+
+psvm{
+Test t1=new Test();
+Runnable r=t1::m1;
+Thread t=new Thread(r);
+t.start();
+for(int i=0;i<10;i++){
+sout("main thread-1");
+}
+
+
+example:Interface
+
+interface Inter{
+public void add(int a,int b);
+}
+
+class Test
+{
+public static void sum(int x,int y){
+sout("the sum is: "+(x+y));
+}
+psvm{
+Interf i=(a,b)->sout("The sum : "+ (a+b));
+i.add(10,20);
+
+Inter i1=Test::sum;
+i1.add(100,200);
+}
+}
+//for functional interface i, in polace of add we can use sum method
+ it is possible but arg type must be same
+
+//here functional class add method refering test class sum method
+
+-if implementation is already available then better to go for method reference
+-not availbale go for lambda expression/constructor reference
+
+
+constructor reference:
+

@@ -1,0 +1,42 @@
+✅ How to Make List Thread-Safe:
+----------------------------------------------------------
+There are 3 common ways:
+1. Using Collections.synchronizedList() (Most common)
+2. Using CopyOnWriteArrayList (Best for multi-threading)
+3. Using Vector (Old way)
+------------------------------------------------------------
+🧩 1. Using Collections.synchronizedList():
+
+public class SyncListExample{
+public static void main(String[] args) throws InterruptedException{
+List<Integer> list=Collections.synchronizedList(new ArrayList<>());
+
+//Thread 1
+Thread t1=new Thread(()->{
+for(int i=1;i<=5;i++){
+list.add(i);
+sout("Thread added:"+ i));
+}
+});
+
+//thread 2
+Thread t2=new Thread(()->{
+for(int i=6;i<=10;i++){
+list.add(i);
+sout("Thread 2 added:"+ i);
+}
+});
+)
+
+t1.start();
+t2.start();
+
+t1.join();
+t2.join();
+sout("final list: "+ list);
+}
+}
+
+//synchronizedList → locks everything (one at a time)
+  CopyOnWriteArrayList → makes copy → no conflict
+  Vector → old version of synchronized list

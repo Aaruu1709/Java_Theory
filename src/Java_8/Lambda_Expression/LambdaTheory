@@ -1,0 +1,79 @@
+lambda Expression:
+___________________________________________
+the advantages of lambda expression,
+1.it will reduce the byte code
+2.lenght of the code also reduced
+
+syntax: arguments->expression
+the lambda expression will provide the imple of only functional interfaces..java 1.8
+
+
+example 1:
+case1:Application without lambda
+interface Message{
+void wish();
+}
+class Ratan implements Message
+{
+public void wish(){
+sout("good morning");
+}
+}
+class TestClient{
+psvm{
+Ratan r=new Ratan();
+r.wish();
+}
+}
+
+case2:
+
+Application with lambda
+interface Message
+{
+void wish();
+}
+psvm{
+Message m1=()->sout("good morning");;
+m1.wish();
+
+Message m2=()->{
+sout ("aaruu..");sout("annu");};
+m2.wish();
+}
+}//in lambda when we take the multiple print statement take that statements in braces
+
+example 2:
+lambda with arguments:
+interface Operations
+{
+void add(int num1,int num2);
+}
+class TestClient
+{
+psvm{
+Operation op1=(int num1,int num2)->sout(num1+num2);
+op1.add(10,20);
+
+Operation op2=(num1,num2)->sout(num1 + num2);
+op2.add(100,200);
+}
+}//in lambda while taking arguments the type declaration is optional
+
+
+example 3:
+lambda with return type
+interface Operation
+{
+psvm{
+Operation op1=(username)->{ return "good morning".....+username;};
+String result1=op1.disp("ratan");
+
+Operation op2=(username)->"good evening..."+ username;
+String result2=op2.disp("anuu");
+sout(result2);
+
+}
+}
+in lambda exp only return value is present, then specifying the return stmt is optional.
+

@@ -1,0 +1,42 @@
+--------------------------------------------------------
+Java Map Interface
+--------------------------------------------------------
+* Map is an interface in Java
+* It is present in `java.util` package
+* It stores data in **key-value pairs**
+* Each key is **unique** (no duplicate keys allowed)
+* Values can be duplicate
+* Each key maps to **only one value**
+* If the same key is inserted again, the **value gets updated**
+* It is used for **fast data retrieval using keys**
+* It does **not extend Collection interface** (separate hierarchy)
+* It is part of **Java Collections Framework but not Collection**
+* Data is accessed using **key, not index**
+* Allows **one null key (in HashMap)** and multiple null values
+* Uses **hashing internally (in HashMap)**
+* Key must properly implement **hashCode() and equals()**
+* Provides **O(1) average time complexity** for operations (HashMap)
+* Used for **search, insert, update, delete operations**
+* Common implementations are **HashMap, LinkedHashMap, TreeMap, Hashtable**
+* Maintains **mapping relationship between key and value**
+* Widely used in **caching, lookup tables, dictionary, database indexing**
+* Supports **iteration using keySet(), values(), entrySet()**
+* Not thread-safe by default (except Hashtable, ConcurrentHashMap)
+_________________________________________________
+Map itself is an interface, not a class
+Marker interfaces are implemented by classes, not interfaces
+________________________________________________
+Map does not implement marker interfaces like:
+
+Serializable
+Cloneable
+RandomAccess
+_______________________________________________
+Some Map implementations (like HashMap) do implement marker interfaces
+Example:
+HashMap implements:
+Serializable ✅
+Cloneable ✅=>👉 “Cloning HashMap creates a shallow copy, not deep copy.”
+
+
+

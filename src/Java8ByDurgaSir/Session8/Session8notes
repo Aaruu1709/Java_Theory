@@ -1,0 +1,140 @@
+Predicate,Function and consumer
+
+supplier:
+Take some input and perform some conditional check and return boolean value-->predicate
+
+take some input and perform some opraion and return the result which is need not be
+boolean type----> function
+
+Accept some input and perform required operation and not required to return anything-->consumer
+______________________________________________________________
+
+Example: supplier
+class Movie{
+String name;
+Movie(String name){
+this.name=name;
+}
+}
+
+class Test{
+psvm{
+Consmer<Movie> c1=m-> sout(m.name+ "ready to release");
+Consumer<Movie> c3=m->sout(m.name+"rewlased but it is bigger flop");
+Consumer<Movie> c3= m->sout(m.name+"storing information in database");
+Consumer<Movie> cc= c1.andThen(c2).andThen(c3)
+Movie m=new Movie("Spider");
+c1.accept(m);
+c2.accept(m);
+c3.accept(m);
+cc.accept(m);//consumer chaining is poosible
+________________________________________________________________________
+
+just supply my required object and it won't take any input ->supplier
+
+interface Supplier<R>
+{
+public R get();
+}
+
+
+example:
+class Test{
+psvm{
+Supplier<Date> s=()->new Date();
+sout(s.get());
+sout(s.get());
+sout(s.get());
+}
+}
+
+
+supplier for Random OTP:
+i want suppiler to generate OTP
+
+random number: type cast:
+(int) (Math.random()*10)
+
+class Test
+{
+psvm{
+Supplier <String> s=()->{
+String otp="";
+for(int i=0;i<6;i++){
+otp=otp+(int)(Math.random()* 10);
+}
+return otp;
+};
+sout(s.get());
+}
+
+
+
+we discuss about:
+predicate ---->test()
+function-----> apply()
+consumer-----> accept()
+supplier------> get()
+-this things content only one input arguments
+-sometimes i want to take two input arguent
+
+-for two input arg :
+1.Whether the give int is even or not---->predicate
+-check the sum of 2 given numbers is even or not?
+-Bipredicate
+
+example 1 for BiPredicate:
+- to check the sum of two given integers is even or not using BiPredicate:
+
+
+class Test
+{
+psvm{
+BiPredicate<Integer,Integer> p= (a,b)-> (a+b) % 2==0;
+sout(p.test(10,20));
+}
+}
+---one input and perform some conditiional check- normal predicate
+---two input argument, requirement to take 2 input argment and perform some conditional check
+ , for this requirement we should go for -BiPredicate
+
+ BiPredicate is exactly same as predicate except that it will take 2 input arguments.
+
+ interface BiPredicate<T1,T2>
+ {
+ public boolean test(T1 t1,T2 t2);
+ //remaining default and static methods are same
+ }
+
+
+ Function take only one argument
+ two arguments-> BiFunction
+
+ class Employee{
+ int eno;
+ String name;
+
+Employee(int eno,String name){
+this.eno=eno;
+this.name=name;
+}
+ }
+
+ class Test{
+ psvm{
+ Arraylist<Employee> l=new Arraylist<Employee>();
+ BiFunction<Integer,String,Employee> f=(eno,name)->new Employee(eno,ename);
+ l.add(f.apply(100, "Aaruu"));
+ l.add(f.apply(200,"meerab-baby"));
+ l.add(f.apply(3000,"kayra"));
+
+ for(Employee e: l){
+ sout("Employee number:"+ e.eno);
+ sout("Employee name:"+ e.name);
+ sout("___________________________________")
+ }
+ }
+
+
+
+

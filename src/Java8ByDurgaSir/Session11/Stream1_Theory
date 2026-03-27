@@ -1,0 +1,135 @@
+Stream:
+collection && stream:
+-if we want to represent a group of objects as a single
+ entity then we should go for collection
+-if we want to process objects from the collecetion-stream
+__________________________________________
+
+Collection:
+-used to store data
+-data structure (like container)
+-stores elements in memory
+-an add, remove, update
+-can be traversed multiple times
+- uses imperative programming (loops)
+-direct operations (add, remove)
+-(immediate execution)
+-Parallel Processing in
+ Collection → not directly
+
+
+
+
+
+
+Stream:
+-used to process data
+ -sequence of operations (pipeline)
+ -does not store data, works on existing data
+ - cannot modify original data
+ -an be used only once
+- uses functional programming (lambda)
+-operations like:
+ filter()
+ map()
+ sorted()
+ reduce()
+ -Lazy (runs only when terminal operation is called)
+ -Parallel Processing in
+Collection → not directly
+Stream → supports parallel processing
+
+
+Collection is used to store data in memory and is mutable,
+ while Stream is used to process that data in a functional
+ and lazy manner without storing it.
+ Streams cannot modify the original data and can be consumed only once."
+
+_____________________________________________
+
+
+Stream s=c.stream();
+java.util.stream package
+
+
+
+
+class Test
+{
+psvm{
+ArrayList<Integer> l=new ArrayList<Integer>();
+l.add(0);
+l.add(5);
+l.add(10);
+l.add(15);
+l.add(20);
+sout(l);
+List<Integer> l2=l.stream().filter(i->i%2==0).collect(Collectors.toList());
+sout(l2);
+}
+}
+
+-concise/minimun line of code->stream
+-filter(Predicate)->return type alwys boolean
+-map(function)->transform->generate new value
+
+list of marks:
+filter based on marks: select only passed students
+marks.stream().filter(m-> m>35);
+
+5 grace marks:
+failedStudent.stream().map(i->i+5);
+___________________________________________
+filter:
+input--->10 elements
+otput---> 0 to 10  or <=10
+
+
+map:
+input : 10 elements
+output: 10
+now we collect the list for that we have collect
+
+List l= failedStudent.stream().map(i->i+5).collect(Collectors.toList());
+
+stream()->filter()->map()->collect()->count()
+
+example:
+failed student count:
+class Test{
+psvm{
+ArrayList<Integer> marks=new ArrayList<Integer>();
+marks.add(70);
+marks.add(45);
+marks.add(35);
+marks.add(80);
+marks.add(25);
+sout(marks);
+long noOfFailedStudents=marks.stream().filter(m->m>35).count();
+sout(noOfFailedStudents);
+}
+}
+
+
+____________________________
+Comparator->compare(obj1, obj2)
+returns -ve if obj1 has to come before obj2
+returns +ve if obj1 has to come after obj2
+returns 0 if obj1 and obj2 are equal
+
+Descending order
+10,20
+(i1,i2)->(i1<i2)? 1: (i1>i2)? -1:0
+
+
+sorted()=According to default natural sorting order
+sorted(Comparator)=> Customized sorting
+
+min()
+max()
+
+
+[5,3,10,15,4]
+[3,4,5,10,15]=>Ascending order
+
+[15,10,5,4,3]=>Descending order

@@ -1,0 +1,194 @@
+
+LIST-THREORY
+____________________________________________
+🔹 1. What is List Interface?
+-List is a part of Java Collection Framework.
+-It is an interface in java.util package.
+-ordered collection of elements (sequence matters).
+-Allows duplicate elements.
+-Elements can be accessed by index.
+-Common implementing classes:
+ArrayList (dynamic/resizable growable array internally)
+LinkedList (doubly linked list)
+Vector (synchronized array, legacy)
+Stack (LIFO structure, legacy)
+
+🔹 2. Key Features of List
+-Ordered Collection: Maintains insertion order.
+-Indexed Access: Access elements using index get(int index).
+-Duplicates Allowed: You can store the same element multiple times.
+-Dynamic Size: Most implementations like ArrayList grow automatically.
+-Null Allowed: Most implementations allow null values (ArrayList, LinkedList), except Vector may differ.
+____________________________________________________
+🔹 3. List Interface Methods
+____________________________________________________
+Here’s a complete list of important methods, grouped by type:
+
+A. Adding Elements
+Method	Description
+add(E e)	Adds element at the end
+add(int index, E element)	Adds element at specific index
+addAll(Collection<? extends E> c)	Adds all elements from another collection
+addAll(int index, Collection<? extends E> c)	Adds all elements at a specific index
+
+Example:
+
+List<String> list = new ArrayList<>();
+list.add("Apple");
+list.add("Banana");
+list.add(1, "Mango"); // adds at index 1
+System.out.println(list); // [Apple, Mango, Banana]
+
+B. Accessing Elements
+Method	Description
+get(int index)	Returns element at index
+indexOf(Object o)	Returns first occurrence index
+lastIndexOf(Object o)	Returns last occurrence index
+size()	Returns number of elements
+
+Example:
+
+System.out.println(list.get(1));       // Mango
+System.out.println(list.indexOf("Banana")); // 2
+System.out.println(list.size());        // 3
+
+C. Removing Elements
+Method	Description
+remove(int index)	Removes element at given index
+remove(Object o)	Removes first occurrence of object
+removeAll(Collection<?> c)	Removes all elements present in another collection
+clear()	Removes all elements
+
+Example:
+
+list.remove("Mango");   // removes Mango
+list.remove(0);         // removes element at index 0
+System.out.println(list); // [Banana]
+
+D. Replacing/Updating Elements
+Method	Description
+set(int index, E element)	Replaces element at index with new element
+
+Example:
+
+list.set(0, "Grapes");
+System.out.println(list); // [Grapes]
+
+E. Sublist / Range Operations
+Method	Description
+subList(int fromIndex, int toIndex)	Returns a view of a portion of the list
+
+Example:
+
+list.add("Orange");
+list.add("Apple");
+List<String> sub = list.subList(0, 2);
+System.out.println(sub); // [Grapes, Orange]
+
+F. Iteration Methods
+Using for-each loop
+for(String fruit : list) {
+    System.out.println(fruit);
+}
+
+Using Iterator
+Iterator<String> it = list.iterator();
+while(it.hasNext()) {
+    System.out.println(it.next());
+}
+
+Using ListIterator (forward and backward)
+ListIterator<String> listIt = list.listIterator();
+while(listIt.hasNext()) {
+    System.out.println(listIt.next());
+}
+while(listIt.hasPrevious()) {
+    System.out.println(listIt.previous());
+}
+
+G. Other Useful Methods
+Method	Description
+contains(Object o)	Checks if element exists
+isEmpty()	Checks if list is empty
+toArray()	Converts list to array
+retainAll(Collection<?> c)	Keeps only elements present in another collection
+equals(Object o)	Checks equality with another list
+
+Example:
+
+System.out.println(list.contains("Apple")); // true
+System.out.println(list.isEmpty());         // false
+
+🔹 4. Implementing Classes Comparison
+Class	Features	Use Case
+ArrayList	Resizable array, fast random access	Best for read-heavy operations
+LinkedList	Doubly linked list, fast insert/delete	Best for frequent add/remove
+Vector	Synchronized ArrayList (legacy)	Thread-safe, rarely used now
+Stack	LIFO, extends Vector	Classic stack operations
+________________________________________________
+
+List Interface: Ordered collection, allows duplicates, index-based access.
+Common Implementations: ArrayList, LinkedList, Vector, Stack.
+Key Methods:
+add(), get(), set(), remove(), subList(), contains(), isEmpty(), size().
+Iteration: for-each, Iterator, ListIterator.
+Use Case: Use when sequence/order matters and duplicates are allowed.
+
++++++++++++++++++++++++++++++++++++++++++
+
+How to convert Array to List:
+We can convert the Array to List by traversing the array and adding the
+element in list one by one using the List.add() method.
+
+Method 1: Using Arrays.asList()
+
+Method 2: Using ArrayList Constructor
+
+
+How to convert List to Array
+We can convert the List to Array by calling the List.toArray() method.
+ Let's see a simple example to convert list elements into array.
+
+ example:
+ import java.util.*;
+ public class Main{
+ public static void main(String args[]){
+  List<String> fruitList = new ArrayList<>();
+  fruitList.add("Mango");
+  fruitList.add("Banana");
+  fruitList.add("Apple");
+  fruitList.add("Strawberry");
+  //Converting ArrayList to Array
+  String[] array = fruitList.toArray(new String[fruitList.size()]);
+  System.out.println("Printing Array: "+Arrays.toString(array));
+  System.out.println("Printing List: "+fruitList);
+ }
+ }
+
+ Get and Set Element in List
+ The get() method returns the element at the given index,
+ whereas the set() method changes or replaces the element.
+
+ How to Sort a List?
+ Sorting a list in Java can be done using the Collections.sort()
+ method or by using the List.sort() method introduced in Java8
+
+ va ListIterator Interface
+ ListIterator Interface is used to traverse the element in a backward and forward direction.
+
+ ListIterator Interface declaration
+ public interface ListIterator<E> extends Iterator<E>
+
+ methods:ListIterator
+
+ | **Method**        | **What it does (Simple Explanation)**                                              |
+ | ----------------- | ---------------------------------------------------------------------------------- |
+ | `add(E e)`        | Adds the specified element to the list.                                            |
+ | `hasNext()`       | Returns `true` if there is a next element when moving forward.                     |
+ | `next()`          | Returns the next element and moves the cursor forward.                             |
+ | `nextIndex()`     | Returns the index of the next element that `next()` would return.                  |
+ | `hasPrevious()`   | Returns `true` if there is a previous element when moving backward.                |
+ | `previous()`      | Returns the previous element and moves the cursor backward.                        |
+ | `previousIndex()` | Returns the index of the element that `previous()` would return.                   |
+ | `remove()`        | Removes the last element returned by `next()` or `previous()`.                     |
+ | `set(E e)`        | Replaces the last element returned by `next()` or `previous()` with a new element. |

@@ -1,0 +1,74 @@
+java predefined support int the form of packages
+the packages contains 6-elements:
+-classes
+-interfaces
+-enums
+-annotations
+-exceptions
+-errors
+
+java contains 14 packages
+the default package in java is java.lang
+java is open source it is possible to check the source code of the java
+
+package is a folder structur..
+there are two types of packages:
+1.predefinedd-14 packags
+2.userdefined-user
+
+one source file allowed only one package statemnt
+
+pacakge-first stmt of file
+decalre-package keyword
+
+package name coding convension:
+a.domain name:
+take reverse of the domain
+www.tcs.com->package com.tcs;
+b.project name:bank
+packahe com.tcs.bank
+c.module name:deposite
+package com.tcs.bank.deposit
+
+example: project is divided into 4-module
+company:tcs
+project:bank
+
+m1:    pacakge com.tcs.bank.deposite
+m2:    pacakge com.tcs.bank.withdraw
+m3:    pacakge com.tcs.bank.loans
+m4:    pacakge com.tcs.bank.chat
+
+advantages:
+parallel development
+maintainance bcome easy
+we ahve the clear separation:readability improved
+reusability
+
+application contain two pckage:
+error-1:
+when we are using other package classes then must import the package using import statement
+error-2:
+default:
+the default modifier in java is :default
+it is applicable to :classes, methods,variables,constructor
+permission:with in package all classes can use
+it is a package level access
+
+public:
+it is applicable to :classes,methods,variables,constructor
+all packages can acess public class
+
+note:
+if the class declared as a public the class members are not public
+
+error 3-
+the public class members are not public
+to access the other class members that members also must be public
+
+2 types of imports:
+1.normal import:
+we can access both instance and static data but here to access the static data using class-name
+
+2.static import:
+we can only static members direclty without using class-name

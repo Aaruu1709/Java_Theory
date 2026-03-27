@@ -1,0 +1,121 @@
+java application:
+
+write code
+save code
+compile code:
+java compiler
+javac file-name
+1.compiler check syntax error:if any error compiler generate error msg
+2.if there is no errors in source file then compiler translate .java->.class
+
+.java file: contains high level language(human understandable language-english)
+.class file: contains byte code(intermediate code ):platform independent code
+
+note:compiler generate .class file based on number of classes present in source file
+Test.class          A.class              b.class
+
+execution process:
+JVM
+Syntax:
+java class-name
+
+a.jvm load .class file byte code ino memory and convert it into machine level
+b.Correct, but after class loading & verification jvm search main method and run code give output
+✅ Java Compilation & Execution – Interview Answer
+
+Step 1:
+Write Java program and save it with .java extension
+
+Step 2:
+Compile using Java compiler
+
+javac FileName.java
+
+
+Step 3:
+Compiler checks syntax & semantic errors
+
+If errors → compilation fails
+
+If no errors → .class file(s) generated
+
+Step 4:
+.class file contains bytecode, which is platform-independent
+
+Step 5:
+Run the program using JVM
+
+java ClassName
+
+
+Step 6:
+JVM loads the class using Class Loader
+
+Step 7:
+JVM verifies bytecode for security and correctness
+
+Step 8:
+Execution Engine (Interpreter + JIT) converts bytecode to machine code
+
+Step 9:
+JVM finds and executes
+
+public static void main(String[] args)
+
+
+Step 10:
+Program runs and output is displayed
+
+Java achieves platform independence by compiling
+source code into bytecode, which is executed by the JVM.
+
+it is possible to compile multiple .java files at a time
+but it is possible to execute only one .class file at a time
+
+the coding conversion are mandatory fro predefined library and optional for user defined library but we have to
+follow the coding conversions to predefined library also.
+
+main method=main class
+3 main class=3 class file =>valid
+but at runtime we can execute only one time,so no need to write multiple main
+
+Project level if we take the 10 classes:
+9-classes contains business logic
+1-class contain main method it is a controller class
+At runtime client is able to execute only one class that is main class
+
+
+java.lang is default package
+note
+:
+-source file is allow to declare multiple classes
+-source file allow to declare only one public class
+-the source file is allow to declare multiple main class
+
+print(): print data and same line
+prinln():print data and control goes to next line
+
+escape sequence character:always start back slash
+
+sout(" hi \"aaruu\" good  morning");  => hi "aaaruu" good morning
+sout("hi \ 'aaruu\'  good morning"); =>  hi 'aaruu' good morning
+sout("hi \\aaruu\\ good morning");  =>hi \aaruu\ good morning
+
+
+space is not recommanded so we need to give \t\t
+sout("hi\t\t aarruu\t\t good morning");=>  hi          aarruu     good...(spaces)
+Default tab width is usually 8 characters,
+but it depends on:
+
+console
+
+OS
+
+IDE (IntelliJ / Eclipse / terminal)
+
+\n  → new line
+\t  → tab
+\b  → backspace
+\r  → carriage return
+\"  → double quote
+\\  → backslash

@@ -1,0 +1,125 @@
+
+Error:
+
+_________________________________________________________
+error:
+-problem occure at runtime that mean problem occure during execution of program
+-error:happen due to system level issues
+-system level issues like memory shortage or JVM crash
+-rather than problem in application logic
+-programmer can not contol it
+-can not recovered within the code
+
+-For Example :
+ StackOverflowError
+ -Occurs when there is deep or infinite recursion.
+public class stackErrorExample
+{
+public static void main(String[] args)
+{
+main(null); //infinite recursive call
+}
+}
+
+In normal recursion, there is always a base condition to stop the repeated calls.
+
+Example:
+if(n == 0) return;
+But in your program there is no condition to stop the recursion.
+So it keeps calling itself endlessly.
+
+-Stack Overflow Error
+ Eventually, the stack memory becomes full because of too many method calls.
+ -Exception in thread "main" java.lang.StackOverflowError
+
+
+OutOfMemoryError:
+import java.util.ArrayList;
+public class MemoryErrorExample
+{
+    public static void main(String[] args)
+    {
+        ArrayList list = new ArrayList<>();
+        while (true)
+        {
+            list.add(new int[1000000]); // keeps consuming memory
+        }
+    }
+}
+
+
+VirtualMachineError:
+Thrown when the Java Virtual Machine (JVM) encounters a serious internal problem.
+JVM crash due to insufficient resources.
+Rare, but indicates JVM is in unstable state.
+
+ Types of Errors in Java
+Errors in Java can be broadly divided into three main categories:
+
+1.Compile-Time Errors
+Errors that occur when the program is being compiled.
+These are detected by the compiler before execution.
+Program cannot run until these errors are fixed.
+
+example:
+
+-Lexical Errors
+ Mistakes in keywords or identifiers.
+ Example: statc instead of static, viod instead of void.
+
+ -Syntax Errors
+ Violation(breaking the ruls) of Java grammar rules.
+ Example: Missing semicolon ;, wrong variable declaration, wrong method declaration/calling.
+
+ -Semantic Errors
+ Code is syntactically correct but meaningless.
+ Example: int x = "hello";
+
+- Type Checking Errors
+ Mismatch of data types.
+ Example: Assigning a String to an int.
+
+ 2.Runtime Errors
+ Occur while the program is running (after compilation).
+ Caused by invalid operations at runtime.
+ These are of 2 types:
+ 1.Errors (serious problems, not recoverable):
+ Thrown by JVM, usually not handled in programs.
+ Example:
+ StackOverflowError
+ OutOfMemoryError
+
+ 2.Exceptions (recoverable problems):
+ Handled using try-catch.
+ Example:
+ ArithmeticException → divide by zero
+ NullPointerException → accessing null object
+ ArrayIndexOutOfBoundsException → invalid array index
+
+3. Logical Errors (hardest to detect)
+ -Program runs successfully but gives incorrect result due to wrong logic.
+ -Its not detected by compiler or JVM.
+
+ For Example :
+ // Example of Logical Error
+ public class LogicalErrorExample
+ {
+     public static void main(String[] args)
+     {
+         int side = 5;
+         int area = 4 * side;  // Wrong formula
+         System.out.println("Area = " + area); // Incorrect result
+     }
+ }
+
+
+
+ -Points to remember:
+  Object class is the parent class of all the classes in Java
+  Throwable class is the parent class of Error class in Java.
+  All the error classes are considered unchecked (because they are not checked by the compiler).
+
+
+Difference between Error and Exception in Java:
+Error: Represents serious problems in the JVM that cannot be handled by the program.
+Exception: Represents conditions that can be caught and handled by the program.

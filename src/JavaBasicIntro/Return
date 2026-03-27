@@ -1,0 +1,234 @@
+return
+___________________________________________________________
+Example 1:
+case 1:
+here local and instance variable have different name
+
+class Test{
+int val1=10, val2=20;//instance var
+void add(int num1,num2)//local varible
+{
+sout(num1+num2);
+sout(val1+val2);
+}
+psvm{
+Test t=new Test();
+t.add(100,200);
+}
+}
+
+case 2:
+here local and instance variable are having same names
+
+class Test{
+int val1=10,val2=20;//instance varialbe
+void add(int val1,int val2){
+sout(val1+val2);
+
+Test t=new Test();
+Sout(t.val1+ t.val2);
+
+sout("___________");
+
+sout(this.val1 + this.val2);
+}
+psvm{
+Test t=new Test();
+t.add(100,200);
+}
+}
+if the application local & instance varibale with same name, in this case to represent
+instance date use object name.
+in place of object it is possible to use this keyword
+this keyword represent current class object
+inside the static area this is not allowed
+
+
+Why this is not allowed in a static context in Java
+
+Short answer:
+👉 this refers to the current object, and static members do NOT belong to any object.
+
+Now the clear breakdown 👇
+
+What this means
+
+In Java, this:
+
+Refers to the current instance (object) of a class
+
+Is used to access instance variables and methods
+
+Example:
+
+class Demo {
+    int x = 10;
+
+    void show() {
+        System.out.println(this.x);
+    }
+}
+
+
+Here, this points to the object that calls show().
+
+What static means
+
+static:
+
+Belongs to the class itself
+
+Is loaded once, when the class is loaded
+
+Exists even before any object is created
+
+Example:
+
+class Demo {
+    static int y = 20;
+}
+
+The core reason 🚨
+
+Since:
+
+static members exist without any object
+
+this needs an object reference
+
+➡️ There is NO object for this to refer to inside a static context
+
+So Java blocks it.
+
+Example that causes error ❌
+class Test {
+    int x = 10;
+
+    static void show() {
+        System.out.println(this.x); // ❌ Compile-time error
+    }
+}
+
+
+Why error?
+Because show() is static → no object → no this.
+
+this keyword is not allowed in static context because static members belong to the class, not to any instance,
+ and this refers to the current object.
+_________________________________________________________
+method return type:
+_________________________________________________________
+
+example 2:
+case 1:if method is having return type other than void , then must return value using return statement
+otherwise compiler generates error
+
+class Test{
+int m1(){
+}
+}
+error:missing return statement
+
+case 2:
+inside method return statement must be the last statemnent
+it wont excecute code after return
+class test{
+int void(){
+return 10;
+sout("hello");//error : unreachcble statement
+}
+}
+
+case 3:inside method it is possible to use only one return statement
+class Test
+{
+int m1(){
+sout("aaruu");
+return 10;
+return 20;//error: unreachable statement
+}
+}
+
+case 4:
+method can return only one value not multiple
+class Test
+{
+int m1(){
+sout("aaruu");
+return 10,20,30;
+}
+}
+
+case 5:HOlding the method return value is optional but recommanded
+class Test{
+int m1(){
+sout("ratan");
+return 10;
+}
+psvm{
+Test t=new Test();
+t.m1();
+}
+}
+
+case 6:
+
+class Test{
+static int m1(){
+return 10;
+}
+psvm{
+
+//holding the retunrn value and printing
+int num=Test.m1();
+sout("return value..."+ num);
+
+//direcltly printing return value
+sout("return value..."+Test.m1());
+}
+}
+
+example 3:
+case 1:
+if application contain both local and instance then it retuen local value
+class Test{
+int a=10;
+int m1(int a){
+return a;
+}
+psvm{
+Test t=new Test();
+int num=t.m1(100);
+sout("return value..."+num);
+}
+}
+
+case 2:if there is no local then it return instance data
+class Test{
+int a=10;
+int m1(){
+return a;
+}
+psvm{
+Test t=new Test();
+int num=t.m1();
+sout("return value..."+num);
+}
+}
+
+
+case 3:
+if the application contain both local and instance variable then it retur local value ,but we print or return instance data use this keyword.
+
+class Test
+{
+int =10;
+int m1(int a){
+return this.a;
+}
+psvm{
+Test t=new Test();
+int num=t.m1(100);
+sout("ratan value...."+num)
+
+

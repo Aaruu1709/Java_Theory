@@ -1,0 +1,280 @@
+1️⃣ FUNDAMENTALS:
+thread:
+A thread is the smallest unit of execution within a process that
+performs a specific task independently.
+One program = many tasks
+Each task = one thread
+
+🔹 Real-life Example
+Mobile phone:
+Playing music 🎵 → Thread 1
+Downloading file ⬇ → Thread 2
+WhatsApp notification 🔔 → Thread 3
+Same app, multiple tasks → threads
+
+2. What is Multithreading?
+Multithreading is a Java feature that allows multiple threads to execute concurrently within a single program.
+Java supports multithreading so that it can do many tasks at the same time and use the CPU efficiently.
+
+Why Java supports multithreading?
+
+.
+
+🔹 Why Java supports multithreading?
+
+CPU has multiple cores
+
+Java wants maximum CPU utilization
+
+Faster and responsive applications
+
+3. Why Multithreading is Needed?
+❌ Without Multithreading
+
+Tasks execute one by one
+
+Slow
+
+Poor user experience
+
+✅ With Multithreading
+
+✔ Parallel execution
+✔ Faster response
+✔ Better performance
+
+🔹 Real-Project Usage
+
+Web server handles multiple users
+
+Banking app handles multiple transactions
+
+E-commerce site handles orders + payments + notifications
+
+| Process             | Thread            |
+| ------------------- | ----------------- |
+| Independent program | Part of a process |
+| Own memory          | Shared memory     |
+| Heavyweight         | Lightweight       |
+| Slow context switch | Fast              |
+👉 Java uses threads because creating processes is expensive.
+
+2️⃣ THREAD LIFE CYCLE
+Thread States (VERY IMPORTANT)
+New
+Runnable
+Running
+Blocked / Waiting
+Dead (Terminated)
+
+Java gives 2 ways because:
+Thread class → simple
+Runnable → flexible (preferred in projects)
+
+5. Creating Thread using Thread Class
+🔹 Why Thread class exists?
+🔹 Code (Runnable in IntelliJ)
+class MyThread extends Thread {
+
+    @Override
+    public void run() {
+        System.out.println("Thread is running: " + Thread.currentThread().getName());
+    }
+
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();   // creates new thread
+    }
+}
+
+🔹 Key Understanding
+
+run() → contains task
+
+start() → creates new thread + calls run()
+
+6. Creating Thread using Runnable Interface (BEST PRACTICE)
+🔹 Why Runnable came?
+
+Java doesn’t support multiple inheritance.
+
+👉 If you extend Thread, you can’t extend any other class
+👉 Runnable solves this problem
+
+
+public class myRunnable implements Runnable{
+public void run(){
+sout("runnable thread");
+sout("t=runable:"+ Thread.CurrentThread().getName());
+}
+psvm{
+MyRunnable r=new MyRunnable();
+Thread t1=new Thread(r);
+t1.start();
+}
+
+7. Thread vs Runnable (
+
+| Thread         | Runnable             |
+| -------------- | -------------------- |
+| Extends class  | Implements interface |
+| Not flexible   | Very flexible        |
+| Less preferred | Highly preferred     |
+👉 Runnable is used in real projects
+
+| start()               | run()                 |
+| --------------------- | --------------------- |
+| Creates new thread    | Normal method         |
+| Executes concurrently | Executes sequentially |
+| JVM controlled        | User controlled       |
+
+5️⃣ THREAD METHODS (WITH PURPOSE):
+
+Thread.sleep():
+
+🔹 Why needed?
+Pause execution
+Simulate delay
+Rate limiting
+
+Real-life use
+
+OTP resend delay
+Animation timing
+API throttling
+_______________________________________________
+join()
+🔹 Why needed?
+
+One thread waits for another to finish
+join() is used to make one thread wait until another thread finishes its work.
+🔹 Why do we need join()? (Actual Use)
+
+In multithreading:
+
+Threads run independently
+There is no guarantee of execution order
+
+But sometimes:
+❗ One task must finish first
+❗ Next task depends on its result
+
+👉 That’s where join() is needed.
+
+🔹 What Actually Happens Internally?
+
+When a thread calls:
+t.join();
+It means:
+Current thread goes into waiting state
+It waits until thread t completes
+After t finishes → current thread resumes
+
+📌 Important:
+
+join() does NOT stop the thread t
+It makes the calling thread wait
+
+🔹 Where join() Is Used in Real Projects
+
+✔ When:
+One thread prepares data
+Another thread uses that data
+Examples:
+Load configuration → then start application
+Download file → then process it
+Validate input → then save to DB
+Finish background task → then send response
+
+join() is used to pause the current thread until another thread completes execution, ensuring dependent tasks run in correct order.”
+______________________________________________________
+
+Thread Naming:
+🔹 What is Thread Name?
+Every thread in Java has a name to identify it.
+Thread name helps us identify which thread is doing what, especially during debugging and logging.
+🔹 Real-Life Example
+
+Think of an office:
+
+Employee names → identify who is working
+
+Thread names → identify which thread is working
+___________________________________________
+2️⃣ Thread Priority
+🔹 What is Thread Priority?
+
+Thread priority is a hint to the CPU scheduler about which thread is more important.
+Java priority range:
+
+1 → MIN_PRIORITY
+5 → NORM_PRIORITY (default)
+10 → MAX_PRIORITY
+
+🔹 Why do we use Thread Priority
+To give more importance to critical tasks
+Background tasks → lower priority
+Important tasks → higher priority
+
+⚠️ Important:
+
+Priority does not guarantee execution order, it only gives preference.
+
+🔹 Real-Life Example
+Hospital example:
+Emergency patient → higher priority
+Normal checkup → lower priority
+___________________________
+3️⃣ yield() Method
+🔹 What is yield()?
+yield() tells the CPU:
+“I am willing to pause and let other threads run.”
+🔹 Why do we use yield()?
+To improve fairnes
+To avoid one thread hogging the CPU
+Mostly used in CPU-intensive tasks
+
+📌 Important:
+yield() is just a request, CPU may ignore it.
+🔹
+ Real-Life Example
+
+Classroom example:
+
+One student is speaking continuously
+
+Teacher says: “Let others speak”
+
+That’s yield()
+
+🔹 Who controls which thread runs?
+✅ Operating System Scheduler
+
+Important interview line:
+
+Java only creates threads; the OS decides when and how they run.
+yield() does NOT guarantee order
+It only increases the chance of switching
+_________________________________________________
+13. What is a Daemon Thread?
+🔹 Definition
+A daemon thread is a background thread that provides services to user threads.
+🔹 Key Rule
+👉 JVM exits automatically when only daemon threads remain.
+
+🔹 Examples of Daemon Threads
+Garbage Collector (GC)
+Background cleanup
+Auto-save
+
+🔹 Real-Life Analogy
+Watchman in building
+Once all people leave → watchman leaves
+________________________________________________
+
+| Model                            | Supported | Reason           |
+| -------------------------------- | --------- | ---------------- |
+| Single Task – Single Thread      | ✅         | Normal execution |
+| Single Task – Multiple Threads   | ✅         | Real concurrency |
+| Multiple Task – Multiple Threads | ✅         | Real-world usage |
+| Multiple Task – Single Thread    | ❌ (as MT) | No concurrency   |

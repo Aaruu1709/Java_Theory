@@ -1,0 +1,67 @@
+✅ Runnable → same task, multiple threads (WORKS)
+class MyTask implements Runnable {
+    public void run() {
+        System.out.println(
+            "Running by: " + Thread.currentThread().getName()
+        );
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Runnable task = new MyTask();
+
+        new Thread(task, "Thread-1").start();
+        new Thread(task, "Thread-2").start();
+        new Thread(task, "Thread-3").start();
+    }
+}
+
+✔ Output (order may vary)
+Running by: Thread-1
+Running by: Thread-2
+Running by: Thread-3
+
+
+🔍 What this proves
+
+Same Runnable object (task)
+
+Multiple Thread objects
+
+Each thread executes the same task
+
+✔ Works perfectly
+
+❌ Thread → single execution only (FAILS)
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Running...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        MyThread t = new MyThread();
+
+        t.start();   // ✔ works
+        t.start();   // ❌ IllegalThreadStateException
+    }
+}
+
+
+🔍 What this proves
+
+Same Thread object
+
+start() called twice
+
+❌ Runtime exception
+
+🔑 One-line conclusion (matches your sentence)
+
+Runnable represents a reusable task that can be executed by
+ multiple Thread objects, whereas a Thread represents a
+ single execution that can be started only once.

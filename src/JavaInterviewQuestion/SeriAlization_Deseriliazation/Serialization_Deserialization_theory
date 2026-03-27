@@ -1,0 +1,131 @@
+-------------------------------------------------
+🎯 1. What is Serialization?
+->Serialization is the process of converting an object into a byte stream
+ -so that it can be stored in a file or sent over a network. or store in database
+ -we must need to implement Serializable class
+ -Serializable interface it is a marker interface(no method inside)
+ -If not implemented → ❌ NotSerializableException
+ -Uses:
+  ObjectOutputStream
+  writeObject()
+------------------------------------------------
+
+🎯 2. What is Deserialization?
+->Deserialization is the process of converting a byte stream back into an object.
+-Reverse of serialization
+-Uses:
+ ObjectInputStream
+ readObject()
+ -May throw:
+  ClassNotFoundException
+  -Object is created without using constructor that mean,
+  -👉 Normally:
+   When you create an object → constructor runs
+   Student s = new Student();  // constructor is called
+   👉 But in Deserialization:
+   Java creates object directly from byte data
+   Constructor is NOT called
+------------------------------------------------
+🎯 3. What is transient keyword?
+->transient is used to skip a variable during serialization.
+Variable marked as transient:
+❌ Not saved in file
+❌ Not transferred
+After deserialization:
+-Default value comes (null, 0, etc.)
+-Variable is NOT saved in file
+-Variable is NOT transferred
+-After deserialization:
+-Gets default value
+-null (object)
+-0 (int)
+-false (boolean)
+-Used for:
+Passwords 🔒
+Sensitive data
+-Works only with instance variables
+-Cannot be used with:
+-static (already not serialized)
+----------------------------------
+class must implement using Serializable
+otherwise: notSerilizableException
+------------------------------------------------
+💻 FULL WORKING CODE (Serialization + Deserialization)
+----------------------------------------------------
+🔹 Step 1: Create Student class:;
+import java.io.Serializable;
+
+public class Student implements Serializable {
+
+    private String name;
+    private String email;
+
+    transient String password; // will NOT be serialized
+
+    public Student(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Email: " + email);
+        System.out.println("Password: " + password);
+    }
+}
+🔹 Step 2: Serialization (Write object to file):
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
+public class SerializeDemo {
+
+    public static void main(String[] args) {
+        try {
+            Student s = new Student("Aman", "aman@gmail.com", "12345");
+
+            FileOutputStream fos = new FileOutputStream("student.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(s);
+
+            oos.close();
+            fos.close();
+
+            System.out.println("Object serialized successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+🔹 Step 3: Deserialization (Read object from file):
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
+public class DeserializeDemo {
+
+    public static void main(String[] args) {
+        try {
+            FileInputStream fis = new FileInputStream("student.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            Student s = (Student) ois.readObject();
+
+            ois.close();
+            fis.close();
+
+            System.out.println("Object deserialized successfully!\n");
+            s.display();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+output:
+Object deserialized successfully!
+
+Name: Aman
+Email: aman@gmail.com
+Password: null   <-- because transient

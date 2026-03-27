@@ -1,0 +1,642 @@
+-------------------------Polymorphism--------------------
+one functionality with deiiferent behavior
+the ability to appears one than more form is called polymorphism
+is showing multiple behavior
+ex.person
+one persone which is in collage teacher , in shopping mall he is customer,
+in home he is father like that one person who  has different behavior
+one functionality havig more behavior
+sleep(1000),sleep(1000,2000)
+two types of polymorphism:
+1. compile time| static binding | early bindig---- achieve overloading
+2. runtime | dynamic | late binding-----achieve overrididng
+
+overloaded method:
+same mrthod name but different number of arguments
+void m1(int a){}
+void m1(int a, int b){}
+
+overloaded method:same method name and same number of argument but diff types
+void add(int a,int b){};
+void add(double d1,double d2){}
+
+class Test{
+//overloaded method
+void sum(int a){
+sout(a+a);
+}
+
+void sum(int a,int b){
+sout(a+b);
+}
+
+void sum(double d1, double d2){
+sout(d1+d2)
+}
+psvm{
+Test t=new Test();
+t.sum(10);
+t.sum(10,20);
+t.sum(10.5,20.4);
+}
+}
+
+whenn we call t.sum(10);
+-in above example during compilation compiler is checking the method with 1-argument is available or not, this mapping is done during compilation is called static binding.'
+-it is not possible to prevent overloading
+-one java class is sufficient to achieve overloading
+
+//without overloading=no.of mehtod names
+//with overloading=we can use same name with different behavior
+
+note:while overloading just check method signature(method name+parameter)
+
+is is possible to overlaod any mehtod:static ,final,absract,private
+-it is not possible to prevent
+-one class is sufficient
+
+case:invalid
+void m1(int a);
+void m1(int b);
+
+
+overloading Concept:
+-Same Method Name: The methods must have the same name.
+-class have different methods with same name but different no.of argumwnts
+-same name same no of argument but types are different
+-order of parameter different
+-to possible overload method in parent and child rel
+
+return type=The return type does not contribute to overloading
+=>compiler uses the method’s name and parameter list to determine
+which method to call at compile time. If methods only differed by their return types,
+the compiler wouldn’t be able to distinguish
+between them solely based on that. It would create ambiguity
+👉 The return type does not call a method.
+
+A method is called using:
+the method name
+and the arguments (parameters) you pass
+The return type is only used after the method is executed,
+ to return a value back.
+
+we only need to check method signature that mean:
+method name+ parameters
+
+so return type does not matter,diff return type also valid..
+
+
+overriding Concept:
+type conversion always left to right
+byte| char=>short=> int=>long=>float=>double
+type promotion =>compiler
+it also called as upcasting | implicite type casting=>compiler done
+-overload with parent and child relationship
+
+in jaava numeric value by default int type
+decimal value are by default double type
+
+possible to override method in parent and child
+
+
+types of overloadiing:
+method overloading
+constructor overloading
+operator overloading
+(java not support operator overloading)
+but implicittely jvm support only + operator
+(concat and add)
+
+
+constructor oveloding:
+class Test{
+//overloaded constructor
+Test(int i){
+sout("int arg constructor");
+}
+Test(char ch)
+{
+sout("char args consteucor");
+}
+Test(char ch,int i){
+sout("char,int args cons");
+}
+}
+
+example:
+operator overloading:
+
+-one operator with diff behavoir is called oprator overloading
+-java not supporting but only + one support
+-if both operands are integer then "+" perform additin
+-if at least one oerand is string then "+" perform concatenation
+
+
+class Test{
+psvm{
+sout(10+20);//30---addition
+sout("ratan"+"anu");----ratananu---cancatenation
+}
+}
+
+
+overriding concept:
+overloading only one class is posssible
+class must have two java classes and which is in child parent relationship
+implement already preent in parent but i want my own implemenatation
+
+ class parent{
+ void eat(){
+ sout("i want idalii");
+ }
+ }
+ class child extends Parent{
+ void eat(){
+ sout("i want pizza");
+ }
+ }
+
+
+__________________________________________________
+method overriing:
+impl of method already present in parent class, but child is not satisfy with parent imple so it create its own imple
+
+
+class Parent{
+void property(){
+sout("money+ gold...");  //overridden method
+}
+void marrige(){
+sout("black girl");
+}
+}
+class Child extends Parent{
+void marrige(){
+sout("red girl");   ///overriding method
+}
+psvm{
+Child c=new Child();
+c.prperty();
+c.marrige();
+}
+}
+//child amrrige will get
+
+
+ if we are oerriding the method thrn child class method executed
+ and
+ if we are not overridding a method then parent class method executed
+
+ we need to follow 9 overriding ruls :
+ 1.method signature must be same
+ 2. return type must be same at primitive level
+ 3.return type can be change-at class level
+ 4.final metod we cant override
+ 5.sttttttatic method we cant override
+ 6.private method we can not override
+ 7.exception handling throws
+ 8.exception handling throws
+ 9.permission modifiers
+_____________________________________
+
+_________________________________RULES__________________________________
+
+parent method is called => overridden method
+child class method=>overriding method
+
+rule 1: overridden and overriding method must be same
+rule 2: final method cant be override
+
+class Parent{
+final void marrige(){
+sout("black girl");
+}
+}
+class Child extends Parent{
+void marrige(){
+sout("red girl");   ///overriding method
+}
+}
+
+Error:marrige() in child can not override marrige in Parent
+overrideen method is final
+
+final modifires:
+fianl classes -can not extended
+final methods -can not override
+fianl variable-not modify
+
+observation:
+final class Test{
+int num =10;
+void eat()
+{
+sout("idly");
+bill=bill+10;
+sout(bill);
+}
+psvm{
+Test t=new Test();
+t.eat();
+}
+}
+we cannot override
+not create to child,not posssible
+-final class variables are not final=>You must write final explicitly for each variable
+-final class methods are by default final
+=>Technically:
+
+  They are not marked as final
+  BUT they cannot be overridden
+  👉 Why can’t they be overridden?
+  Because:
+  A final class cannot be extended
+  If there is no child class…
+  There is no place to override methods
+  So Java treats them as if they were final
+
+Final class → no inheritance
+No inheritance → no method overriding
+No overriding → methods behave like final
+
+
+rule 3: overriding return type must be same at primitive level(byte ,short,int,long...)
+rule 4: we can change return type,method always return object
+we cahge at class level : co-variant return type:java -5 concept
+
+case 1:ovverriding method return type is a sub-type of overridden method return type
+Animal ->dog
+case 2: we can write Object directly ,in parent we write Object and in child we write subtype(Animal) it oaky
+Object->Dog
+
+case 3: animal is subclass of Object
+class Animal{
+class Dog extends Animal{}
+class parent{
+Object eat(){
+sout("idly");
+return new Object();
+}
+class Child extends parent
+{
+Animal eat(){
+sout("puri or dosa");
+return new Animal();
+}
+}
+case 4:
+supose we do dog->animal so it give error
+return type Animal is not compatible with Dog
+
+rule 5 depends on modifires:
+not possible to override private
+most accesible=public
+only within class-private
+only within package=default
+protected=protected(in package and outside package only in child classes)
+
+modifiers     classes   methods   constructors   variables     Access
+---------------------------------------------------------------------------
+public          yes        yes          yes           yes       all pkgs
+
+default         yes        yes          yes           yes       only one pkg
+
+private         no         yes          yes           yes       only one class
+
+protected       no         yes          yes           yes       pkg1 all ; pkg2 only child classes(inheritace must)
+
+Low to high=> Private - default - protected - public
+
+                               public   protected    default   private
+with in the class                yes      yes           yes       yes
+same package sub class           yes       yes          yes       no
+same package non-subclass        yes       yes          yes       no
+different package sub class      yes       yes          no        no
+diff package non-sub class       yes        no          no        no
+
+
+-not possible to decrease the permission
+rule 5: private method not possible to override
+
+rule 6: i declare public but this is invalid actually(not decrese permisse....keep same or more not decrese)
+protected=>public=valid
+atteemptin to access weaker access privilegs; was public
+                                           parent       child
+case 1: same level permission valid        public=>    public
+case 2: incresing level : valid           protected =>  public
+case 3: decresing level :invalid          public=>      protected
+
+
+__________________________________
+Class Parent{
+}
+class Child extends Parent{
+}
+
+Parent p=new Child();
+Child c=new parent();//invalid
+
+note:
+parent class can hold the child object
+
+example 1:
+interface Birds{
+void fly();
+void swim();
+}
+
+class Parrot implements Birds
+{
+public void fly(){
+sout("parrot can fly");
+}
+public void swim(){
+sout("parrot can not fly");
+}
+}
+class Penguin implements Birds
+{
+public void fly(){
+sout("penguin can'nt fly");
+}
+public void swim(){
+sout("penguin can swim");
+}
+}
+
+
+//problem:here we creating multiple methods.
+
+class TestClient{
+void parrotInfo(Parrot p){
+p.fly();
+p.swim();
+}
+void penguinInfo(Penguin p){
+p.fly();
+p.swim();
+}
+psvm{
+TestClient t=new TestClient();
+t.parrotInfo(new Parrot());
+t.penguinInfo(new Penguin());
+}
+}//problem end
+
+class TestClient{
+void info(Birds b){
+b.fly();
+b.swim();
+}
+psvm{
+TestClient t =new TestClient();
+t.info(new Parrot());
+t.info(new Penguin());
+}
+}
+
+exmaple 2:
+interface Message{
+void wish();
+}
+
+class Aaruu implements Mesage
+{
+public void wish(){
+sout("good morning aaruu mam");
+}
+public void display(){
+sout("hi students how are you")
+}
+}
+class TestClients{
+psvm{
+Message m=new Aaruu();
+m.wish();
+
+Aaruu r=(Aaruu)m;
+r.display();
+}
+}
+
+note:
+in parent p=new Child() using parent reference variable we can access the only overriding mehtods,
+but we can not acccess direct methods of implementation class
+so to acess the direct methods of implementation classes perform type conversion process
+
+_________________________________
+
+void birdInfo(Bird b){
+    b.fly();
+    b.swim();
+}
+👉 Here:
+
+b is the reference
+
+Type of reference = Bird
+
+Actual object = Parrot or Penguin
+
+When you call:
+
+t.birdInfo(new Parrot());
+Java does this internally:
+
+Bird b = new Parrot(); // reference created HERE
+4️⃣ How Java decides which method to call
+Bird b = new Penguin();
+b.fly();
+Reference type (Bird) → checks method existence
+
+Object type (Penguin) → decides which implementation runs
+
+👉 This is runtime polymorphism
+
+3️⃣ Loose coupling (VERY IMPORTANT)
+
+If tomorrow:
+Parrot class changes
+Penguin class changes
+👉 Client code does NOT change
+Because it only knows Bird
+This is called loose coupling
+
+4️⃣ Easy to extend (Open–Closed Principle)
+Add a new bird:
+class Duck implements Bird {
+    public void fly() { }
+    public void swim() { }
+}
+
+Client code:
+birdInfo(new Duck()); // works without change
+✅ Open for extension
+❌ Closed for modification
+
+Always create reference of parent and object of child
+___________________________________
+rule 7:
+it is not possible to override static method
+class Parent{
+static void m1(){
+sout("parent m1 method");
+}
+}
+class Child extends Parent{
+static void m1(){
+sout("child m1 method");
+}
+psvm{
+Parent p=new Child();
+p.m1();
+}
+}
+
+instance methods    : method overriding   :signature must be same  : excecution depends on object creation
+static methods      : method hiding       : signature must be same : execution depends on class-name
+
+when one static one instance =>not overrriding concept
+different parameter not overriding concept=>
+Overriding needs instance methods only
+Static methods belong to class, not object
+This is called method hiding, not overriding
+________________________________
+rule 7 && 8:
+rule 7:if overridden(parent) does not throw any exception then
+overriding method(child ) only throw unchecked exception(arithmeticException) but not Checked(InterruptedException)
+rule 8:parent throw Arithmetic and child also Arithmetic =>no issue
+- parent throw exception but child not throw any exception then => no issue
+
+-parent throw Exception and child thorw Arithmetic (subclass) exception then no issue
+-parent throw Arithmetic exception but child throw Exception =invalid
+
+case 1:valid
+class Parent{
+ void m1(){
+sout("parent m1 method");
+}
+class Child extends Parent{
+ void m1() throws ArithmeticExcecpton{
+sout("child m1 method");
+Thread.sleep(1000);
+}
+}
+
+case 2: invalid
+
+class Parent{
+ void m1(){
+sout("parent m1 method");
+}
+class Child extends Parent{
+ void m1() throws InturrupteedExcecpton{
+sout("child m1 method");
+}
+
+
+rule 9:
+case 1: overriden method and overriding method throws same exception:valid
+class Parent{
+void m1() throws ArithmeticException
+{
+}
+}
+class Chid extends Parent
+{
+void m1() throws ArithmeticException
+{}
+}
+
+case 2: parent throw exception ,child does not throws :valid
+-overrriden method throws exception, the overriding method does not throw exception
+
+class Parent{
+void m1() throws ArithmeticException
+{}
+}
+class Child extends Parent
+{
+void m1(){}
+}
+
+case 3:
+oveeriden method thows parent exception then overriding method can throws child exception:valid
+
+class Parent
+{
+void m1() throws Exception
+{}
+}
+class Child extends PArent{
+void m1() throws ArithmeticException{}
+}
+
+case 4:
+parent throw child Exception and child throws Parent exception:invalid
+
+class Parent
+{
+void m1() throws ArithmeticException
+{}
+}
+class Child extends PArent{
+void m1() throws Exception{}
+}
+
+
+rule 9:
+-it is possible to override only instance metod in java
+-static  method is not possible to overrride
+
+method overriding and method hinding
+the concept is :
+in overriding:only instance method=> mrhtod signature must be same=>method execution decided by Object
+in method hiding:Static method =>mrthod signature must be same=>method execution decided by class
+
+one is instance and one is static not possible
+
+
+rule 1: method sig must be same
+rule 2:final method not possible to oveeride
+rule 3:return type must be same:primitive level
+rule 4:object level possible to change the return type co-variant retur type
+rule 5:private method not possible to override
+rule 6:possible to maintain same level permission or increasing order of permission but not decresing
+rule 7: Static method not possible to override
+rule 8:Execption handling : parent method does not throw exception , child can throw only unchecked
+exception but not checked exception
+rule 9:exception handling:
+parent is throws exception:
+  1.child can throws same exception
+  2.child can not throws exception
+  3.child can throws child exception
+  4.child can not throws parent exception
+
+___________________________________
+method overloading=compile time poly
+more than one method with same name
+but different parameter
+ rule:
+ Rules of Method Overloading :-
+ All overloaded methods must have the same name.
+ All the methods should be in same class or in subclass.
+ All the method parameters list must be different:
+ Number of parameters
+ Type of parameters
+ Order of parameters
+
+  Important Points:
+  Method overloading does not depend on return type, it depends only on the parameter list.
+  Main method can also be overloaded in Java.
+Constructors can also be overloaded.
+class Student
+{
+    Student() {}
+    Student(String name) {}
+    Student(String name, int age) {}
+}
+Access modifiers (e.g., public, private) can be different.
+Static methods can be overloaded.
+
+

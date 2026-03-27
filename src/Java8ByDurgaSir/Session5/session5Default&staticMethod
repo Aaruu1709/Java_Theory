@@ -1,0 +1,216 @@
+Default method and static method inside interface;
+______________________________________________________________________
+ Annonymous inner class more powerful->
+ extends normal class
+ extend an abstact class
+ can implement an interface which contain any no.of abstract mthods
+
+
+ Lambda Expression:
+ implement an interface contains a single abstract method(FI)
+
+ Anonymous inner class != lambda
+ Anonymous inner class > lambda expression
+ _________________________________________________________________
+ default method concept
+ until 1.7 version every method present inside interface is always ->public and abstract
+ void m1();
+ public void m1();
+ abstract void m1();
+ public abstract void m1();
+
+ Related Methods:
+ 1.8 v:default method + static methods
+ 1.9 v: private methods
+
+ variable:
+ public static final
+
+ default method | virtual extension method | defender method(protector):
+
+ ________________________________________________________________________
+
+ A default method is used inside an interface.
+ 👉 Normally, interfaces only had method declarations (no body).
+ But starting from Java 8, you can add methods with implementation using default.
+
+ Example:
+interface MyInterface {
+    default void show() {
+        System.out.println("This is a default method");
+    }
+}
+Why it exists:
+To add new methods to interfaces without breaking existing classes
+Helps with backward compatibility.
+
+_____________________________________________________________________
+
+
+default method:
+without effecting implementation classes if we want to add new method to the interface=>default methods
+default implementation->default
+
+interface Inter {
+defalt void m1()
+{
+sout("default method");
+}
+}
+class Test implements Interf
+{
+public void m1(){
+sout("overriding version of default method");
+}
+psvm{
+Test t=new Test();
+t.m1();
+}
+}
+//default method we should only write inside interfaces not inside class
+//object class method we can not imple as default method...bcoz this object
+class method by default available
+in evrey impl class..we not allow to override
+//we cant override objcet class method in interface as default ->no
+//oject classs by default method in every class
+
+
+interface Interf
+{
+deffault void m1()
+{
+sout("default method");
+}
+
+default int hashCodea(){
+return 10;
+}
+}
+
+class Test implements Inter
+{
+
+}
+
+
+//is java provide support for mul inheritance->no
+//diamond problem
+//multiple parent classes having different implementation,child which method should come
+
+Multiple inheritance:
+class p1{
+public void m1(){
+sout("p1 method");
+}
+}
+classs P2{
+public void m1(){
+sout("p2 method");
+}
+}
+class Test extends P1,P2{
+psvm{
+Test t=new Test();
+t.m1();
+}
+}
+//compiler calsses
+// in java we cant access multiple classes simultaneously
+that the problem
+
+
+interface Left{
+default void m1(){
+sout(" m1 method of left interface");
+}
+}
+
+interface Right(){
+default void m2(){
+sout("m2 method of right interface");
+}
+}
+
+class Test implements Left,Right
+{
+public void m1()
+{
+sout("our own m1 method");
+Left.super.m1();
+Right.super.m1();
+}
+
+psvm{
+Test t=new Test();
+t.m1();
+}
+}
+_________________________
+class vs interface
+class is very constly
+
+interface never contain constructor ,static block , instance block
+-light weight component
+-not very costly
+
+in class:
+class Test{
+m1(){
+}
+t=new Test()
+t.m1();
+
+instance method always associates with object so we need to compalsor go for class
+and we required to create object
+-create object and then call
+
+
+in static no need to creatw object..direclty call
+
+interface we never going to create obejct
+
+from 1.8 ->interface can support static method support...
+-static method not needed object so whats the reason we going for class,we need to go for interface which is light weight
+
+interface inter
+{
+public static void m1()
+{
+sout("Interfa ce Static method");
+}
+}
+class Test implments Inter
+{
+psvm{
+Interf.m1();
+m1();
+Test.m1();
+Test t=new Test();
+t.m1();
+}
+}
+
+//interface static method by defULT not available to implementation class
+-so m1() not work
+-m1();
+ Test.m1();
+ Test t=new Test();
+ t.m1();//all not work
+
+ //interfCE static method are only call using interface Name
+
+ //if there is no implementation class-> then also work perfectly
+ 1.8->static
+ -static->not available to imple class
+ -we should used interface name
+
+ -is it possible to writee main method inside interrface->yes
+
+ -why static methods concept come->supose
+ i want to define utilit method
+ until 1.7v
+ -> we define those utility method inside class
+
+ to define genral utilit method we go for interfaces
+ -everythig is static , so no need to going with static,unnessary performance wasted,memory is wasted, costly
+ -any no. of static in interface

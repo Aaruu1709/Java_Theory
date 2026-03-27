@@ -1,0 +1,685 @@
+*****Exception handling***********
+Error:
+      - problem happen bcoz of lack of system resources not by logic.
+      - we cant handle error
+      - it is type of unchecked exception
+
+Exception:
+          - its only problem
+          - happen during Execution of program
+          - we can recover it
+
+Abnormal termination of code->it handle using try-catch->then our program flow normally
+rest of code Executed
+
+3 types of excepton:
+1-checked:check by compile time->it show msg only->its child class of exception class->rised at compile time
+2-unchecked Exception: not checked by compile time->it is child class of runtime exception->its rised on runtime
+3-error:lack of system resources
+
+checked or unchecked exception both rised at runtime only
+which is more safe?
+unchecked exception is more safe bcoz it compile time compiler show information
+
+throwable is parent class of exception and error
+
+and there are many child classes available in exception and error
+....now talking about exception child class are=> runtime exception,ioexception,classsnotfoundException,sql exception
+and many subclasses inside it...
+in runtime exception:
+Arithmetic exception
+null pointer Exception
+number format exception
+indexoutof bound exception->ArrayIndexOutOfBoxException,StringIndexOutofBoundException
+
+
+now in error-Virtual machine Error,out of memory error,Stack over flow error
+exception is aslo called as checked exception
+and error is unchecked exception
+
+when exception is comming at starting compiler never execute code below that even it is in try-catch block,
+
+ try {
+            FileReader fr=new FileReader("abc.txt");
+
+            System.out.println("program Stared from here");
+            System.out.println("step 1");
+            System.out.println(10/0);
+        }
+
+        catch (Exception e){
+//            System.out.println(10/0);
+            //exception occured here..Exception in thread "main" java.lang.ArithmeticException: / by zero
+            System.out.println("Application termianted abnormally");
+        }
+
+        see here,,,,,exception occur at filereader file not found it handle using try block it not goes below even if below code is clear runnavle still not run...
+        it goes direcly at catch and run syso stmt.
+
+     _________________________________________________________________
+
+     keywords:
+     try
+     catch
+     finally
+     throw
+     throws
+
+     handle exception using try and catch block
+     try{
+     exceptinal code is comming here:may or may not occure exception here
+     }
+     catch(exeption-name ref-var){
+     code:excecuted when the exception raised in try block
+     }
+     when exception not raised there is no chance to exceuting catch block
+
+     condition 1:
+     when we write code without try-catch block....and somewhere exception may occcured then our code will be
+     ->abnormally terminated and rest of code not excecuted
+
+     condtion 2:
+     when we write it with try-catch block whichever code it may be give
+     exception then we write it with try block and and handle it throght catch block
+      so in that case -> not abnormally terminated...run succesfully and rest of code exceuted succesffuly
+
+      condition 3: and when in try block exception occured aritmetic type and in catch block we write nulllpointer exception
+      so in that case try block not found particular type of exception so in this case aslo our program terminated abnormally
+      and rest of code not exceuted
+
+      condition 4:
+      if no exception in try block then catch block not checked
+      not exception in try->catch block not checked
+
+      condition 5:
+      if try no give exception so catch required or not->catch is mandatory
+      only one is not allowed
+      only try is not allowed
+      **try without catch ,finally or resource declaration
+
+      condtion 5:
+      in between two block statment delcaration is invalid
+
+      condition 6:
+      exception occure at try then control goes to catch block..catch block match then it handle
+      execption rised other than try it is always abnormal termonattion
+
+      condition 7:
+      case1:
+      ratan
+      anu
+      exception occure
+      catch match
+      executed rest line
+      rest app exceuted
+      case 2:
+      execption occure at first line (10/0)
+      ratan
+      anu
+      in catch ->matched
+      other code exacuted
+      ..conclusion: ratan and anu normal but when exception occure at first line then remaining code not executed
+      once exception occur at try block remaining code of try not exceuted
+
+try catches cases:
+1.try with multiple catch block posiible
+2.try with single catch for multiple eception( exeception handle all the eception)
+3.try and catch block of diffrent(artihmentc, null pointer....) exception block(child->parent work)
+4. try->catch (exeption)->catch(arithmetic exceptioi)=no used of Arithmetical ...first match then second not used.
+
+
+case 1:
+requirement:
+print exception msg in different way:
+1.printing reference variable......toString()
+2.want just description.......getMessage()
+3.used in project=> print complete stack info..where actually exception rised=>PrintStacktrace()
+
+
+case 2:when we are not handling any exception
+default exception handler===when we are not handling exceptiion=>jvm will print exception msg=>jvm internally used printStacktrace()
+
+case 3:
+main thread-exception is in main
+when an exception rised in m3 method JVM not Shown any exception msg
+so it propagate to caller method who call it actually
+
+
+//only unchecked eception are propagated not checked
+//we can propagate unchecked using throws keyword
+
+_________________________________
+by using PIPE we can handle multiple exception
+
+
+case 1:
+by using pipe i can handle multiple exceptions....when unchecked exp these are not present in try block it will be ok
+
+case 2:
+when we declare checked exp it must be present in try block
+
+case 3:
+when we mixed both checkd and unchecked then checked exp must be present in try
+
+case 4:
+by using pipe symbol we declare multiple exp but both parent and child not allowed....
+either take parent class or child class but not both.
+
+_________________________________________________
+
+try with resources:
+try-catch=>valid
+try with resources valid
+try-finally =>valid
+
+try with resources are allowed->try(scanner sc=new scanner(system.in))....then no need to write catch block
+resources scanner=>closable=>java.lang.autoclosable
+
+try with checked resources at that time catch is required...file input string ..suppose file not found expection occure
+
+
+
+______________________________________________
+
+Java 7 Pipe Symbol (|) – Multi-Catch Exception Handling
+(Category / Case based explanation)
+What is Pipe Symbol Concept?
+
+Introduced in Java 7
+
+Used in catch block
+
+Allows handling multiple exceptions in a single catch block
+
+Called Multi-catch
+
+Syntax
+try {
+    // risky code
+}
+catch (Exception1 | Exception2 | Exception3 e) {
+    // handling code
+}
+
+CASE 1️⃣: Pipe Symbol with Unchecked Exceptions
+(Runtime / Automatic Exceptions)
+Key Points
+
+Unchecked exceptions need NOT be present in try block
+
+Compiler does NOT check them
+
+Program compiles even if try block never throws them
+
+Common Unchecked Exceptions
+
+ArithmeticException
+
+NullPointerException
+
+NumberFormatException
+
+ClassCastException
+
+StringIndexOutOfBoundsException
+
+Example
+try {
+    int x = 10 / 0;   // ArithmeticException
+}
+catch (ArithmeticException |
+       NullPointerException |
+       NumberFormatException e) {
+
+    System.out.println("Exception handled");
+}
+
+
+✅ Valid
+Even though only ArithmeticException can occur, others are allowed.
+
+CASE 2️⃣: Pipe Symbol with Checked Exceptions
+(Compile-time Exceptions)
+Key Rule ⭐
+
+👉 Checked exceptions MUST have a chance to occur in try block
+
+Common Checked Exceptions
+
+InterruptedException
+
+FileNotFoundException
+
+IOException
+
+❌ Invalid Example
+try {
+    Thread.sleep(1000);   // only InterruptedException
+}
+catch (InterruptedException | FileNotFoundException e) {
+    System.out.println("Handled");
+}
+
+
+❌ Compile-time Error
+
+FileNotFoundException is never thrown in try block
+
+✅ Valid Example
+try {
+    Thread.sleep(1000);
+    FileInputStream fis = new FileInputStream("abc.txt");
+}
+catch (InterruptedException | FileNotFoundException e) {
+    System.out.println("Handled");
+}
+
+
+✔ Both checked exceptions have a chance to occur
+
+CASE 3️⃣: Mixing Checked + Unchecked Exceptions
+(Allowed ✅)
+Rules
+
+You CAN mix checked & unchecked exceptions
+
+Checked exception MUST be possible in try block
+
+Unchecked exception presence is optional
+
+Example
+try {
+    Thread.sleep(1000);   // Checked
+    int x = 10 / 0;       // Unchecked
+}
+catch (InterruptedException | ArithmeticException e) {
+    System.out.println("Handled");
+}
+
+
+✅ Valid
+
+InterruptedException → present in try
+
+ArithmeticException → allowed automatically
+
+CASE 4️⃣: Parent & Child Exception in Pipe Symbol
+(NOT Allowed ❌)
+Rule ⭐⭐
+
+👉 Cannot combine Parent and Child exception together
+
+Example
+try {
+    FileInputStream fis = new FileInputStream("abc.txt");
+}
+catch (IOException | FileNotFoundException e) {
+    System.out.println("Handled");
+}
+
+
+❌ Compile-time Error
+
+FileNotFoundException is subclass of IOException
+
+Reason
+
+Parent already handles child
+
+Child becomes useless
+
+✅ Correct Way
+catch (FileNotFoundException e) { }
+
+
+OR
+
+catch (IOException e) { }
+___________________________________________________________________
+
+
+  finally:
+  ________________________________________________________________
+  always exceuted..
+  when we write try block ....there are many resources we open just like Scanner,connection,file Input output and bufferreader like that...
+  so we need to close that resources at the end ....
+  release the memory so when we write it into catch block theire is two condition aquires:
+  1: when our program run successfully then it will be okay
+  2: when our program abnormally terminated then our resources be same not closed
+  so that we need to write our resources which we need to close we must need to write it finally
+  block bcoz of finally always exceuted.
+  so for sure we write our release resources in finally block so at the end it must be closable.
+
+try{
+Scanner sc=new Scanner(System.in)
+connection
+fileInputStream
+sout("abnormal termiantion")
+
+catch(){
+when we write here ....no guarantee t close it 100% when abnormal cond occure
+}
+finally{
+close resourse here so it will definetly close
+}
+}
+
+
+// ____________nested try catch combination_______________
+
+1.try{
+
+}
+catch(){
+}
+---------------------------------------
+2.
+try{
+}
+catch(){
+}
+;;;;;;;
+try{
+}
+catch(){
+}
+
+-------------------------------------------
+
+
+3.
+try{}
+catch(){}
+catch(){}
+
+
+------------------------------------------------
+4.
+try{
+try{
+}
+catch(){
+}
+}
+catch(){
+}
+
+
+---------------------------
+5.
+
+try{
+}
+catch(){
+try{
+}
+catch(){
+}
+}
+
+
+------------------------------------------
+
+6.
+
+try{
+try{
+}
+catch(){
+}
+
+}
+catch(){
+try{
+}
+catch()
+{
+}
+}
+____________________________________________________
+Throws keyword:
+___________________________________________________
+
+1) student delegates to hod ,hod delegate to principal,princiapl delegate to officeboy and principal handling the exception using try and catch block
+
+2)All are delegating ..throwing exception so main is handling exception,so jvm responsible to handling exception
+
+3) one method throw multiple exception so we can throw multiple exception using pipe symbol
+
+4)insteed of throwing multiple exception we can throw one parent exception only
+
+5)one method trows two exception but in that  can handle it exception and one is delegate exception
+
+note: in java unchecked expection are automatically propagated
+note:checked exception are propagated using throws keyword
+
+
+case : 1
+class test{
+void m1(){
+sout(10/0)
+}psvm{
+Test t=new Test();
+try{
+t.m1();}
+catch(ArithmeticException e){
+sout(10/5)
+}
+}
+}
+case2: here throws keyword not required bcoz unchecked exception are automatically propagated
+class test{
+void m1() trows ArithmeticException{
+sout(10/0);
+}
+psvm(){
+Test t=new Test();
+try{t.m1();
+}
+catch(ArithmeticException a){
+sout(10/5);}}
+}
+
+________________________________
+exception handling overriding rules:
+
+rule 1:
+parent class contain override method and child class contain ovveridding method ..if parent class does not throw any exeption then cild class only throw unchecked exception
+ovveridden method does not throw any exception then overridding method can throws unchecked excep[tion..but not checked exception.
+
+package ExceptionHandling.overrideRule;
+
+public class Rule1 {
+    //case:1
+    void marriage() throws InterruptedException {
+        System.out.println("parent did marriage ");
+    }
+}
+class Child extends Rule1{
+    void marriage() throws ArithmeticException,  {
+        System.out.println("im child of rule1-parent");
+    }
+}
+___________________________
+case:2
+
+package ExceptionHandling.overrideRule;
+
+public class Rule1 {
+    //case:1
+    void marriage() throws InterruptedException {
+        System.out.println("parent did marriage ");
+    }
+}
+class Child extends Rule1{
+    void marriage() throws InterruptedException  {
+    sout("Thread.sleep(1000)")
+    }
+        System.out.println("im child of rule1-parent");
+    }
+}
+
+=====================================
+rule:2
+-No exception in ovverriding method..when parent throw exception and child does not throw exception
+-parent throwws arithmetic exception ,child also arithmetic exception,,then no issue
+
+package ExceptionHandling.overrideRule;
+
+public class Rule2 {
+
+//    case 1:no exception in overriding method
+//parent class throw any checked or unchecked exception then child class does not throw any exception
+    class Parent{
+        void marriage()throws InterruptedException{
+            Thread.sleep(1000);
+        }
+    }
+    class child extends Parent{
+        void marriage(){
+
+        }
+
+    }
+
+
+//    case 2: in overriding method same exception
+//parent and child showing same execption no issues
+
+    class Parent{
+        void marriage()throws ArithmeticException{
+
+        }
+    }
+    class Child extends Parent{
+        void marriage() throws ArithmeticException{
+
+        }
+    }
+}
+
+case:3=subclass Exception:
+//parent class throwing Exception and child throw Arithmetic which is subclass of exception so no issues
+valid:
+class Parent{
+void marriage() throws Exception{
+}
+}
+class Child extends Parent{
+void marriage() throws ArithmeticException{
+}
+}
+
+
+case:4=parent throwing child exception nd child is throwing parent exception =invalid
+/parent theowing ArithmeticException and child throwing Exception which is invalid
+class Parent{
+void marriage() throws ArithmeticException{}
+
+}
+class Child extends Parent{
+void marriage() throws Exception{}
+
+}
+//overridden method does not throw Exception
+_____________________________________________________________________
+
+predefied exception like ArithmeticException=jvm handle it
+in case of userdefined Exception we are created suppose InvalidAgeException then we create object of this by new InvalidAgeException() and throws it to the JVM so now Jvm will able to handle this userdefined Exception
+//we handover object to the JVM
+
+two types of user Exception:
+checked=exception class we only need to extends exception
+unchecked=our normal java has unchecked class we need to extends runtimeException
+
+
+throw keyword:
+UserException:
+1.user Checked Exception:
+class MyException extends Exception{
+}
+two ways to create:
+a.0-ars constructor
+b. parameterized constructor approach
+_________________________________________
+2.user unchecked exception:
+class MyException extends RuntimeExeception]{
+
+}
+it has also two ways to create:
+a.0-args constructor
+b.params cons approach
+
+example:
+steps 1:
+create user defined checked Exception:
+//InvalidAgeException.java
+ class InvalidAgeException extends Exception
+ {
+ //default constructor here:0-args constructor
+ }
+
+
+
+ step 2: use exception this in project
+ so ,
+
+//Test.java
+ class Test{
+ Static void CheckStatus(int age){
+ if(age>20){
+ sout("Eligible to marriage");
+ }
+ else{
+ throw new InvalidAgeException();//create object and handover to jvm with help of throws
+ }
+ }
+ psvm{
+ Scanner sc=new Scanner(System.in);
+ Sout("enter Your age");
+ int age=sc.nextInt();
+ Test.CheckStatus(age);
+ }
+ }
+
+ we give throws InvalidAgeException and delibarate to main to jvm
+
+__________________________
+example 2
+with param constu
+both are same only diff is that...default constru case just print Exception name
+and in case of parameterized constructor exception name with some information
+
+and in case of unchecked exception only we chage extends RuntimeException
+in case of uncheckd ..throws && try catch is not required ..optional but recommanded
+process is same:
+create exception and use in project
+
+
+throw: user defind object: recommanded
+throw: predefined exception obje: not recomamnded
+___________________________________________
+different types of Exception:
+arithmetic
+arrayindexoutofbound
+StringIndexOutOfBound
+NullpointerException
+String str=null;
+syso(str.lenght();
+
+numberFormatExce=conversion not possible
+classcastException=converison is not possible
+InputMismatch=data is wrong
+
+threadpriority Exception
+negativeArraySizeException
+IlleagalThreadStateException
+________________________________________________________
+different types of errors:
+
+out of memory errror=java space is full
+stack overflow error
+noclassDeffoundError
+assertionError
+_________________________________________________________
+diffference between noclassdeffoundError and classnotfoundException

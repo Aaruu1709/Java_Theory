@@ -1,0 +1,293 @@
+java 8 by durga sir
+____________________________________________
+features of java - 8:
+
+-concise code
+-Enabling functional Programming
+
+1.Lambda Expression
+2.Functional Interface
+3.Default methods and static methods
+4.Predefined functional interfaces
+  -Predicate
+  -Function
+  -Consumer
+  -Supplier
+  -etc
+5.Double Colon Operator(::)
+  method reference
+  constructor reference
+6.Streams
+7.Date and Time API
+8.Optional Class
+9.Nashron Javascript Engine
+etc
+___________________________________________________
+1️⃣ How Lambda Expressions were introduced in Java:
+-to make Java more modern,
+ concise,
+ and functional-programming friendly.
+ - before java 8, java programming nedded more lengthy code to write even for small pieces of logic
+ before java 8, (Anonymous class):
+
+ Runnable r=new Runnable(){
+ public void run(){
+ sout("hello");
+ }
+ };
+
+ with lambda Expression:
+ Runnable r=()->System.out.println("hello");
+
+ -So the goal was to make Java shorter, clearer, and easier to write.
+
+ 2️⃣ Reason Behind Introducing Lambda Expressions;
+ 1. Reduce Boilerplate Code
+ -Earlier Java required writing a lot of unnecessary code.
+ -Lambda allows writing behavior in a single line.
+ example before java 8:
+ Collection.sort(list,new Comparator<Integer>(){
+
+ return a-b;
+ }
+ });
+
+ After java 8:
+ Collection.sort(list,(a,b)->a-b);
+
+ 2. Support Functional Programming
+ Modern languages like:
+ Scala
+ Python
+ JavaScript
+ already supported functional programming.
+ Java needed similar capabilities to stay modern.
+
+ 3. Enable Powerful APIs (like Streams)
+
+ Lambda expressions enabled the Stream API in Java 8.
+ list.stream()
+     .filter(x->x>10)
+     .forEach(x->sout(x));
+
+ 4. Easier Parallel Processing
+ With streams + lambda, Java can easily run operations in parallel.
+ Example:
+ list.parallelStream()
+     .filter(x -> x > 10)
+     .forEach(System.out::println);
+ -This helps with multi-core processing.
+
+ what is Lambda Expression:
+ -It is an Anonymous function
+ -nameless
+ -without return type
+ -without modifiers
+- it is a short way to implement a functional interface using an anonymous function
+syntax:  (parameters)->expession
+example: (a,b)-> a+b
+
+4️⃣ Uses of Lambda Expressions in Java:
+To reduce the amount of code (write shorter code).
+To implement functional interfaces easily.
+To iterate through collections like List, Set, and Map.
+To filter data from collections.
+To sort collections easily.
+To work with the Stream API for data processing.
+To perform parallel processing for better performance.
+To make code more readable and cleaner.
+To replace anonymous classes in many cases.
+To write functional-style programming in Java.
+
+
+Steps to Convert to Lambda Expression:
+1️⃣ Start with Anonymous Class (Old Way)
+Comparator<Integer> c = new Comparator<Integer>() {
+    public int compare(Integer a, Integer b) {
+        return a - b;
+    }
+};
+
+2️⃣ Remove Class Declaration
+Remove:
+
+new Comparator<Integer>()
+{ } class block
+Now we only focus on the method part.
+3️⃣ Remove Method Name and Modifier
+Remove:
+public
+int
+compare
+Keep parameters and logic only.
+(Integer a, Integer b) {
+    return a - b;
+}
+
+4️⃣ Add Lambda Arrow ->
+(Integer a, Integer b) -> {
+    return a - b;
+}
+
+5️⃣ Remove Parameter Data Types (Optional)
+Java can automatically detect types.
+
+(a, b) -> {
+    return a - b;
+}
+
+6️⃣ Remove Curly Braces if One Line
+(a, b) -> return a - b
+
+7️⃣ Remove return if Single Expression
+
+Final Lambda Expression:
+
+(a, b) -> a - b
+
+Final Lambda Code
+Comparator<Integer> c = (a, b) -> a - b;
+
+example:
+public void m1(String s)
+{
+return s.length();
+}
+
+ans:  s->s.length()
+
+
+functional interface:only one method(single method)
+runnable=>run()
+comaparable=>comapreTo()
+comapreTo=>comapre()
+ActionListener=>actionPerformed()
+Callable=>call()
+
+single Abstract method
+functional interface=>call lambda expression
+___________________________________________________________________
+
+session 2:
+___________________________________________________________
+without curly braces we can not use return keyword
+compiler will consider returned value autoamtically
+
+within curly braces if we want to return some value compasary we should use return statement
+1️⃣ Lambda Without Curly Braces { }
+When the lambda has only one expression, you do NOT use return.
+The compiler automatically returns the value.
+Example
+interface Add {
+    int sum(int a, int b);
+}
+
+public class Test {
+    public static void main(String[] args) {
+
+        // Lambda without curly braces
+        Add obj = (a, b) -> a + b;
+
+        System.out.println(obj.sum(10, 20));
+    }
+}
+
+Explanation
+(a, b) -> a + b
+
+
+Here:
+No { }
+No return
+Compiler automatically returns a + b
+✔ Output
+30
+______________________________________________________
+2️⃣ Lambda With Curly Braces { }
+
+When you use curly braces, the lambda body behaves like a normal method block.
+So return becomes compulsory if the method returns a value.
+
+Example
+interface Add {
+    int sum(int a, int b);
+}
+
+public class Test {
+    public static void main(String[] args) {
+        // Lambda with curly braces
+        Add obj = (a, b) -> {
+            return a + b;
+        };
+        System.out.println(obj.sum(10, 20));
+    }
+}
+
+Explanation
+(a, b) -> {
+    return a + b;
+}
+
+
+Here:
+{ } used
+So return statement is required
+✔ Output
+30
+____________________________________
+3️⃣ Wrong Example (Compiler Error)
+Add obj = (a, b) -> {
+    a + b;
+};
+
+❌ Error because:
+Curly braces used
+But return keyword missing
+Correct version:
+Add obj = (a, b) -> {
+    return a + b;
+};
+
+@FunctuionalInterface
+interface A{
+public void hello();
+}
+
+@FunctionalInterface
+interface B extends A{
+public void hello();
+}
+
+//valid
+
+_________________________________________________
+lambda with functional interface
+_________________________________________________________
+session 3:
+__________________________________________________________________
+lambda expression multithreading and colections
+
+class MyRunnable extends RUNNABLE{
+public void run(){
+for(int i=0;i<1-){
+sout("child");
+}
+}
+}
+class Test{
+psvm{
+MyRunnable r=new MyRunnable();
+t.start();
+for(int i=0;i<10;i++){
+sout("main thread")
+}
+}
+
+
+
+
+
+
+
+
+}
