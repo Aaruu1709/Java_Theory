@@ -13,7 +13,7 @@ b.abstract methods:
 -the absract method end with semicolon
 -to represent the method as a abstract use absract modifier
 
-abstract void mul();
+abstract void multiplication();
 
 based on above imple the classes are divided into two types:
 normal classes
@@ -42,8 +42,8 @@ abstract classes
  void m2(){}
  void m3(){}
  }
- note:abstract class may contains abstract or may not contain
- abstract method but for abstract classes object creation is not allowed.
+ note:abstract class may contains abstract or may not contain abstract method but for abstract
+ classes object creation is not allowed.
 
 
 example 1:
@@ -92,7 +92,7 @@ public class Example1 {
 1. one abstract class contain multiple imple classes
 2. the abstract class can hold impl class object
 
-
+--------------------------------------------------------------
 Example 2:
 package AbstractClass;
 
@@ -119,15 +119,16 @@ public class Example2 {
     }
 }
 
-
+------------------------------------------------
 example 3:inside the abstract class possible to declare main method
 abstract class Demo{
 psvm{
 sout("this is absratct method");
 }
 }
-
+-------------------------------------------------------
 example 4:
+
 abstract class Demo{
 Demo(){
 sout("Abstract class:demo construcor");
@@ -144,7 +145,8 @@ new Test();
 note:inside the abstract class it is posible to declare the variable ,method,cons,blocks
 
 
-absract and private combination is illegal:
+//absract and private combination is illegal:
+
 abstract means:
 No body
 Must be implemented by child class
@@ -154,6 +156,7 @@ private mean:
 Accessible only inside the same class
 NOT visible to child classes
 Cannot be overridden
+
 =put them together:
 This says:
 “Child class MUST override this method”
@@ -188,7 +191,8 @@ abstract private void morning(String name);
 }
 error:illegal combinatiion abstract+private
 
-note:abstract methods means we have override that method in child classes but final , static, private methods
+note:abstract methods means we have override that method in child classes but
+final , static, private methods
 not possible to override so the combination of modifires is illegal
 
 case 4:
@@ -197,8 +201,10 @@ abstract class Test{
 abstract void add(int a,int b);
 abstract void add(int a,int b,int c);
 }
+//overloading is possible
 
 case 5:  can we override abstract method:yes
+
 case 6:
 Assignment:
 abstract class services{
@@ -212,14 +218,11 @@ complete impl in three child classes
 
 
 
-
-
-
  _____________________________________
 normal classes and abstarct classes:
 absract class may contain abstarct method or may not contain abstract method
 
-if any one abstarct metod present in abstract class which we declare class as abstarct class
+if any one abstarct method present in abstract class which we declare class as abstarct class
 but class may not have any abstarct method still we can declare class abstarct
 we can not create object of abstact class.
 when we create abstact method then we need to provide class as abstact...rather than it will get error like
@@ -234,19 +237,21 @@ void m1();
 abstarct void m2();
 }//valid
 
-we need to override metod in child class to write implementation
-in child class
+we need to override method in child class to write implementation in child class
 
 abstact class can hold child class object
 
 example 1:
-abstact class contain abstact and normal method....but we need to implent all those methods in chid class and
-create object of child class and access that mehtods
+abstact class contain abstact and normal method....but we need to implement all those methods
+in chid class and create object of child class and access that mehtods
 
 example 2:
-we write Abstact method in topmost class and try to implemet it in next child (test1) but this also unavle to implement every method so this test1 also abstact
-again we create test2 and write implementation of next one method but this class also unable to create all imple,,so i have declare that class also abstact finnaly
- we create Test3 class and here implementation last method so now all methodhas body so now we are able to create that class test3 object
+-we write Abstact method in topmost class and try to implemet it in next child (test1)
+ but this also unable to implement every method so this test1 also abstact
+-again we create test2 and write implementation of next one method but this class also unable to create
+all imple,,so i have declare that class also abstact finnaly
+- we create Test3 class and here implementation last method so now all method  has body so now
+we are able to create that class test3 object
 ....but not before ....either we implement all method or declare that class to abstact.
 
 we can take any number of child classes no issue..only we have to complete implementation
@@ -282,7 +287,8 @@ example 6:
 inside abstact class constructor declaration is possible
 //where constructor are executed but object is not created
 Parent class constructor ALWAYS executes first, then child class constructor.
-abstact class constructor extends only when we declare child class:no child class abstract class construcor not possible
+abstact class constructor extends only when we declare child class:
+no child class abstract class construcor not possible
 -to execute abstract class constructor child class is mandatory
 
 example 7:
@@ -299,6 +305,7 @@ abstract class AbstractBlocks {
     {
         System.out.println("abstact class instance block");
     }
+
     static {
         System.out.println("abstract class static block");
     }
@@ -339,7 +346,7 @@ interview que:
 abstact class Test{
 public final abstact void m1();
 }
-error:illegal combination of modifiers:abstactc and final
+error:illegal combination of modifiers:abstact and final
 
 abstract class Test{
 Static abstract void m1();
@@ -350,7 +357,7 @@ error:illegal combination of modifiers : abstract and static
 so that we understand we can override absractc mehtod but can not private, final, static
 
 - weaker access privialge
-abstract class test{
+abstract class Test{
 public abstract void m1();
 }
 class Test1 extends Test{

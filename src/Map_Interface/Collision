@@ -1,0 +1,75 @@
+
+collision
+--------------------------------------------------------------
+
+👉 Collision happens when two different keys produce the same hashCode
+and go to the same bucket.
+-👉 Collision happens when two different keys produce the same hashCode and
+ go to the same bucket.
+
+ real life example:
+ Book A → hashCode → Shelf 5
+ Book B → hashCode → Shelf 5
+ 👉 Now both are in same place → COLLISION 💥
+
+ ❓ Why does collision happen?
+ 1. Limited buckets (space problem)
+ HashMap has limited bucket size.
+
+ 2. hashCode is not unique
+ Different objects can produce same hashCode.
+ Example:
+ Key1 → 101
+ Key2 → 101   ❌ same hashCode
+
+ ⚙️ What problem does collision create?
+ Without handling collision:
+ ❌ Wrong value returned
+ ❌ Data overwrite
+ ❌ Slow search (O(n))
+ ❌ HashMap becomes useless
+
+
+ 🛠️ How Java handles collision
+ In Java HashMap:
+ ✔ 1. Linked List (Old method)
+ When collision happens:
+ Bucket 5:
+    Key1 → Value1 → Key2 → Value2 → Key3
+ 👉 Java checks each one using equals()
+
+ ✔ 2. Balanced Tree (Java 8+ improvement)
+ If too many items in same bucket:
+ Linked List → becomes Red-Black Tree 🌳
+
+ 👉 hashCode = bucket number
+ 👉 collision = crowd in same bucket
+ 👉 solution = list or tree to manage crowd
+
+ 🌳 When HashMap converts List → Tree (Important Notes)
+ HashMap uses Linked List initially for handling collisions
+ When too many elements are added in the same bucket, performance becomes slow (O(n))
+ To improve performance, Java converts the list into a Red-Black Tree
+
+ 🔥 Conversion Conditions (VERY IMPORTANT)
+ ⭐ 1. TREEIFY_THRESHOLD
+ If number of nodes in a bucket ≥ 8
+ Then Linked List → Tree
+ bucket size ≥ 8 → convert to Tree
+
+ ⭐ 2. MIN_TREEIFY_CAPACITY
+ HashMap size must be ≥ 64
+ Otherwise resizing happens instead of tree conversion
+ if (capacity < 64) → resize
+ if (capacity ≥ 64) → treeify
+
+ ⭐ 3. UNTREEIFY_THRESHOLD
+ If nodes reduce to ≤ 6
+ Tree → back to Linked List
+ bucket size ≤ 6 → convert back to List
+
+ 🧠 Why these values?
+ 8 → balance between memory & performance
+ 64 → avoid unnecessary tree creation for small maps
+ 6 → avoid frequent switching (optimization)
+ -----------------------------------------------------------

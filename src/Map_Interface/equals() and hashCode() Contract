@@ -1,0 +1,105 @@
+
+🔥 equals() and hashCode() Contract
+--------------------------------------------------
+👉 It is a rule set that Java expects us to follow when
+ overriding equals() and hashCode().
+
+📜 The Contract (Very Important Points)
+1. If two objects are equal → hashCode must be same ✔
+a.equals(b) == true
+⇒ a.hashCode() == b.hashCode()
+2. If hashCode is same → objects may or may not be equal (collision allowed) ⚠️
+a.hashCode() == b.hashCode()
+⇒ a.equals(b) may be true or false
+3. If objects are not equal → hashCode SHOULD ideally be different ✔
+(not mandatory but recommended for performance)
+
+4. Same object → always same hashCode ✔
+a.equals(a) → true
+a.hashCode() → same always
+
+📦 Why this contract is important?
+Because in Hash-based structures like:
+HashMap
+HashSet
+👉 Java uses:
+1. hashCode → find bucket
+2. equals → check exact match
+If contract breaks ❌:
+Wrong bucket selection
+Duplicate entries
+Data not found
+Unexpected behavior
+
+“The equals and hashCode contract states that if two objects
+are equal according to equals(), then their hashCode must be the same
+ However, if two objects have the same hashCode, they may or may not
+ be equal. This contract ensures correct behavior
+ in hash-based collections like HashMap and HashSet.”
+
+-----------------------------------------------------------
+import java.util.*;
+
+class Student {
+    int id;
+    String name;
+
+    Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    // WHY equals()?
+    // 👉 used to compare TWO objects logically (data comparison)
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        // WHY? → same memory object = directly equal
+
+        if (o == null || getClass() != o.getClass()) return false;
+        // WHY? → ensure same type (Student vs Student only)
+
+        Student student = (Student) o;
+        // WHY? → convert Object → Student to access fields
+
+        return id == student.id && name.equals(student.name);
+        // WHY? → real data comparison
+    }
+
+    // WHY hashCode()?
+    // 👉 used by HashMap to decide BUCKET location
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+        // WHY? → converts object data into a unique integer
+        // same data → same hashCode → same bucket
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Map<Student, String> map = new HashMap<>();
+
+        Student s1 = new Student(1, "Aman");
+        Student s2 = new Student(1, "Aman"); // same data but different object
+        Student s3 = new Student(2, "Raj");
+
+        map.put(s1, "Java Developer");
+        // STEP:
+        // 1. s1.hashCode() → bucket decided
+        // 2. store value in that bucket
+
+        System.out.println("Getting with s2: " + map.get(s2));
+        // STEP:
+        // 1. s2.hashCode() → same bucket as s1
+        // 2. equals() → true
+        // 3. return value
+
+        System.out.println("Getting with s3: " + map.get(s3));
+        // STEP:
+        // 1. different hashCode → different bucket
+        // 2. no match → null
+    }
+}

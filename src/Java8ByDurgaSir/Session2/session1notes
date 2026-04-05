@@ -38,7 +38,8 @@ public int squareIt(int n){
 return n*n;
 }
 
-int n->{return n*n}//only one stmt so remove curly but without curly we should not write return compiler can give error
+int n->{return n*n}//only one stmt so remove curly but without curly we should not write return
+ compiler can give error
 n->n*n;//consise/small code
 
 
@@ -46,13 +47,13 @@ n->return n*n;------>invalid=>..we can not return without {}
 n->{return n*n;};----->valid
 n->{return n*n};------>Invalid(semicoln missing..java stsmt end with semicolon)
 n->n*n;------>valid
-n->{n*n;};---->invalid(last rule)
+n->{n*n;};---->invalid(last rule)//we should use return Statemnt and java code end with semicolon
 
  Return Rule:
 -without curly we can not use return keyword.
 compiler will consider returned value automatically
 -within curly if we want to return some valve compalsory
- we should use return statement
+ we should use return statement and end with semicolon
 
  ✅ 1. Without curly braces {}
  n -> n * n
@@ -297,7 +298,7 @@ public void m2();
 
 
   interface Inter{
-  pulic void add(int a, int b);
+  public void add(int a, int b);
   }
 
   class Imple extends Inter{

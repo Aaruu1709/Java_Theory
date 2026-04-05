@@ -84,7 +84,7 @@ class Parent {
                     System.out.println("____________________________");
 
                     //using nameless object:
-                    Student s2 = new Student(1, "sauruu", "Asha marine International school", new Parent("rohini","sankapal"), new Marks(50,70,80), new Address2(300,"narhe",412219,"india"));
+                    Student s2 = new Student(1, "sauruu", "Asha marine International school", new Parent("rohini","Gaikwad"), new Marks(50,70,80), new Address2(300,"Philipines",412219,"OutOfcountry"));
                     s2.status();
 
 

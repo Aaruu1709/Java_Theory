@@ -1,0 +1,107 @@
+
+-----------------------------------------------------
+TreeMap
+-----------------------------------------------------
+1. TreeMap stores data in sorted order
+Automatically sorts keys in ascending order (natural order)
+Example: 1, 2, 3 or A, B, C
+🔥 2. Sorting is based on keys (not values)
+TreeMap always sorts by key only
+Values have no role in ordering
+🔥 3. Uses Red-Black Tree internally
+TreeMap is implemented using a Self-balancing Red-Black Tree
+So operations are always balanced
+🔥 4. Time complexity is O(log n)
+put(), get(), remove() → O(log n)
+Slower than HashMap (O(1)) but sorted
+🔥 5. Null key is NOT allowed
+❌ TreeMap does not allow null keys
+Because it needs to compare keys for sorting
+🔥 6. Null values ARE allowed
+✔ You can store multiple null values
+Only keys restriction exists
+🔥 7. Custom sorting using Comparator
+You can define your own sorting logic
+new TreeMap<>(Comparator.reverseOrder());
+
+🔥 8. Implements NavigableMap interface
+Supports navigation methods like:
+ceilingKey()
+floorKey()
+higherKey()
+lowerKey()
+🔥 9. Not synchronized (not thread-safe)
+TreeMap is not thread-safe
+Use Collections.synchronizedMap() if needed
+🔥 10. Best when sorted order is required
+
+Use TreeMap when:
+
+You need sorted keys
+You need range operations
+You need navigation features
+
+-----------------------------------------
+1. NavigableMap is a sub-interface of SortedMap in Java
+2. It provides navigation methods to move through keys in a sorted map
+3. It is implemented by TreeMap
+4. Keys are always stored in sorted order (ascending by default)
+5. It provides methods to get closest matches for a given key
+6. ceilingKey() returns smallest key ≥ given key
+7. floorKey() returns largest key ≤ given key
+8. higherKey() returns smallest key > given key
+9. lowerKey() returns largest key < given key
+10. It is useful when we need range-based searching and navigation in maps
+--------------------------------------------------------------
+
+//Focus mainly on:
+
+  ceilingKey, floorKey, higherKey, lowerKey
+  firstKey, lastKey
+  subMap, headMap, tailMap
+
+  ------------------------------
+
+  ✅ TreeMap Methods Table
+ | Method             | Description                 |
+ | ------------------ | --------------------------- |
+ | `put(K, V)`        | Inserts key-value pair      |
+ | `get(K)`           | Returns value for given key |
+ | `remove(K)`        | Removes key-value pair      |
+ | `containsKey(K)`   | Checks if key exists        |
+ | `containsValue(V)` | Checks if value exists      |
+ | `size()`           | Returns number of entries   |
+ | `isEmpty()`        | Checks if map is empty      |
+ | `clear()`          | Removes all entries         |
+
+  🔹 Sorting & Navigation Methods
+| Method          | Description              |
+| --------------- | ------------------------ |
+| `firstKey()`    | Returns smallest key     |
+| `lastKey()`     | Returns largest key      |
+| `ceilingKey(K)` | Smallest key ≥ given key |
+| `floorKey(K)`   | Largest key ≤ given key  |
+| `higherKey(K)`  | Smallest key > given key |
+| `lowerKey(K)`   | Largest key < given key  |
+
+  🔹 Entry-based Methods
+ | Method             | Description                   |
+ | ------------------ | ----------------------------- |
+ | `firstEntry()`     | Returns first key-value pair  |
+ | `lastEntry()`      | Returns last key-value pair   |
+ | `pollFirstEntry()` | Removes & returns first entry |
+ | `pollLastEntry()`  | Removes & returns last entry  |
+
+  🔹 View Methods
+ | Method       | Description             |
+ | ------------ | ----------------------- |
+ | `keySet()`   | Returns all keys        |
+ | `values()`   | Returns all values      |
+ | `entrySet()` | Returns key-value pairs |
+
+  🔹 Range Methods
+  | Method                   | Description                |
+  | ------------------------ | -------------------------- |
+  | `subMap(fromKey, toKey)` | Returns part of map        |
+  | `headMap(toKey)`         | Keys less than given key   |
+  | `tailMap(fromKey)`       | Keys greater than or equal |

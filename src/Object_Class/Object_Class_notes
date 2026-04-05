@@ -1,0 +1,87 @@
+
+-------------------------------------------------------
+Object Class in Java
+-----------------------------------------------------
+Object class (in java.lang) is the root of the Java class hierarchy.
+Every class in Java either directly or indirectly extends Object.
+
+👉 Object class is the parent (superclass) of all classes in Java
+👉 Every class you create:
+class Student {}
+👉 Internally becomes:
+class Student extends Object {}
+-“Every object in Java is ultimately an Object class object”
+
+🧠 Why Object class is needed (Simple Points)
+Java needs one common parent for all classes
+To make all objects behave in a standard way
+To avoid writing same logic again and again
+To allow generic handling of objects
+To provide built-in common methods (equals, hashCode, etc.)
+
+❌ Problems before Object class (imagine if not present)
+No common type → cannot store different objects together
+No standard methods → every class must write its own logic
+Code duplication → same methods repeated in every class
+Difficult to build generic features (like collections)
+No uniform way to compare or print objects
+
+🔥 How Object class helps in polymorphism
+✅ Point 1: Common parent for all classes
+
+👉 Every class extends Object
+
+class Student extends Object
+class Employee extends Object
+
+
+👉 So we can write:
+
+Object obj1 = new Student();
+Object obj2 = new Employee();
+
+
+✔ SAME reference, different objects
+
+✅ Point 2: One variable → many forms
+Object obj;
+
+obj = new Student();
+obj = new Employee();
+obj = new Car();
+
+
+👉 This is polymorphism ✔
+
+✅ Point 3: Useful in collections
+List<Object> list = new ArrayList<>();
+
+list.add(new Student());
+list.add(new Employee());
+list.add("Hello");
+
+
+👉 Different types stored together ✔
+
+✅ Point 4: Method handling
+public void print(Object obj) {
+    System.out.println(obj.toString());
+}
+
+
+👉 Works for ANY object ✔
+
+🧠 SIMPLE TABLE
+Method	Use
+equals()	compare objects
+hashCode()	generate hash
+toString()	print object
+getClass()	class info
+wait()	pause thread
+notify()	wake thread
+notifyAll()	wake all threads
+clone()	copy object
+finalize()	cleanup (deprecated)
+
+
+

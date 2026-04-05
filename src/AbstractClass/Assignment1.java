@@ -9,12 +9,15 @@ abstract class Services{
 class AmazonService extends Services {
 
 //    @Override
-    String login(String username, String password) {
+    String login(String username, String password)
+    {
         return "Amazon login successful for " + username;
     }
 
 //    @Override
-    double totalBill(String productName, double pcost, int pquantity) {
+    double totalBill(String productName, double pcost, int pquantity)
+    {
+        System.out.println("product name here..."+productName);
         return pcost * pquantity;
     }
 
@@ -40,6 +43,9 @@ class FlipkartService extends Services {
     double totalBill(String productName, double pcost, int pquantity) {
         double discount = 0.10; // 10% discount
         return (pcost * pquantity) - (pcost * pquantity * discount);
+        //20*2=40
+        //20*2*10=40*0.10=4.00
+        //40-4=36
     }
 
 //    @Override

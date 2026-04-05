@@ -2,7 +2,7 @@ package AbstractClass;
 
 abstract class AbstractConstructor {
     AbstractConstructor(){
-        System.out.println("Abstract class constructor");
+        System.out.println("Abstract class parent constructor");
     }
 
 }

@@ -8,7 +8,7 @@ gr.of constant=public static final
 //before enum:
 class week{
 public static final Week MON;
-public stati fianl Week TUE;
+public static final Week TUE;
 public static final Week WED;
 }
 
@@ -20,7 +20,7 @@ MON,TUE,WED;//public static final
 example:
 
 enum Week{
-MON,TUE,WED;//const:publuc static final
+MON,TUE,WED;//const:public static final
 }
 psvm{
 Week w1=Week.MON;
@@ -38,7 +38,7 @@ sout(ww+ " " +ww.ordinal());
 
 
 Observation:
-//enum code before compilation     :week.java
+enum code before compilation     :week.java
 enum Week
 {
 MON,TUE,WED;

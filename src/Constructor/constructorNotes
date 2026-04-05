@@ -13,6 +13,29 @@ rules:
 
 class Test{
 //0-args cons
+
+-used to initialize an object
+👉 To initialize object values at the time of object creation
+-It has the same name as the class
+-It is called automatically when an object is created
+
+📦 Uses of Constructor:
+-Constructors are used to assign initial values to instance variables when the object is created
+-If no values are passed, constructor can assign default values to variables
+-👉 Object creation and initialization happen in a single line, making code easier to understand
+-👉 It means we can create objects in different ways based on the information we have
+-👉 “Using multiple constructors, we can create objects with different sets of data” means:
+we can create objects:
+       new Student() → no data
+       new Student(101) → partial data
+       new Student(101, "Rahul") → full data
+  -----------------------------------------------------------------------
+🧠 What is Constructor Chaining?
+👉 Constructor chaining means calling one constructor from another constructor in the same class
+-we can do this using : this()
+-by using this() we can calls another constructor of the same class
+-but It must be the first statement inside the constructor
+
 Test(){
 logics
 }
@@ -25,12 +48,13 @@ there are two types of  constructor:
 1.default->compiler->0-args const with empty implememntation
 2.userdefined-> developer-> 0-args or parameterised const
 
--constror are special method to write the logic and these logic are executed
+-constror are special method to write the logic and these logic are
+executed
  when we create object
 -construcotr execute when we create object of class
 
 when we not generator any const=compiler generate it
-when we declare=comiler not generate
+when we declare=compiler not generate
 
 
 example:

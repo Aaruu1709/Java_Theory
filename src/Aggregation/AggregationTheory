@@ -51,7 +51,7 @@ Hero h=new Hero("aaruu",26,5,a,m);
 sout("________________________");
 
 //nameless object
- Hero h2=new Hero("sauruu",26,168,new Address(200,"Maltahn","Pune","Maharashtra"),new Movie("Saiyara","Marjava"));
+ Hero h2=new Hero("sauruu",26,168,new Address(200,"Malthan","Pune","Maharashtra"),new Movie("Saiyara","Marjava"));
 
 }
 }

@@ -1,0 +1,4 @@
+package Map_Interface;
+
+public class AddMethod {
+}
