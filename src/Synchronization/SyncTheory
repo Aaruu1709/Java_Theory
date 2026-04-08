@@ -17,38 +17,39 @@ With synchronization, only one thread can access the account at a time,
 
 
 Why Synchronization Comes (in Multithreading)
-When we have multiple threads running at the same time,
- they may access the same data or resource simultaneously.
-This can lead to problems like incorrect results, inconsistent data,
+-When we have multiple threads running at the same time,
+-they may access the same data or resource simultaneously.
+-This can lead to problems like incorrect results, inconsistent data,
  or program crashes.
-Synchronization is used to overcome these problems.
-Avoid unexpected behavior: program doesn’t crash or give wrong output.
+-Synchronization is used to overcome these problems.
+-Avoid unexpected behavior: program doesn’t crash or give wrong output.
 
 1.Race Condition:
-When two threads try to change the same data at the same time,
- the final result depends on which thread finishes first.
-Synchronization prevents this by allowing one thread at a time.
+-When two threads try to change the same data at the same time,
+-the final result depends on which thread finishes first.
+-Synchronization prevents this by allowing one thread at a time.
 2.Data Inconsistency
-Shared resources can get corrupted if multiple threads access them together.
-Synchronization keeps the data consistent and correct.
+-Shared resources can get corrupted if multiple threads access them together.
+-Synchronization keeps the data consistent and correct.
 3.Unexpected Behavior / Bugs:
-Without synchronization, programs may behave unpredictably.
-Synchronization ensures reliable and predictable execution.
+-Without synchronization, programs may behave unpredictably.
+-Synchronization ensures reliable and predictable execution.
 ----------------------------------------------
 solution:
 Synchronization:
 
-Synchronization addresses such issues by ensuring that only one thread
+-Synchronization addresses such issues by ensuring that only one thread
 at a time can access a critical section of code or a shared resource
-associated with an object. This exclusive access prevents race
+associated with an object.
+-This exclusive access prevents race
 conditions and maintains data consistency.
-Java provides two primary mechanisms for synchronization:
+-Java provides two primary mechanisms for synchronization:
 
-Synchronized methods
-Synchronized blocks
+-Synchronized methods
+-Synchronized blocks
 
-so this allow deelopers to control thread access and ensure safe execution
-in this multithreadd environment
+-so this allow developers to control thread access and ensure safe execution
+in this multithreaded environment
 
 Synchronized Methods in Java :
 
@@ -56,7 +57,8 @@ Synchronized Methods in Java :
 from accessing it simultaneously.
 -Only one thread can execute a synchronized method at a time.
 Makes synchronization simpler — no need for manual locks inside the method.
-Every call to the method is automatically thread-safe.
+Every call to the method is automatically thread-safe.(👉 “Only one thread can use this method at a time.”
+                                                       👉 “Other threads must wait until the method is free.”)
 
 example:
 
@@ -95,4 +97,552 @@ Synchronized Block:
 | **Flexibility** | Less flexible; locks the whole method even if only part needs synchronization. | More flexible; only **critical section** is synchronized, improving performance.                       |
 | **Performance** | Slower if method is large but only part needs sync.                            | Faster because only small code is synchronized.                                                        |
 | **Usage**       | Easy to implement for simple thread safety.                                    | Used when **only some code needs thread safety** or you want **different locks for different blocks**. |
+//----------------------------------------------------------------
 
+🔒 Synchronized Method vs Synchronized Block:
+
+✅ 1. Synchronized Method:
+-Entire method is locked 🔐
+-Only one thread can execute the method at a time
+-Lock is on the object (this) (for non-static methods)
+-Easy to write, but less flexible
+
+2. Synchronized Block
+Only specific part of code is locked 🔐
+Other parts of method can run simultaneously
+Lock is on a specific object
+More efficient and flexible
+-------------------------------------------------------------------
+🎯 Example: Ticket Booking System 🎟️
+👉 Only 1 ticket available
+👉 2 people trying to book at same time
+------------------------------------------------------------------
+❌ Without synchronized (problem)-synchronized method
+-----------------------------------------------------------------
+class TicketBooking{
+int tickets=1;
+
+void bookTickets(String name){
+if(tickets>0){
+sout(name +" is booking ticket...");
+tickets --;
+sout(name+ " booked ticket");
+}
+else{
+sout("no tickets available for"+ name);
+}
+}
+}
+class MyThread extends Thread{
+TicketBooking t;
+String name;
+
+MyThread(TicketBooking t, String name){
+this.t=t;
+this.name=name;
+}
+public void run(){
+t.bookTicket(name);
+}
+}
+
+public class Main{
+psvm{
+TicketBooking t=new TicketBooking();
+MyThread t1=new MyThread(t,"user1");
+MyThread t2=new MyThread(t,"user2");
+
+t1.start();
+t2.start();
+}
+}
+---------------------------------------
+example: sync block-
+
+package Synchronization;
+
+class Printer2 {
+
+    void printDocument(String name) {
+
+        // only this block is synchronized
+        synchronized (this) {
+            System.out.println(name + " started printing...");
+
+            try {
+                Thread.sleep(1000); // simulate time
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(name + " finished printing");
+        }
+
+        // this part runs freely (no lock)
+        System.out.println(name + " exited print method");
+    }
+}
+
+// Thread class
+class MyThread2 extends Thread {
+    Printer2 p;
+    String name;
+
+    MyThread2(Printer2 p, String name) {
+        this.p = p;
+        this.name = name;
+    }
+
+    public void run() {
+        p.printDocument(name);
+    }
+}
+
+// Main class
+public class SyncBlockPrinterExample {
+    public static void main(String[] args) {
+
+        Printer2 printer = new Printer2();
+
+        MyThread2 t1 = new MyThread2(printer, "User1");
+        MyThread2 t2 = new MyThread2(printer, "User2");
+
+        t1.start();
+        t2.start();
+    }
+}
+--------------------------------------------------------------------------
+
+🧠 What is Intrinsic Lock?
+-In Java, every object automatically has an intrinsic lock (or monitor lock)
+associated to it.
+-The moment a thread enters the synchronized block or method,
+it gets the lock for the object, and then no other thread is
+allowed to enter the synchronized block or method for that object until
+  the lock is released.
+
+-intrinsic lock=built in lock that every java object has
+-it is alos called as:
+monitor lock or object lock
+👉 “It is the internal lock associated with every object in Java,
+ which is used by synchronized methods and blocks to
+ensure only one thread executes critical section at a time.”
+
+👉 Intrinsic lock = object-level lock automatically used by synchronized
+---------------------------------------------------------------------
+1. Deadlocks
+👉 Deadlock = “Deadlock is a situation where two or more threads are blocked forever,
+each waiting for a resource held by the other.”
+👉 Why?
+Because each thread is waiting for a resource held by another thread
+
+💡 Easy Real-Life Example
+Imagine:
+Person A has 🔑 Key1 and wants Key2
+Person B has 🔑 Key2 and wants Key1
+
+👉 Both are waiting for each other 😵
+👉 No one moves = Deadlock
+
+⚠️ Why Deadlock happens?
+👉 4 main reasons (remember this for interview):
+Mutual Exclusion → only one thread can use resource
+Hold and Wait → thread holds one lock, waits for another
+No Preemption → lock cannot be taken forcefully
+Circular Wait → threads waiting in circle
+
+
+✅ How to avoid Deadlock (VERY IMPORTANT):
+🔹 1. Lock ordering (MOST IMPORTANT)
+👉 Always acquire locks in same order
+// both threads should follow same order
+lock A → then B
+
+🔹 2. Avoid nested locks
+👉 Don’t lock inside another lock unnecessarily
+
+🔹 3. Use timeout (advanced)
+👉 Try lock for limited time (using tryLock())
+
+🔹 4. Release locks properly
+👉 Always release resources after use
+
+💡 Easy memory trick
+👉 Deadlock = “You wait for me, I wait for you”
+
+example of deadLock:
+Food Delivery System 🍕🚴
+👉 Scenario:
+Delivery Boy needs Order + Payment
+Manager needs Payment + Order Confirmation
+👉 Both are waiting on each other → Deadlock
+
+class Order {
+    synchronized void confirm(Payment payment) {
+        System.out.println("Thread1: Order locked");
+
+        try { Thread.sleep(1000); } catch (Exception e) {}
+
+        System.out.println("Thread1: Waiting for Payment...");
+        payment.process();
+    }
+
+    synchronized void process() {
+        System.out.println("Order processed");
+    }
+}
+
+class Payment {
+    synchronized void process(Order order) {
+        System.out.println("Thread2: Payment locked");
+
+        try { Thread.sleep(1000); } catch (Exception e) {}
+
+        System.out.println("Thread2: Waiting for Order...");
+        order.process();
+    }
+
+    synchronized void process() {
+        System.out.println("Payment processed");
+    }
+}
+
+public class DeadlockFoodExample {
+    public static void main(String[] args) {
+
+        Order order = new Order();
+        Payment payment = new Payment();
+
+        Thread t1 = new Thread(() -> order.confirm(payment));
+        Thread t2 = new Thread(() -> payment.process(order));
+
+        t1.start();
+        t2.start();
+    }
+}
+Thread1 → locks Order → waits for Payment
+Thread2 → locks Payment → waits for Order
+Both stuck forever ❌
+Deadlock 😵
+
+👉 “Deadlock is like two services waiting for each other’s
+response in a circular dependency, causing the system to hang.”
+
+“In this example, one thread locks the Order object and waits for
+Payment, while another thread locks the Payment object and waits for
+Order. Since both threads are waiting for each
+other’s resources, neither can proceed, resulting in a deadlock.”
+------------------------------------------------
+🧠 What is tryLock()?
+
+👉 tryLock() is a method from:
+java.util.concurrent.locks.ReentrantLock
+👉 It tries to get a lock without waiting forever
+-“tryLock() is used to acquire a lock only if it is available,
+otherwise it immediately returns false instead of waiting.
+
+🔥 Why we use tryLock()
+👉 Problem with synchronized:
+Thread waits forever ❌ (can cause deadlock)
+👉 Solution with tryLock():
+Try → if available → take lock ✅
+Else → skip or do something else 🚀
+
+example:
+import java.util.concurrent.locks.ReentrantLock;
+
+class Test {
+    ReentrantLock lock = new ReentrantLock();
+
+    void show() {
+        if (lock.tryLock()) {
+            try {
+                System.out.println(Thread.currentThread().getName() + " got the lock");
+
+                try { Thread.sleep(1000); } catch(Exception e) {}
+
+            } finally {
+                lock.unlock();
+            }
+        } else {
+            System.out.println(Thread.currentThread().getName() + " could not get the lock");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Test t = new Test();
+
+        Thread t1 = new Thread(() -> t.show(), "Thread1");
+        Thread t2 = new Thread(() -> t.show(), "Thread2");
+
+        t1.start();
+        t2.start();
+    }
+}
+
+
+
+| Feature       | synchronized    | tryLock()    |
+| ------------- | --------------- | ------------ |
+| Waiting       | Yes (forever) ⏳ | No ❌         |
+| Deadlock risk | High ⚠️         | Less ✅       |
+| Control       | Less            | More control |
+
+
+🚀 Advanced version (with timeout)
+lock.tryLock(2, TimeUnit.SECONDS);
+👉 Waits for 2 seconds
+👉 If still not available → returns false
+
+💡 Real-life example
+Think:
+You try to enter a room 🚪
+If locked:
+synchronized → wait outside forever 😵
+tryLock() → leave and do something else 😎
+
+⚠️ Important rule
+👉 Always release lock:
+finally {
+    lock.unlock();
+}
+“tryLock() is a method of ReentrantLock that attempts to
+acquire a lock without blocking. If the lock is available,
+ it acquires it; otherwise, it returns false immediately,
+ helping to avoid deadlocks and improve performance.”
+ -----------------------------------------------------------------
+ 2. Locking Granularity
+ =✅ It is a design idea / concept that guides how you use locks
+👉 Locking granularity = size of the lock
+👉 It means:
+How much part of code or resource you are locking
+
+👉 “Locking granularity refers to how much data or code is protected by a lock,
+ whether it is a large portion (coarse-grained) or a small portion (fine-grained).”
+
+ -locking granularity refers to how much of your code or
+ data is protected by a lock at one time.
+
+ t describes the size/scope of the lock:
+
+ Coarse-grained locking → lock a large portion of code/data
+ Fine-grained locking → lock a small, specific part
+
+ 1. Coarse-Grained Locking 🔒 (big lock)
+ You lock everything together.
+
+ Example:
+ public synchronized void updateData() {
+     // many operations
+     doTask1();
+     doTask2();
+     doTask3();
+ }
+ 👉 Here:
+
+ Entire method is locked
+ Only one thread can run it at a time
+ ✅ Pros:
+ Simple to implement
+ Less risk of errors (like deadlocks)
+ ❌ Cons:
+ Poor performance
+ Threads wait more → less concurrency
+
+ 🔹 2. Fine-Grained Locking 🔓 (small locks)
+ You lock only the necessary parts.
+ public void updateData() {
+     doTask1(); // no lock
+
+     synchronized(this) {
+         doTask2(); // only this part is locked
+     }
+
+     doTask3(); // no lock
+ }
+👉 Here:
+Only critical section is locked
+Multiple threads can run other parts simultaneously
+✅ Pros:
+Better performance
+More parallel execution
+❌ Cons:
+More complex
+Higher chance of bugs (deadlocks, race conditions)
+
+Coarse-grained → Lock the entire house 🔒
+Fine-grained → Lock only specific rooms 🚪
+---------------------------------------------------------------
+3. Concurrent Collections
+-java.util.concurrent package
+Why we use them?
+
+👉 Problem with normal collections (ArrayList, HashMap):
+❌ Not thread-safe
+❌ Can cause:
+Data inconsistency
+Exceptions (like ConcurrentModificationException
+
+✅ Solution
+👉 Use Concurrent Collections
+✔ Safe for multiple threads
+✔ No need to manually use synchronized
+✔ Better performance 🚀
+
+❌ Normal List
+List<Integer> list = new ArrayList<>();
+👉 Multiple threads → unsafe ❌
+
+✅ Concurrent List
+List<Integer> list = new CopyOnWriteArrayList<>();
+👉 Multiple threads → safe ✅
+
+🔑 Common Concurrent Collections
+🟢 1. ConcurrentHashMap
+👉 Thread-safe version of HashMap
+
+🔵 2. CopyOnWriteArrayList
+👉 Safe version of ArrayList
+
+🟡 3. CopyOnWriteArraySet
+👉 Safe version of Set
+
+🟠 4. BlockingQueue
+👉 Used in producer-consumer problems
+
+🔥 Why better than synchronized?
+👉 Old way:
+
+Collections.synchronizedList(list);
+👉 Problem:
+Locks whole object ❌ (slow)
+
+👉 “Concurrent collections are thread-safe collections from
+the java.util.concurrent package that allow multiple threads
+to access and modify data efficiently without explicit synchronization,
+improving performance and avoiding concurrency issues.”
+
+👉 “Concurrent = many threads working safely together”
+
+--------------------------------------------------------------------
+
+4. Volatile Keyword
+👉 volatile is used for variables in multithreading
+👉 It ensures:
+latest value is always visible to all threads
+
+🧠 Problem (without volatile)
+👉 Each thread has its own cache memory
+Thread1 → has its copy
+Thread2 → has its copy
+👉 If one thread updates value:
+❌ Other thread may NOT see it
+❌ Uses old value → wrong result
+👉 “In this example, volatile ensures that when the main thread updates the running flag,
+ the worker thread immediately sees the change and stops execution.”
+
+ 🧠 When volatile FAILS
+ 👉 volatile only gives:
+ ✔ Visibility
+ ❌ NOT thread safety
+ ❌ NOT atomicity
+
+ “Volatile ensures visibility but does not guarantee atomicity.
+  For example, increment operations like count++ are not atomic,
+  so multiple threads can
+ cause inconsistent results even if the variable is volatile.”
+
+ -------------------------------------------------------------
+🔥5. AtomicInteger :
+
+java.util.concurrent.atomic
+thread-safe integer operations without using synchronized
+
+👉 “AtomicInteger is a thread-safe class that allows atomic
+ operations on an integer value without using locks.”
+ 👉 Atomic = operation happens in ONE step
+
+ 👉 “AtomicInteger is a thread-safe class that performs atomic
+ operations using CAS without locking. It provides better performance
+ than synchronized
+  and ensures correct results in concurrent environments.”
+
+  import java.util.concurrent.atomic.AtomicInteger;
+
+  class VisitorCounter {
+
+      AtomicInteger count = new AtomicInteger(0);
+
+      void visit() {
+          count.incrementAndGet(); // safe increment
+      }
+  }
+
+  public class AtomicVisitorExample {
+      public static void main(String[] args) throws InterruptedException {
+
+          VisitorCounter vc = new VisitorCounter();
+
+          // Thread 1
+          Thread t1 = new Thread(() -> {
+              for (int i = 0; i < 1000; i++) {
+                  vc.visit();
+              }
+          });
+
+          // Thread 2
+          Thread t2 = new Thread(() -> {
+              for (int i = 0; i < 1000; i++) {
+                  vc.visit();
+              }
+          });
+
+          t1.start();
+          t2.start();
+
+          t1.join();
+          t2.join();
+
+          System.out.println("Total Visitors: " + vc.count);
+      }
+  }
+✅ Output (always correct)
+Total Visitors: 2000
+👉 Say in interview:
+
+Multiple threads are updating the same counter
+Instead of count++, we use:
+count.incrementAndGet();
+
+This operation is atomic (safe)
+So no wrong result
+
+❌ Wrong way
+int count = 0;
+count++; // unsafe
+
+✅ Correct way
+AtomicInteger count = new AtomicInteger(0);
+count.incrementAndGet(); // safe
+
+-other automic classs:
+
+AtomicInteger
+AtomicLong
+AtomicBoolean
+AtomicReference
+
+------------------------------------------------------------
+Types of Thread Synchronization
+There are two types of thread synchronization in Java:
+ mutual exclusive and inter-thread communication.
+
+1.Mutual Exclusive
+Synchronized method.
+Synchronized block.
+Static synchronization.
+
+2.Cooperation (Inter-thread communication in Java)

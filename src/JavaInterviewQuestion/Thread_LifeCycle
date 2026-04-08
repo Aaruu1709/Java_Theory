@@ -1,0 +1,84 @@
+
+Thread-LifeCycle:
+------------------------------------------------------------------
+
+-thread goes through different stages from creation to completion:
+-🔄 Thread Lifecycle Stages
+ There are 5 main states:
+ -🟢 1. NEW (Born state):
+ Thread t = new Thread();
+ 👉 Thread is created
+ 👉 But NOT started yet
+
+-🟡 2. RUNNABLE
+ t.start();
+ 👉 Thread is ready to run
+ 👉 Waiting for CPU
+
+-🔵 3. RUNNING
+
+ 👉 Thread is actually executing:
+ run() method
+ 👉 JVM gives CPU time
+
+-🟠 4. WAITING / BLOCKED
+
+ 👉 Thread is paused temporarily
+ Reasons:
+ sleep()
+ wait()
+ waiting for resource (like synchronized lock)
+ Example:
+ Thread.sleep(1000);
+
+ -🔴 5. TERMINATED (Dead)
+  👉 Thread finished execution
+  run() completed
+  👉 Cannot restart ❌
+  -NEW → RUNNABLE → RUNNING → WAITING/BLOCKED → RUNNING → TERMINATED
+  ---------------------------------------------------
+  difference between start() and run():
+
+  start():
+  -create new thread
+  -call run() internally
+
+  run():
+  -just normal method
+  -no new thread
+-----------------------------------------------------------
+we can not restart a thread again
+t.start();//OK
+t.start();//exception
+-----------------------------------------------------------
+we use sleep to pause the execution
+-----------------------------------------------------------
+example:
+
+class MyThread extends Thread {
+
+    public void run() {
+        try {
+            System.out.println("Thread is running");   // RUNNING stage
+
+            Thread.sleep(1000);  // WAITING stage
+
+            System.out.println("Thread resumed");
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        MyThread t = new MyThread();  // NEW state
+        System.out.println("Thread state: " + t.getState());
+
+        t.start();  // RUNNABLE
+        System.out.println("Thread state after start: " + t.getState());
+    }
+}
+
