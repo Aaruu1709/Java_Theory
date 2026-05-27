@@ -9,7 +9,7 @@ static execute only once=>instance=> constructors
 package Blocks;
 
 
-example 1:instance block vs statci block
+example 1:instance block vs static block
 public class Example1 {
     Example1(){
         System.out.println("0-args constructor");
