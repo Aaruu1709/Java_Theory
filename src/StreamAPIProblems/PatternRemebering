@@ -1,0 +1,83 @@
+🔥 Main Types of Operations in Collectors
+-------------------------------------------------
+🔹 1. Grouping (MOST IMPORTANT 🔥):
+Collectors.groupingBy()
+👉 Used for:
+group by gender
+group by department
+
+🔹 2. Partitioning
+Collectors.partitioningBy()
+👉 Splits into 2 groups (true/false)
+Example:
+salary > 50000 vs ≤ 50000
+
+🔹 3. Aggregation Operations
+✔ Counting
+Collectors.counting()
+
+✔ Summing
+Collectors.summingDouble()
+
+✔ Averaging
+Collectors.averagingDouble()
+
+✔ Max / Min
+Collectors.maxBy()
+Collectors.minBy()
+
+🔹 4. Mapping / Transforming
+Collectors.mapping()
+👉 Convert data while collecting
+
+🔹 5. Collecting to List / Set / Map
+Collectors.toList()
+Collectors.toSet()
+Collectors.toMap()
+-----------------------------------------
+toMap() Example:
+-----------------------------------------
+Convert list to map (id → name)
+
+Map<Integer, String> result =
+    employees.stream()
+             .collect(Collectors.toMap(
+                 Employee::getId,
+                 Employee::getName
+             ));
+
+🎯 When to use:
+When converting stream into specific collection type
+
+🔹 6. Joining (for Strings)
+Collectors.joining()
+🧠 6. Joining (joining)
+❓ Use Case:
+Join all employee names into one string
+String result =
+    employees.stream()
+             .map(Employee::getName)
+             .collect(Collectors.joining(", "));
+
+🎯 Output:
+"Amit, Rahul, Sneha"
+🎯 When to use:
+When you need to combine strings
+-----------------------------------------------
+✅ When map() is NOT needed
+
+Only when stream already contains Strings:
+List<String> names = List.of("A", "B", "C");
+
+String result =
+    names.stream()
+         .collect(Collectors.joining(", "));
+
+👉 Here:
+Already Stream<String>
+No need for map ✅
+
+
+We use map() before joining() to transform the stream elements into strings,
+ because joining() operates on a Stream<String>. If the stream already contains
+  strings, mapping is not required.

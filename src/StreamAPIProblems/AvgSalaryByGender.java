@@ -48,6 +48,7 @@ public class AvgSalaryByGender {
                                 Employeee::getGender,
                                 Collectors.averagingDouble(Employeee::getSalary)
                         ));
+        System.out.println(avgSalaryByGender);
 
         // Print result
         avgSalaryByGender.forEach((gender, avgSalary) ->
@@ -57,3 +58,5 @@ public class AvgSalaryByGender {
         System.out.println("-------------------------------------------");
     }
 }
+//We use Java Streams to group employees by gender using Collectors.groupingBy(),
+// and then calculate the average salary using Collectors.averagingDouble().

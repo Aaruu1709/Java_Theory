@@ -2,6 +2,54 @@ last intreoductory session:
 what is lambda expression
 how to write lambda expression
 functional interface basic
+
+A Stream is a way to process a collection of data
+So instead of writing long loops, you just describe what you want to do, not how to do it.
+Without Stream (old way):
+
+List<Integer> nums = Arrays.asList(1,2,3,4,5);
+List<Integer> result = new ArrayList<>();
+
+for (int n : nums) {
+    if (n % 2 == 0) {
+        result.add(n);
+    }
+}
+
+-----------------------------------------------------------
+With Stream (Java 8):
+
+List<Integer> result = nums.stream()
+                          .filter(n -> n % 2 == 0)
+                          .toList();
+
+
+👉 Same work, but shorter, cleaner, easier to read
+
+so we can say that ,
+we use stream to process data in a clean, declarative way
+instead of Loop and check each element
+“Before Java 8, we used to process collections using loops like for-loop or iterator.
+That made the code longer, more complex, and harder to read, especially when multiple
+operations like filtering, sorting, or transforming were needed. Also, it was difficult
+to take advantage of multi-core processing.”
+
+“So in Java 8, Streams were introduced to solve these problems.
+ Streams allow us to write code in a more declarative and functional style,
+ where we focus on what we want to do instead of how to do it.”
+
+ before stream or java 8....parallel processing ,✅ “It was possible, but complicated and not convenient”
+
+ -----------------------------------------------------------
+ 👉 stream() processes data sequentially (one by one)
+ 👉 parallelStream() processes data in parallel (multiple at the same time using multiple CPU cores)
+ *The key difference is that stream() processes elements sequentially
+ using a single thread, whereas parallelStream() processes elements in
+ parallel using multiple threads,
+ which can improve performance for large data sets.
+ nums.stream()           // one by one (single thread)
+ nums.parallelStream()   // multiple at same time (multi-thread)
+
 ___________________________________________________________
 session 2:
 ___________________________________________________________
@@ -14,9 +62,9 @@ lambda expression is:
 ()->sout("hello");
 
 lambda expression is nothing but anonymous function:
-no name
-no return type
-no modifier
+-no name
+-no return type
+-no modifier
 -> symbol to use
 after arg just add arrow symbol
 in body only one statement so we can remove curly braces
@@ -32,7 +80,7 @@ lambda=>
 (int a,int b)-> sout(a+b);
 (a,b)->sout(a+b);
 //body contains only one line so we can remove curly
-//compiler automatically detect(guess) the type automatically so can remove type also
+//compiler automatically detect(guess) the type  so can remove type also
 
 public int squareIt(int n){
 return n*n;
@@ -42,10 +90,11 @@ int n->{return n*n}//only one stmt so remove curly but without curly we should n
  compiler can give error
 n->n*n;//consise/small code
 
+about return we need to remember following rules:
 
 n->return n*n;------>invalid=>..we can not return without {}
 n->{return n*n;};----->valid
-n->{return n*n};------>Invalid(semicoln missing..java stsmt end with semicolon)
+n->{return n*n};------>Invalid(semicolon missing..java stsmt end with semicolon)
 n->n*n;------>valid
 n->{n*n;};---->invalid(last rule)//we should use return Statemnt and java code end with semicolon
 
