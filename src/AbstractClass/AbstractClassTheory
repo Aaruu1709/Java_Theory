@@ -216,6 +216,27 @@ abstract void wish();
 complete impl in three child classes
 
 
+abstract class Services{
+abstract String login(String username, String password);
+abstract double totalBill(productName, pcost, pqty);
+abstract int add(num1, num2);
+abstract void wish();
+}
+
+class Child1 extends Services(){
+String login(String username,String password){
+
+sout(username, password);
+}
+}
+
+class Child2 extends Services(){
+ double totalBill(productName,pcost,pquantity){
+ sout("");
+ }
+ }
+
+
 
 
  _____________________________________

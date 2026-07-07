@@ -5,4 +5,4 @@ abstract class Example3 {
         System.out.println("hello, god morning");
     }
 }
-//we can write maon method in abstract class
+//we can write main method in abstract class

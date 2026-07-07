@@ -8,6 +8,7 @@ Exception:
           - its only problem
           - happen during Execution of program
           - we can recover it
+          -Exception means an unexpected event that stops the normal flow of program execution.
 
 Abnormal termination of code->it handle using try-catch->then our program flow normally
 rest of code Executed
@@ -24,7 +25,8 @@ unchecked exception is more safe bcoz it compile time compiler show information
 throwable is parent class of exception and error
 
 and there are many child classes available in exception and error
-....now talking about exception child class are=> runtime exception,ioexception,classsnotfoundException,sql exception
+....now talking about exception child class are=> runtime exception,ioexception,
+classsnotfoundException,sql exception
 and many subclasses inside it...
 in runtime exception:
 Arithmetic exception
@@ -53,7 +55,8 @@ when exception is comming at starting compiler never execute code below that eve
             System.out.println("Application termianted abnormally");
         }
 
-        see here,,,,,exception occur at filereader file not found it handle using try block it not goes below even if below code is clear runnavle still not run...
+        see here,,,,,exception occur at filereader file not found it handle using try block it not
+        goes below even if below code is clear runnable still not run...
         it goes direcly at catch and run syso stmt.
 
      _________________________________________________________________
@@ -83,8 +86,10 @@ when exception is comming at starting compiler never execute code below that eve
      exception then we write it with try block and and handle it throght catch block
       so in that case -> not abnormally terminated...run succesfully and rest of code exceuted succesffuly
 
-      condition 3: and when in try block exception occured aritmetic type and in catch block we write nulllpointer exception
-      so in that case try block not found particular type of exception so in this case aslo our program terminated abnormally
+      condition 3: and when in try block exception occured aritmetic type and in catch block we write
+       nulllpointer exception
+      so in that case try block not found particular type of exception so in this case aslo our program
+      terminated abnormally
       and rest of code not exceuted
 
       condition 4:
@@ -112,6 +117,7 @@ when exception is comming at starting compiler never execute code below that eve
       catch match
       executed rest line
       rest app exceuted
+
       case 2:
       execption occure at first line (10/0)
       ratan
@@ -683,3 +689,146 @@ noclassDeffoundError
 assertionError
 _________________________________________________________
 diffference between noclassdeffoundError and classnotfoundException
+| ClassNotFoundException                                                  | NoClassDefFoundError                                                                   |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| It is an **Exception**                                                  | It is an **Error**                                                                     |
+| It is a **Checked Exception**                                           | It is an **Unchecked Error**                                                           |
+| Happens when JVM **cannot find the class while loading it dynamically** | Happens when JVM **found the class during compile time but cannot find it at runtime** |
+| Mostly occurs with `Class.forName()`                                    | Mostly occurs because `.class` file or dependency is missing                           |
+| We can handle it using `try-catch` or `throws`                          | Usually fixed by correcting classpath/dependencies                                     |
+| Example: Class name typed wrong                                         | Example: JAR removed after build                                                       |
+-------------------------------------------------------------------
+
+Practice these aloud 👇
+### 1. Why did you create Custom Exception?
+**Answer:**
+> “In my project, I use custom exceptions to represent business-specific errors instead of generic exceptions.
+ For example, if employee data is not available, I throw `EmployeeNotFoundException`.
+ This improves code readability, debugging, and provides meaningful error messages to clients.”
+
+---
+### 2. Why did you extend RuntimeException?
+**Answer:**
+> “I extended RuntimeException because employee not found is a business validation issue
+and I don't want to force exception handling using try-catch everywhere.
+I handle such exceptions centrally using Global Exception Handler.”
+
+Code example:
+```java
+public class EmployeeNotFoundException
+extends RuntimeException {
+
+public EmployeeNotFoundException(
+String message){
+
+super(message);
+}
+}
+```
+
+---
+### 3. Explain complete exception flow in your project
+
+**Answer:**
+
+> “When API request comes to controller, controller calls service layer. Service performs business validation and database operation. If employee data is not found, service throws custom exception. Then Global Exception Handler catches it and returns proper HTTP response with status code and message.”
+
+Flow:
+
+```text
+Controller
+↓
+Service
+↓
+Repository
+↓
+throw Custom Exception
+↓
+Global Exception Handler
+↓
+ResponseEntity
+```
+
+---
+
+### 4. Why use Global Exception Handling?
+
+**Answer:**
+
+> “Global Exception Handling helps avoid duplicate try-catch blocks across controllers. It centralizes exception handling and returns consistent error responses.”
+
+---
+
+### 5. Explain @ControllerAdvice and @ExceptionHandler
+
+**Answer:**
+
+> “`@ControllerAdvice` acts as a global exception handler class and `@ExceptionHandler` is used inside it to handle specific exception types and return custom responses.”
+
+Example:
+
+```java
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+@ExceptionHandler(
+EmployeeNotFoundException.class)
+
+public ResponseEntity<String>
+handleException(
+EmployeeNotFoundException ex){
+
+return ResponseEntity
+.status(404)
+.body(ex.getMessage());
+
+}
+}
+```
+
+---
+
+### 6. Why ResponseEntity?
+
+**Answer:**
+
+> “I use ResponseEntity because it gives full control over response body, status code, and headers. It helps return proper REST API responses.”
+
+Example:
+
+```java
+return ResponseEntity
+.status(404)
+.body("Employee not found");
+```
+
+---
+
+### 7. Where should Custom Exception be thrown?
+
+**Answer:**
+
+> “Custom exceptions should generally be thrown from Service layer because business validation belongs to service layer. Controller should only handle request and response.”
+
+Example:
+
+```java
+return employeeRepo
+.findById(id)
+
+.orElseThrow(()->
+new EmployeeNotFoundException(
+"Employee not found"));
+```
+
+---
+
+### Final 30-second answer (very important ⭐)
+
+If interviewer says:
+
+**“Explain custom exception handling in your project.”**
+
+Say:
+
+> “In my project, I implemented custom exception handling to manage business-specific errors. Whenever business validation fails in service layer, I throw custom exceptions such as EmployeeNotFoundException. These exceptions are handled centrally using @ControllerAdvice and @ExceptionHandler, which return meaningful messages and appropriate HTTP status codes to clients.”

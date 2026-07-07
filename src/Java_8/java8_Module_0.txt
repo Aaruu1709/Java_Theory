@@ -1,0 +1,164 @@
+Module 0
+Why Java 8 Came?
+-------------------------------------------------------
+Problem 1
+Too Much Boilerplate Code
+Every small operation required
+loop
+if
+comparator
+temp list
+Again and again.
+
+Problem 2
+No Functional Programming
+Java before 8 was purely Object-Oriented.
+Everything had to be inside a class.
+Everything needed an object.
+Even tiny logic required creating objects.
+
+Problem 3
+Anonymous Inner
+
+Problem 4
+Collection Processing Was Slow
+Developer had to manually write loops.
+
+Problem 5
+Parallel Programming Was Difficults
+Making multithreading manually
+
+Problem 6
+
+Date API Was Terrible
+Mutable
+Not Thread Safe
+Confusing
+Month starts from 0
+Terrible formatting
+Lots of bugs
+
+Problem 7
+NullPointerException
+This was one of the biggest problems.
+
+Problem 8
+Interfaces Could Not Evolve
+
+------------------------------------------
+What Did Java 8 Introduce?
+| Feature                    | Solved Problem                   |
+| -------------------------- | -------------------------------- |
+| Lambda                     | Removed huge anonymous classes   |
+| Functional Interface       | Enabled functional programming   |
+| Stream API                 | Easy collection processing       |
+| Method Reference           | Cleaner Lambda                   |
+| Optional                   | Reduce NullPointerException      |
+| Default Method             | Interface evolution              |
+| Static Method in Interface | Utility methods inside interface |
+| Date Time API              | Replaced old Date API            |
+| CompletableFuture          | Better asynchronous programming  |
+| Parallel Stream            | Easy parallel processing         |
+
+
+Before Java 8, developers focused on how to perform tasks.
+With Java 8, you focus on what you want.
+You describe the operation, and the Stream API handles the iteration.
+
+--------------------------------
+Why did Java 8 come?
+
+Interview-ready answer:
+
+Java 8 was introduced to modernize Java and make code more concise,
+readable, and maintainable. Before Java 8, developers had to write
+ a lot of boilerplate code using loops, anonymous inner classes, and
+  manual collection processing. Java 8 introduced Functional Programming
+   concepts like Lambda Expressions, Functional Interfaces, Stream API,
+    Optional, the new Date-Time API, and Default Methods. These features
+     simplified collection processing, improved parallel programming
+     support, reduced boilerplate code, and helped solve common
+ issues like NullPointerException and interface evolution
+ ---------------------------------------------------------
+ Interviewer: Why was Lambda introduced?
+Lambda Expressions were introduced to bring functional programming into Java, allowing behavior to be passed as data.
+They also reduce boilerplate code created by anonymous inner classes.
+----------------------------------------
+
+Interviewer: Is Java 8 only about Stream API?
+no.
+Stream API is only one feature. Java 8 also introduced Lambda Expressions, Functional Interfaces, Method References, Optional, the new Date-Time API, Default Methods,
+ Static Methods in interfaces, CompletableFuture, and more
+-----------------------------------------------------------
+Java 8 is not just "Lambda and Streams."
+It introduced Functional Programming concepts into Java.
+The biggest change is thinking in terms of what to do instead of how to do it.
+Streams do not store data; they process data from a source like a collection.
+Java 8 was designed to reduce boilerplate code, improve readability, support multicore processors,
+and make APIs easier to evolve.
+-----------------------------------------------------------
+Before Java 8 – What Were the Problems?
+| Letter | Problem                                                           |
+| ------ | ----------------------------------------------------------------- |
+| **B**  | Boilerplate Code (too much code)                                  |
+| **A**  | Anonymous Inner Class was lengthy                                 |
+| **D**  | Date API was confusing & not thread-safe                          |
+| **C**  | Collection processing required manual loops                       |
+| **N**  | NullPointerException was very common                              |
+| **I**  | Interfaces couldn't evolve (adding methods broke implementations) |
+| **P**  | Parallel processing was difficult
+ -----------------------------------
+
+ Java 8 Solution:
+
+
+| Feature | Solves                                                |
+| ------- | ----------------------------------------------------- |
+| **L**   | Lambda Expression → Less code                         |
+| **S**   | Stream API → Easy collection processing               |
+| **O**   | Optional → Avoid NullPointerException                 |
+| **D**   | Default Methods → Interface evolution                 |
+| **M**   | Method Reference → Cleaner lambda code                |
+| **F**   | Functional Interface → Functional programming support |
+| **C**   | CompletableFuture → Better asynchronous programming   |
+New Date & Time API (java.time)
+Parallel Streams
+
+
+-------------------------------
+Before Java 8 (Imperative)
+Developer tells Java:
+HOW to do the work.
+You control every step.
+
+Java 8 (Declarative)
+Developer tells Java:
+WHAT to do.
+Java decides how to process it.
+ -----------------------------------------
+
+ Why Java 8?
+
+ Problems Before Java 8:
+ ✔ Too much boilerplate code
+ ✔ Long anonymous classes
+ ✔ Manual collection processing
+ ✔ Difficult parallel programming
+ ✔ Frequent NullPointerException
+ ✔ Poor Date API
+ ✔ Interfaces couldn't evolve
+
+ Java 8 Solutions:
+ ✔ Lambda Expressions
+ ✔ Functional Interfaces
+ ✔ Stream API
+ ✔ Method References
+ ✔ Optional
+ ✔ Default Methods
+ ✔ New Date-Time API
+ ✔ CompletableFuture
+ ✔ Parallel Streams
+
+ Biggest Change:
+ Before → HOW to do
+ Java 8 → WHAT to do

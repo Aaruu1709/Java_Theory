@@ -1,0 +1,232 @@
+Module 1 – Functional Programming
+Functional Programming is a programming style where
+we focus on describing what needs to be done instead of writing every step of how to do it.
+Why Did Java Need Functional Programming?
+Let's imagine you're working in a company.
+
+You have:
+List<Employee> employees;
+Requirement:
+Find employees with salary > 50,000
+Sort by name
+Convert to DTO
+Print the result
+Before Java 8
+
+You would write:
+for loop
+if condition
+temporary list
+comparator
+another loop
+
+Lots of code.
+
+Java 8
+
+Conceptually, you write:
+employees
+    .filter(...)
+    .sort(...)
+    .map(...)
+    .collect(...);
+
+You're describing the operations.
+Java handles the iteration.
+------------------------------------------------
+
+Did Java Become a Functional Language?
+Java is still an Object-Oriented Programming (OOP) language.
+Java 8 added Functional Programming features, but it did not become a pure functional language.
+Java is primarily an Object-Oriented language with support for Functional Programming starting from Java 8.
+
+| Object-Oriented Programming       | Functional Programming                               |
+| --------------------------------- | ---------------------------------------------------- |
+| Focus on Objects                  | Focus on Functions                                   |
+| Objects hold state and behavior   | Functions transform data                             |
+| Data can change                   | Prefer immutable data                                |
+| Often uses loops                  | Often uses Streams                                   |
+| Uses inheritance and polymorphism | Uses function composition and higher-order functions |
+
+-----------------------------------------------------
+
+Imperative vs Declarative Programming
+This is one of the most important concepts.
+Imperative Programming
+You explain HOW.
+Example:
+for(Employee e : employees){
+    if(e.getSalary()>50000){
+        System.out.println(e);
+    }
+}
+You control:
+Loop
+Condition
+Printing
+Everything.
+----------------------------------------------------------
+Declarative Programming
+You explain WHAT.
+Conceptually:
+employees
+    .filter(...)
+    .forEach(...);
+You don't write the loop yourself.
+The Stream API does it.
+
+--------------------------------------------------------------
+Behavior as Data:
+Normally we pass data.
+calculate(10,20);//we pass numbers here
+
+Java 8 allows us to pass behavior.
+doSomething(printLogic);
+Instead of passing only values, we can pass what should be done.
+This is called:
+Passing behavior as data.
+Lambda Expressions make this possible.
+
+Why Is This Powerful?
+Imagine one sorting method.
+Sometimes you want:
+Sort by name
+Sort by salary
+Sort by age
+Instead of writing three methods, you write one method and pass the sorting behavior.
+This makes code:
+Flexible
+Reusable
+Easy to maintain
+-----------------------------------------------------------
+First-Class Functions
+
+In languages like JavaScript or Kotlin, functions are first-class citizens. That means you can:
+
+Store them in variables
+Pass them as arguments
+Return them from other functions
+Java does not have true first-class functions.
+Instead, Java achieves a similar effect using:
+Functional Interfaces
+Lambda Expressions
+Method References
+So in interviews:
+Java supports functional-style programming, but it does not support first-class functions in the same way as purely functional languages.
+
+---------------------------------------------------------
+
+Functional Programming is a programming paradigm where we focus on describing what needs to be done rather than explicitly defining every step of how to do it.
+-----------------------------------
+What is the difference between Imperative and Declarative Programming?
+
+Answer:
+
+In Imperative Programming, the developer specifies how to perform each step of a task.
+ In Declarative Programming, the developer specifies what result is required, and the framework or API handles the execution details.
+ -------------------------------------------------------------
+
+A Pure Function always produces the same output for the same input and does not modify anything outside itself.
+
+Rule 1
+Same Input
+↓
+Same Output
+Rule 2
+No Side Effects
+If these two conditions are true,
+✅ Pure Function
+
+
+pure:
+public int add(int a, int b) {
+    return a + b;
+}
+Let's call it.
+add(10,20)
+Returns
+30
+Again
+add(10,20)
+Returns
+30
+Always.
+No external variable changed.
+Nothing is modified.
+This is a Pure Function.
+---------------------------
+What is an Impure Function?
+int counter = 0;
+public int increment(){
+    counter++;
+    return counter;
+}
+First call
+Returns
+1
+Second call
+Returns
+2
+Third
+Returns
+3
+same method-> different output
+Why?
+Because it depends on an external variable.
+This is Impure.
+
+Functional Programming
+        │
+        ├── Pure Functions
+        │      │
+        │      ├── Same input → Same output
+        │      └── No side effects
+        │
+        ├── Avoid Side Effects
+        │
+        └── Prefer Immutability
+
+        Pure Function
+        ✔ Same input → Same output
+        ✔ No side effects
+
+        Impure Function
+        ✔ Depends on external state
+        ✔ May modify data
+
+        Side Effects
+        ✔ Print
+        ✔ Database update
+        ✔ File write
+        ✔ API call
+        ✔ Modify external variables
+
+        Immutability
+        ✔ Object cannot change after creation
+        ✔ Thread-safe
+        ✔ Predictable
+        ✔ Preferred in Functional Programming
+        -----------------------------------------
+        Interviewer: Is System.out.println() a Pure Function?
+        Many candidates say:
+
+        Yes.
+
+        ❌ Wrong.
+
+        It changes the outside world by writing to the console.
+
+        So it has a side effect.
+        ----------------------------------------------------------
+
+Yes, Java allows it, but it's considered a bad practice. Streams are designed to work best with pure functions. Side effects can make code harder to understand and may cause unpredictable behavior, especially with Parallel Streams.
+
+
+| Question                                    | Answer                                              |
+| ------------------------------------------- | --------------------------------------------------- |
+| Is `Math.max()` Pure?                       | ✅ Yes                                               |
+| Save Employee to DB Pure?                   | ❌ No                                                |
+| Why String Immutable?                       | Security, Thread Safety, String Pool, Performance   |
+| Why avoid Side Effects in Parallel Streams? | Race Condition, Inconsistent Results, Thread Safety |
+
+
